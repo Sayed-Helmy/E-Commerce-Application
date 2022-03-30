@@ -1,0 +1,14 @@
+{
+  "name": "e-comerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd server && npm install  && cd ../client && npm install && npm run build",
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
