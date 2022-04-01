@@ -1,7 +1,7 @@
 import React from "react";
 
 const MainNavigation = () => {
-  return <div>MainNavigation</div>;
+  return <div className="text-blue-500">MainNavigation</div>;
 };
 
 export default MainNavigation;

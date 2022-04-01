@@ -7,14 +7,11 @@ import SignupPage from "./pages/SignupPage";
 function App() {
   return (
     <Layout>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="expenses" element={<SigninPage />} />
-          <Route path="invoices" element={<SignupPage />} />
-        </Routes>
-      </BrowserRouter>
-      ,
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="expenses" element={<SigninPage />} />
+        <Route path="invoices" element={<SignupPage />} />
+      </Routes>
     </Layout>
   );
 }
