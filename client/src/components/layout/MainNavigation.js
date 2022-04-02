@@ -161,7 +161,7 @@ export default function MainNavigation() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog
