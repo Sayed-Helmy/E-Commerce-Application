@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <>
       <MainNavigation />
-      <main className="container">{props.children}</main>
+      <main className="container mx-auto">{props.children}</main>
       <Footer />
     </>
   );

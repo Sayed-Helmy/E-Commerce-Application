@@ -39,3 +39,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@media only screen and (min-width: 1024px) {
+  .test {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr; */
+    gap: 12px 12px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "cat cat2 cat3 cat3"
+      "cat4 cat4 cat5 cat6";
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .test {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr; */
+    gap: 12px 12px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "cat cat2 cat3 cat3"
+      "cat4 cat4 cat5 cat6";
+}}
+
+.cat { grid-area: cat; }
+
+.cat2 { grid-area: cat2; }
+
+.cat3 { grid-area: cat3; }
+
+.cat4 { grid-area: cat4; }
+
+.cat5 { grid-area: cat5; }
+
+.cat6 { grid-area: cat6; }

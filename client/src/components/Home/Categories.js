@@ -16,73 +16,89 @@ import CategoryCard from "./CategoryCard";
   }
   ```
 */
-const products = [
+const categories = [
   {
     id: 1,
-    name: "Earthen Bottle",
+    desc: "Enjoy With",
+    name: "HEADPHONES",
     href: "#",
     price: "$48",
     category: "laptop",
+    colorGradient: "bg-gradient-to-br from-black to-black/70",
+    gridClass: "",
 
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+      "/assets/category-1.png",
     imageAlt:
       "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
   },
   {
     id: 2,
-    name: "Nomad Tumbler",
+    desc: "New Wear",
+    name: "GADGETS",
     href: "#",
     price: "$35",
     category: "laptop",
-
+    colorGradient: "bg-gradient-to-br from-[#FEC62E] to-[#FEC62E]/70",
+    gridClass: "",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+      "/assets/category-2.png",
     imageAlt:
       "Olive drab green insulated bottle with flared screw lid and flat top.",
   },
   {
     id: 3,
-    name: "Focus Paper Refill",
+    desc: "Trend Devices",
+    name: "LAPTOP",
     href: "#",
     price: "$89",
     category: "laptop",
-
+    colorGradient: "bg-gradient-to-br from-[#F42C37]  to-[#F42C37]/70",
+    gridClass: "xl:col-span-2",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+      "/assets/category-3.png",
     imageAlt:
       "Person using a pen to cross a task off a productivity paper card.",
   },
   {
     id: 4,
-    name: "Machined Mechanical Pencil",
+    desc: "Enjoy With",
+    name: "HEADPHONES",
     href: "#",
     category: "laptop",
     price: "$35",
+    colorGradient: "bg-gradient-to-br from-[#F42C37]  to-[#F42C37]/70",
+    gridClass: "xl:col-span-2",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+      "/assets/category-1.png",
     imageAlt:
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
   },
   {
     id: 5,
-    name: "Machined Mechanical Pencil",
+    desc: "New Wear",
+    name: "GADGETS",
     href: "#",
     category: "laptop",
     price: "$35",
+    colorGradient: "bg-gradient-to-br from-[#FEC62E] to-[#FEC62E]/70",
+    gridClass: "",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+      "/assets/category-2.png",
     imageAlt:
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
   },
   {
     id: 6,
-    name: "Machined Mechanical Pencil",
+    desc: "Trend Devices",
+    name: "LAPTOP",
     href: "#",
     category: "laptop",
     price: "$35",
+    colorGradient: "bg-gradient-to-br from-black to-black/70",
+    gridClass: "",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
+      "/assets/category-3.png",
     imageAlt:
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
   },
@@ -91,14 +107,16 @@ const products = [
 
 export default function Categories() {
   return (
-    <div className="container mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-      <h2 className="sr-only">Products</h2>
-
-      {/* <div className="grid-cols-test grid grid-rows-2"> */}
-      <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-test xl:gap-x-8 ">
-        {products.map((product) => (
-          <CategoryCard key={product.id} product={product} />
-        ))}
+    <div>
+      <div className="px-2 mb-16 mt-32 sm:mb-20 text-5xl sm:text-6xl font-bold text-center"><h1> Our Categories </h1></div>
+      <div className="max-w-2xl mx-auto  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="sr-only">Categories</h2>
+        {/* <div className="grid grid-rows-2 grid-cols-test"> */}
+        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {categories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
+        </div>
       </div>
     </div>
   );
