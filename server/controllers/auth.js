@@ -10,7 +10,7 @@ const createUser = asyncWrapper(async (req, res) => {
 });
 
 const updateUser = asyncWrapper(async (req, res) => {
-  const { email } = req.payload;
+  const { email } = req.payload.email;
   const { password } = req.body;
   const user = await User.findOne({ email });
   user.password = password;

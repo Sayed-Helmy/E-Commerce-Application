@@ -28,10 +28,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       default: ["USER"],
     },
-    orders: {
-      type: [mongoose.Schema.Types.ObjectId],
-      default: [],
-    },
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
     cart: [
       {
         productId: {

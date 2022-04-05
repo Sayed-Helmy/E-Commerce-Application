@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(payload.userID);
     req.roles = user.roles;
-    req.payload = payload;
+    req.payload = user;
     next();
   } catch (error) {
     if (error instanceof CustomError) {
