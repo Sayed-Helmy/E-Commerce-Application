@@ -4,14 +4,14 @@ import Home from "./pages/Home";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import NotFound from "./pages/NotFound";
-import ProductPage from "./components/Home/ProductPage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="ProductPage" element={<ProductPage />} />
+        <Route path="product" element={<ProductPage />} />
         <Route path="SigninPage" element={<SigninPage />} />
         <Route path="SignupPage" element={<SignupPage />} />
         <Route path="*" element={<NotFound />} />
