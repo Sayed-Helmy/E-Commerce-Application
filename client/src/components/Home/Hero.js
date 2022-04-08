@@ -5,7 +5,7 @@ import heroimg from "../../assets/hero.png";
 const Hero = () => {
   return (
     <div>
-      <div className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
         <div className="relative flex items-center justify-center w-full h-full min-h-[400px] my-16 bg-gradient-to-br from-black/50 to-black/20 rounded-2xl">
           <div className="w-full">
             <img

@@ -124,7 +124,7 @@ export default function MainNavigation() {
 
         <nav
           aria-label="Top"
-          className="max-w-2xl mx-auto  px-4  sm:px-6 lg:max-w-7xl lg:px-8"
+          className="max-w-2xl mx-auto  px-4  sm:px-6 md:max-w-7xl lg:px-8"
         >
           <div className="border-b border-gray-200">
             <div className="flex items-center h-16">

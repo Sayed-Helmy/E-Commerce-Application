@@ -2,10 +2,13 @@ import React from "react";
 
 const Footer = () => {
   return <div>
-    <footer className="max-w-2xl mx-auto  px-4  sm:px-6 lg:max-w-7xl lg:px-8">
+    <footer className="max-w-2xl mx-auto  px-4  sm:px-6 md:max-w-7xl lg:px-8">
       <div className="flex flex-col justify-center space-y-5">
-        <div className="text-center">logo
-          <img src="" alt="" title="" className="" />
+        <div className="mx-auto ">
+          <a to="/">
+            <span className="sr-only">Logo</span>
+            <img className="w-auto h-8" src="./assets/logo.svg" alt="" />
+          </a>
         </div>
         <ul className="flex flex-wrap items-center justify-center space-x-8 text-sm">
             <li>
