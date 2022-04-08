@@ -1,17 +1,22 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 
+const passwordRegex = new RegExp(
+  "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+);
+
+const emailRegex = new RegExp(
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
+
 const Signin = () => {
   const {
     register,
     handleSubmit,
-    // watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => console.log(data);
-  // console.log(watch("email"));
-  // console.log(watch("password"));
 
   return (
     <>
@@ -40,24 +45,31 @@ const Signin = () => {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
                   type="email"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: true,
+                    pattern: {
+                      value: emailRegex,
+                      message: " Email format is not correct ",
+                    },
+                  })}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   autoFocus
                 />
               </div>
-              {errors.email && <span>This field is required</span>}
+              <p>{errors.email?.message}</p>
 
               <div>
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
                 <input
+                  type="password"
                   {...register("password", {
                     required: true,
 
@@ -66,7 +78,7 @@ const Signin = () => {
                       message: "min number is 7",
                     },
                     pattern: {
-                      value: /^. * . [a - z][A - Z].{ 8, } /,
+                      value: passwordRegex,
                       message: "dosen't mach the pattern",
                     },
                   })}
@@ -78,21 +90,6 @@ const Signin = () => {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-
               <div className="text-sm">
                 <a
                   href="#"
