@@ -1,111 +1,93 @@
-import React from "react";
+import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-const passwordRegex = new RegExp(
-  "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
-);
-
-const emailRegex = new RegExp(
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-);
+const schema = yup
+  .object({
+    name: yup.string().required("Name is required"),
+    email: yup.string().email(),
+    password: yup.string().min(7).required("Password is required"),
+  })
+  .required();
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const onSubmit = (data) => console.log(data);
+
   return (
     <>
-      <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Signup
-      </h1>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-      >
-        <div className="shadow overflow-hidden sm:rounded-md ">
-          <div className="px-4 py-2  bg-white sm:p-5">
-            <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+      <div className="min-h-full flex items-center justify-center py-28 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          <div>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Create a new account
+            </h2>
+          </div>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <input type="hidden" name="remember" defaultValue="true" />
+            <div className="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label htmlFor="email" className="sr-only">
                   Name
                 </label>
                 <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  id="name"
-                  autoComplete="given-name"
-                  className="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  border-gray-300 rounded-md"
-                  placeholder="Name"
+                  {...register("name")}
+                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  placeholder="your name"
+                  autoFocus
                 />
+                <p className="py-2 text-red-600 text-sm">
+                  {errors.name?.message}
+                </p>
               </div>
-
-              <div className="col-span-6 sm:col-span-4">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
+              <div>
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
-                  type="email"
+                  {...register("email")}
+                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
                   placeholder="Email address"
-                  className="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  border-gray-300 rounded-md"
-                  {...register("email", {
-                    required: true,
-                    pattern: {
-                      value: emailRegex,
-                      message: " Email format is not correct ",
-                    },
-                  })}
+                  autoFocus
                 />
+                <p className="py-2 text-red-600 text-sm">
+                  {errors.email?.message}
+                </p>
               </div>
-              <p>{errors.email?.message}</p>
-              <div className="col-span-6 sm:col-span-4">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  password
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
                 </label>
                 <input
-                  placeholder="Password"
+                  {...register("password")}
                   type="password"
-                  id="password"
-                  className="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm  border-gray-300 rounded-md"
-                  {...register("password", {
-                    required: true,
-
-                    minLength: {
-                      value: 7,
-                      message: "min number is 7",
-                    },
-                    pattern: {
-                      value: passwordRegex,
-                      message: "Password dosen't mach the pattern",
-                    },
-                  })}
+                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  placeholder="Password"
                 />
+                <p className="py-2 text-red-600 text-sm">
+                  {errors.password?.message}
+                </p>
               </div>
-              <p>{errors.password?.message}</p>
             </div>
-          </div>
-          <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
-            <button
-              type="submit"
-              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Signup
-            </button>
-          </div>
+
+            <div>
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Sign up
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import saleimg from "../../assets/sale.png";
 const Sale = () => {
   return (
     <div>
-      <div className="max-w-2xl px-4 mx-auto sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
         <div className="relative grid items-center justify-center w-full grid-cols-1 my-16 bg-[#36B37E] sm:grid-cols-2 rounded-2xl">
           <div className="relative flex flex-col items-center justify-center p-2">
             <div className="absolute font-bold text-white text-7xl lg:text-9xl bottom-20">
