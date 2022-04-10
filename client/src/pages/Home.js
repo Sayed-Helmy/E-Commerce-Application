@@ -3,15 +3,16 @@ import Hero from "../components/Home/Hero";
 import Categories from "../components/Home/Categories";
 import ProducList from "../components/Home/ProducList";
 import Sale from "../components/Home/Sale";
-  //fdgfdgfddfd
 
 const Home = () => {
-  return <div>
-    <Hero />
-    <Categories />
-    <ProducList />
-    <Sale />
-  </div>;
+  return (
+    <div>
+      <Hero />
+      <Categories />
+      <ProducList />
+      <Sale />
+    </div>
+  );
 };
 
 export default Home;

@@ -27,7 +27,7 @@ import { Link } from "react-router-dom";
 const navigation = {
   pages: [
     { name: "Home", href: "/" },
-    { name: "Contact Us", href: "#" },
+    { name: "Contact Us", href: "ContactUs" },
   ],
 };
 
@@ -153,7 +153,7 @@ export default function MainNavigation() {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="">
+                    <a href="ContactUs" className="">
                       Contact
                     </a>
                   </li>
