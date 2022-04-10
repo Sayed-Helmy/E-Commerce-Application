@@ -1,4 +1,3 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,6 +7,9 @@ const schema = yup
     name: yup.string().required("Name is required"),
     email: yup.string().email(),
     password: yup.string().min(7).required("Password is required"),
+    passwordConfirmation: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match"),
   })
   .required();
 
@@ -71,8 +73,24 @@ const Signup = () => {
                   className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
+
                 <p className="py-2 text-red-600 text-sm">
                   {errors.password?.message}
+                </p>
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password confirmation
+                </label>
+                <input
+                  {...register("passwordConfirmation")}
+                  type="password"
+                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  placeholder="confirm your password"
+                />
+
+                <p className="py-2 text-red-600 text-sm">
+                  {errors.passwordConfirmation?.message}
                 </p>
               </div>
             </div>
