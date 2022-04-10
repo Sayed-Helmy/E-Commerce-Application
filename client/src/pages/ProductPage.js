@@ -140,7 +140,9 @@ export default function ProductPage() {
               </h3>
 
               {/* Price */}
-              <p className="text-gray-900 lg:text-2xl">{product.price}</p>
+              <p className="text-gray-900 lg:text-3xl font-bold">
+                {product.price}
+              </p>
 
               {/* Reviews */}
               <div className="">
