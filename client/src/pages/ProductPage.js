@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 import Button from "../components/Button";
 
@@ -15,30 +15,16 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Tab } from "@headlessui/react";
 
 const product = {
+  id: 1,
   name: "White EliteBook Tablet  ",
   price: "900$",
   rating: 3.9,
   reviewCount: 117,
   inStock: 10,
   href: "#",
-  imageSrc:
-    "https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg",
+  imageSrc: "/assets/best-seller-1.png",
   imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
-  sizes: [
-    { name: "XXS", inStock: true },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "XXL", inStock: true },
-    { name: "XXXL", inStock: false },
-  ],
+  category: "HEADPHONES",
 };
 
 function classNames(...classes) {
@@ -46,10 +32,7 @@ function classNames(...classes) {
 }
 
 export default function ProductPage() {
-  const [open, setOpen] = useState(false);
   const [inStock, setInStock] = useState(true);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [categories] = useState({
     Description: [
@@ -163,12 +146,7 @@ export default function ProductPage() {
                     ))}
                   </div>
                   <p className="sr-only">{product.rating} out of 5 stars</p>
-                  <a
-                    href="#"
-                    className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    {product.reviewCount} reviews
-                  </a>
+                  {product.reviewCount} reviews
                 </div>
               </div>
             </section>
@@ -338,7 +316,7 @@ export default function ProductPage() {
                   {/* Form */}
                   <form>
                     <div className="flex flex-col">
-                      <label for="w3review" className=" mb-2 mt-4">
+                      <label htmlFor="w3review" className=" mb-2 mt-4">
                         Your Review:
                       </label>
                       <textarea
