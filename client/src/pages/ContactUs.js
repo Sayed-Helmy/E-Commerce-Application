@@ -96,7 +96,6 @@ const ContactUs = () => {
                   {...register("email")}
                   className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
                   placeholder="Email address"
-                  autoFocus
                 />
                 <p className="py-2 text-red-600 text-sm">
                   {errors.email?.message}
