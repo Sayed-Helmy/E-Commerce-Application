@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="">
             <Link to="/">
               <span className="sr-only">Logo</span>
-              <img className="w-auto h-8" src="./assets/logo.svg" alt="" />
+              <img className="w-auto h-8" src="/assets/logo.svg" alt="" />
             </Link>
           </div>
           <ul className="flex flex-wrap items-center justify-center space-x-8 text-sm">
