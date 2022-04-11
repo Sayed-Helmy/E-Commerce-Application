@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
 
 const schema = yup
   .object({
@@ -14,6 +15,7 @@ const schema = yup
   .required();
 
 const Signup = () => {
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -22,7 +24,21 @@ const Signup = () => {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const { name, email, password } = data;
+    try {
+      const result = await fetch("/api/v1/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const user = await result.json();
+      if (!result.ok) throw new Error(user.msg);
+      console.log(user);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <>
@@ -94,7 +110,6 @@ const Signup = () => {
                 </p>
               </div>
             </div>
-
             <div>
               <button
                 type="submit"
@@ -102,6 +117,7 @@ const Signup = () => {
               >
                 Sign up
               </button>
+              <p className="py-2 text-red-600 text-sm">{error && error}</p>
             </div>
           </form>
         </div>

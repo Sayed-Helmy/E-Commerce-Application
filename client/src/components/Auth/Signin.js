@@ -2,6 +2,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 
 const schema = yup
   .object({
@@ -19,7 +20,10 @@ const Signin = () => {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const user = await axios.post("/api/v1/auth", data);
+    console.log(user);
+  };
 
   return (
     <>
