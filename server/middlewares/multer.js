@@ -4,6 +4,7 @@ const multer = require("multer");
 const storage = multer.diskStorage({
   destination: "./public/uploads",
   filename: (req, file, cb) => {
+    console.log(file);
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -35,9 +36,11 @@ const multerUploader = async (req, res, next) => {
       res.json({ msg: err });
     } else {
       if (req.files.length > 0) {
-        req.body.image = req.files[0].path
-          .replace(/\\/g, "/")
-          .substring("public".length);
+        req.body.images = [
+          ...req.files.map((i) =>
+            i.path.replace(/\\/g, "/").substring("public".length)
+          ),
+        ];
         return next();
       }
       next();
