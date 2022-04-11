@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const Button = ({ to, className, text }) => {
   const navigator = useNavigate();
-  console.log(navigator);
   return (
     <button
       onClick={() => navigator(to)}

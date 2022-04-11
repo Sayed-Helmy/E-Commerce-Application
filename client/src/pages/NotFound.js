@@ -3,7 +3,7 @@ import React from "react";
 const NotFound = () => {
   return (
     <div className="container mx-auto flex flex-col items-center py-28 h-screen max-h-screen">
-      <img src="./assets/404.png" alt="not found" className=" w-1/3" />
+      <img src="/assets/404.png" alt="not found" className=" w-1/3" />
       <div className="max-w-xl text-center">
         <h1 className=" text-6xl font-bold text-black my-4">
           Oops, This Page Could Not Be Found.
