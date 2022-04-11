@@ -14,20 +14,21 @@ const Footer = () => {
           </div>
           <ul className="flex flex-wrap items-center justify-center space-x-8 text-sm">
             <li>
-              <a href="#" className="font-bold hover:underline">
+              <Link to="/" className="font-bold hover:underline">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="font-bold hover:underline">
-                Pages
-              </a>
+              <Link to="/" className="font-bold hover:underline">
+                Shop
+              </Link>
             </li>
             <li>
-              <a href="#" className="font-bold hover:underline">
+              <Link to="/" className="font-bold hover:underline">
                 Contact
-              </a>
+              </Link>
             </li>
+            to
           </ul>
         </div>
         <hr className="my-3 border-gray-200 sm:mx-auto dark:border-gray-700 " />
@@ -35,19 +36,19 @@ const Footer = () => {
           <div className="my-2 text-center">All rights reserved</div>
           <ul className="flex flex-wrap items-center justify-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="#" className="mr-4 hover:underline md:mr-6 ">
+              <Link to="/" className="mr-4 hover:underline md:mr-6 ">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="mr-4 hover:underline md:mr-6">
+              <Link to="/" className="mr-4 hover:underline md:mr-6">
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="mr-4 hover:underline md:mr-6 ">
+              <Link to="/" className="mr-4 hover:underline md:mr-6 ">
                 Cookies Settings
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -1,14 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // use :<Button text="Browse" className="bg-white text-black" to="/SigninPage" />
 
 const Button = ({ to, className, text }) => {
+  const navigator = useNavigate();
   return (
-    <button className={`px-6 py-3 rounded-lg ${className}`}>
-      <Link to={to}>{text}</Link>
+    <button
+      onClick={() => navigator(to)}
+      className={`px-6 py-3 rounded-lg ${className}`}
+    >
+      {text}
     </button>
   );
 };
-
 export default Button;

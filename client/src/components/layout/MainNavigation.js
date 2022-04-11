@@ -15,7 +15,7 @@
   ```
 */
 import { Fragment, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   MenuIcon,
   SearchIcon,
@@ -24,17 +24,16 @@ import {
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
-
 const navigation = {
   pages: [
     { name: "Home", href: "/" },
-    { name: "Contact Us", href: "ContactUs" },
+    { name: "Contact Us", href: "/ContactUs" },
   ],
 };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
 export default function MainNavigation() {
   const [open, setOpen] = useState(false);
@@ -142,21 +141,21 @@ export default function MainNavigation() {
               <div className="flex ml-4 lg:ml-0">
                 <Link to="/">
                   <span className="sr-only">Logo</span>
-                  <img className="w-auto h-8" src="./assets/logo.svg" alt="" />
+                  <img className="w-auto h-8" src="/assets/logo.svg" alt="" />
                 </Link>
               </div>
 
               <div className="hidden lg:block">
                 <ul className="flex ml-5 space-x-8 text-sm justify-center items-center">
                   <li>
-                    <a href="#" className="">
+                    <Link to="/" className="">
                       Shop
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="ContactUs" className="">
+                    <Link to="/ContactUs" className="">
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

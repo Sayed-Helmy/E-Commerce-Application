@@ -65,7 +65,7 @@ const Signin = () => {
             <div className="flex items-center justify-between">
               <div className="text-sm">
                 <a
-                  href="#"
+                  href="/"
                   className="font-medium text-black/50 hover:text-black/60"
                 >
                   Forgot your password?

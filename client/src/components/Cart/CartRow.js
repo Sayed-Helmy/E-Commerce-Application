@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CartRow = ({ product, index }) => {
   const [productCount, setproductCount] = useState(1);
@@ -6,14 +7,14 @@ const CartRow = ({ product, index }) => {
   return (
     <tr className=" border-b">
       <td className="hidden py-4 md:table-cell ">
-        <a href="#">
+        <Link to={`/shop/${product.id}`}>
           <img src={product.imageSrc} class="w-20 rounded" alt="Thumbnail" />
-        </a>
+        </Link>
       </td>
       <td>
-        <a href="#">
+        <Link to={`/shop/${product.id}`}>
           <p className=" md:ml-4">{product.name}</p>
-        </a>
+        </Link>
       </td>
       <td className="justify-center md:justify-end md:flex mt-6">
         <div className="w-20 h-10">
