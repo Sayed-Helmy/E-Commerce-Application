@@ -5,12 +5,15 @@ import App from "./App";
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import ScrollToTop from "./components/layout/ScrollToTop";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
