@@ -104,7 +104,7 @@ export default function ShopFilter() {
                 </div>
 
                 {/* Filters */}
-                <form className="mt-4 text-gray-100 border-t">
+                <form className="mt-4 border-t text-black/70">
                   <h3 className="sr-only">Categories</h3>
                   <ul role="list" className="px-2 py-3 font-medium text-black-900">
                     {subCategories.map((category) => (
