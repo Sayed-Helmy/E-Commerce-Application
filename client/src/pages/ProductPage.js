@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
-import Button from "../components/Button";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,6 +12,7 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 import { Tab } from "@headlessui/react";
+import Button from "../components/ui/Button";
 
 const product = {
   id: 1,

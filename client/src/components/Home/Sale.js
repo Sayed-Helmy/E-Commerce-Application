@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../Button";
 import saleimg from "../../assets/sale.png";
+import Button from "../ui/Button";
 
 const Sale = () => {
   return (

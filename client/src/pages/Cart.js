@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../components/Button";
 import CartRow from "../components/Cart/CartRow";
 
 const Cart = () => {
