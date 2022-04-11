@@ -60,7 +60,7 @@ const OrderSchema = new mongoose.Schema(
           type: String,
           required: [true, "Please Provide Your country!"],
         },
-        zip: {
+        phone: {
           type: String,
           required: [true, "Please Provide Your Zip!"],
         },

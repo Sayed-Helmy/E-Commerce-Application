@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema(
         "You have To Provide a valid Email address!",
       ],
       unique: [true, "This Email is already exist!"],
+      index: true,
     },
     password: {
       type: String,
@@ -24,11 +25,32 @@ const UserSchema = new mongoose.Schema(
       maxlength: [20, "Username length must be blew 20 char."],
       minlength: [6, "Password length must be above 6 char."],
     },
+    avatar: {
+      type: String,
+      default: "",
+    },
     roles: {
       type: [String],
       default: ["USER"],
     },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
+    address:{
+      street: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      country: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
+    },
     cart: [
       {
         productId: {
