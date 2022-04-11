@@ -20,6 +20,7 @@ const CartRow = ({ product, index }) => {
           <div className="relative flex flex-row w-full h-8">
             <input
               type="number"
+              min={0}
               value={productCount}
               onChange={handleChange}
               className="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black"
