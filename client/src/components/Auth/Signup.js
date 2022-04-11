@@ -20,6 +20,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   const onSubmit = (data) => console.log(data);
 
