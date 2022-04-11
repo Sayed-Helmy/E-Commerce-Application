@@ -1,7 +1,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        test: "1fr 1fr 2fr",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
