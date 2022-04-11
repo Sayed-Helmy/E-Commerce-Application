@@ -2,6 +2,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
 
 const schema = yup
   .object({
@@ -17,12 +18,16 @@ const Signin = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const user = await axios.post("/api/v1/auth", data);
+    console.log(user);
+  };
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-28 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-full flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -65,7 +70,7 @@ const Signin = () => {
             <div className="flex items-center justify-between">
               <div className="text-sm">
                 <a
-                  href="#"
+                  href="/"
                   className="font-medium text-black/50 hover:text-black/60"
                 >
                   Forgot your password?

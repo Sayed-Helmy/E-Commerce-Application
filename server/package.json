@@ -18,9 +18,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "helmet": "^5.0.2",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
-    "multer": "^1.4.4"
+    "multer": "^1.4.4",
+    "stripe": "^8.215.0"
   }
 }

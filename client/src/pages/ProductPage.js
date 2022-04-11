@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
-import Button from "../components/Button";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,48 +12,20 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 import { Tab } from "@headlessui/react";
+import Button from "../components/ui/Button";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const product = {
-  id: 1,
-  name: "White EliteBook Tablet  ",
-  price: "900$",
-  rating: 3.9,
-  reviewCount: 117,
-  inStock: 10,
-  href: "#",
-  imageSrc: "/assets/best-seller-1.png",
-  imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-  category: "HEADPHONES",
-};
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ProductPage() {
-  const [inStock, setInStock] = useState(true);
+  const productId = useParams();
+  const products = useSelector((state) => state.products);
+  const product = products.find((item) => item.id === +productId.id);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [categories] = useState({
-    Description: [
-      {
-        id: 1,
-        title: "Does drinking coffee make you smarter?",
-        date: "5h ago",
-        commentCount: 5,
-        shareCount: 2,
-      },
-    ],
-    Reviews: [
-      {
-        id: 1,
-        name: "Wade Warren",
-        photo: "",
-        date: "Jan 7",
-        rating: 4,
-        comment: "",
-      },
-    ],
-  });
 
   return (
     <>
@@ -123,12 +94,12 @@ export default function ProductPage() {
               </h3>
 
               {/* Price */}
-              <p className="text-gray-900 lg:text-3xl font-bold">
+              <p className="text-gray-900 text-3xl font-bold">
                 {product.price}
               </p>
 
               {/* Reviews */}
-              <div className="">
+              <div>
                 <h4 className="sr-only">Reviews</h4>
                 <div className="flex items-center">
                   <div className="flex items-center">
@@ -166,7 +137,7 @@ export default function ProductPage() {
                     </p>
                   </div>
                   {/* Stock */}
-                  {inStock ? (
+                  {product.inStock ? (
                     <div className="text-base ">
                       In Stock: {product.inStock}
                     </div>
@@ -197,19 +168,26 @@ export default function ProductPage() {
           <Tab.Group>
             {/* Switcher BTN */}
             <Tab.List className="flex max-w-sm mx-auto space-x-1 border border-black rounded-lg overflow-hidden">
-              {Object.keys(categories).map((category) => (
-                <Tab
-                  key={category}
-                  className={({ selected }) =>
-                    classNames(
-                      "w-full py-2.5 text-base ",
-                      selected ? "bg-black shadow text-white" : "text-black "
-                    )
-                  }
-                >
-                  {category}
-                </Tab>
-              ))}
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-base ",
+                    selected ? "bg-black shadow text-white" : "text-black "
+                  )
+                }
+              >
+                Description
+              </Tab>
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-base ",
+                    selected ? "bg-black shadow text-white" : "text-black "
+                  )
+                }
+              >
+                Reviews
+              </Tab>
             </Tab.List>
 
             {/* Description */}
@@ -320,8 +298,6 @@ export default function ProductPage() {
                         Your Review:
                       </label>
                       <textarea
-                        id=""
-                        name=""
                         rows="4"
                         cols="50"
                         placeholder="Type your review..."
