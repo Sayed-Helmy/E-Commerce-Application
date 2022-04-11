@@ -27,14 +27,14 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "",
+      default: "/upload/Default-avatar.jpg",
     },
     roles: {
       type: [String],
       default: ["USER"],
     },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
-    address:{
+    address: {
       street: {
         type: String,
       },

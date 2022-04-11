@@ -36,12 +36,12 @@ const multerUploader = async (req, res, next) => {
       res.json({ msg: err });
     } else {
       if (req.files.length > 0) {
-        req.body.images = [
-          ...req.files.map((i) =>
-            i.path.replace(/\\/g, "/").substring("public".length)
-          ),
-        ];
-        return next();
+        req.body.images = {};
+        req.files.forEach((image) => {
+          req.body[image.fieldname] = image.path
+            .replace(/\\/g, "/")
+            .substring("public".length);
+        });
       }
       next();
     }

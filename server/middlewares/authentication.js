@@ -7,6 +7,12 @@ const auth = async (req, res, next) => {
     if (!token) throw new Unauthenticated("Authentication Token Required.");
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(payload.userID);
+    if (req.route.path === "/validate") {
+      const result = user.toObject();
+      delete result._id;
+      delete result.password;
+      return res.status(200).json(result);
+    }
     req.roles = user.roles;
     req.payload = user;
     next();

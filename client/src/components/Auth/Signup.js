@@ -2,6 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/userSlice";
 
 const schema = yup
   .object({
@@ -16,6 +20,8 @@ const schema = yup
 
 const Signup = () => {
   const [error, setError] = useState(null);
+  const navigator = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,16 +33,21 @@ const Signup = () => {
   const onSubmit = async (data) => {
     const { name, email, password } = data;
     try {
-      const result = await fetch("/api/v1/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-      const user = await result.json();
-      if (!result.ok) throw new Error(user.msg);
-      console.log(user);
+      const user = await axios.post(
+        "http://localhost:5000/api/v1/auth/signup",
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(userActions.setUser(user.data));
+      navigator("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.response.data.msg);
     }
   };
 
