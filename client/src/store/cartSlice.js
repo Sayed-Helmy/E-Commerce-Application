@@ -32,6 +32,12 @@ const cartSlice = createSlice({
       }
       state.cartCount = state.cartItems.reduce((a, b) => a + b.quantity, 0);
     },
+    delProduct(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.product.id
+      );
+      state.cartItems.splice(itemIndex, 1);
+    },
   },
 });
 export const cartActions = cartSlice.actions;

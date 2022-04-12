@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import axios from "axios";
+import ProfileAvatar from "./ProfileAvatar";
 
 const navigation = {
   pages: [
@@ -28,6 +29,7 @@ export default function MainNavigation() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const logoutHandler = async () => {
+    console.log("logout");
     await axios.get("http://localhost:5000/api/v1/auth/logout", {
       withCredentials: true,
     });
@@ -189,7 +191,9 @@ export default function MainNavigation() {
                     </Link>
                   </div>
                 ) : (
-                  <button onClick={logoutHandler}>Logout</button>
+                  <ProfileAvatar logoutHandler={logoutHandler} />
+
+                  // <button onClick={logoutHandler}>Logout</button>
                 )}
 
                 {/* Cart */}
