@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import axios from "axios";
 import { cartActions } from "../../store/cartSlice";
+import ProfileAvatar from "./ProfileAvatar";
 
 const navigation = {
   pages: [
@@ -32,6 +33,7 @@ export default function MainNavigation() {
     dispatch(cartActions.getCount());
   }, [dispatch, cartCount]);
   const logoutHandler = async () => {
+    console.log("logout");
     await axios.get("http://localhost:5000/api/v1/auth/logout", {
       withCredentials: true,
     });
@@ -163,9 +165,16 @@ export default function MainNavigation() {
 
               <div className="flex items-center w-full space-x-4 ">
                 {/* Search */}
-                <form action="" className="flex flex-row-reverse items-center flex-1 ml-6 border-2 rounded-lg">
+                <form
+                  action=""
+                  className="flex flex-row-reverse items-center flex-1 ml-6 border-2 rounded-lg"
+                >
                   <SearchIcon className="w-5 h-5 mx-3 " aria-hidden="true" />
-                  <input className="w-full py-1 mx-3 border-0 outline-0 " type="" placeholder="What are you looking for?" />
+                  <input
+                    className="w-full py-1 mx-3 border-0 outline-0 "
+                    type=""
+                    placeholder="What are you looking for?"
+                  />
                   <span className="sr-only">Search</span>
                 </form>
 
@@ -186,7 +195,9 @@ export default function MainNavigation() {
                     </Link>
                   </div>
                 ) : (
-                  <button onClick={logoutHandler}>Logout</button>
+                  <ProfileAvatar logoutHandler={logoutHandler} />
+
+                  // <button onClick={logoutHandler}>Logout</button>
                 )}
 
                 {/* Cart */}
