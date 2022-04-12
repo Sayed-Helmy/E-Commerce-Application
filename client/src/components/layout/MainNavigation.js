@@ -125,7 +125,7 @@ export default function MainNavigation() {
 
         <nav
           aria-label="Top"
-          className="max-w-2xl mx-auto  px-4  sm:px-6 md:max-w-7xl lg:px-8"
+          className="max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8"
         >
           <div className="border-b border-gray-200">
             <div className="flex items-center h-16">
@@ -147,7 +147,7 @@ export default function MainNavigation() {
               </div>
 
               <div className="hidden lg:block">
-                <ul className="flex ml-5 space-x-8 text-sm justify-center items-center">
+                <ul className="flex items-center justify-center ml-5 space-x-8 text-sm">
                   <li>
                     <Link to="/" className="">
                       Shop
@@ -163,16 +163,9 @@ export default function MainNavigation() {
 
               <div className="flex items-center w-full space-x-4 ">
                 {/* Search */}
-                <form
-                  action=""
-                  className="flex flex-row-reverse items-center flex-1 ml-6 border-2 rounded-lg"
-                >
+                <form action="" className="flex flex-row-reverse items-center flex-1 ml-6 border-2 rounded-lg">
                   <SearchIcon className="w-5 h-5 mx-3 " aria-hidden="true" />
-                  <input
-                    className="w-full py-1 mx-3 focus:outline-none"
-                    type="search"
-                    placeholder="What are you looking for?"
-                  />
+                  <input className="w-full py-1 mx-3 border-0 outline-0 " type="" placeholder="What are you looking for?" />
                   <span className="sr-only">Search</span>
                 </form>
 
