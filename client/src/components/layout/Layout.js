@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import { useCookies } from "react-cookie";
+import { cartActions } from "../../store/cartSlice";
 
 const Layout = (props) => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Layout = (props) => {
         })
         .then((result) => {
           dispatch(userActions.setUser(result.data));
+          dispatch(cartActions.setCart(result.data.cart));
         });
   }, [dispatch, cookies.token]);
   return (

@@ -2,15 +2,14 @@ import { XCircleIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { cartActions } from "../../store/cartSlice";
+import { updateUserCart } from "../../store/cartSlice";
 
 const CartRow = ({ product, index }) => {
-  const [productCount, setproductCount] = useState(1);
+  const [productCount, setproductCount] = useState(product.quantity);
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setproductCount(e.target.value);
-    dispatch(cartActions.setQuantity({ product, quantity: +e.target.value }));
-    dispatch(cartActions.getCount());
+    dispatch(updateUserCart(product, +e.target.value));
   };
   const handleDelete = (e) => {
     dispatch(cartActions.delProduct({ product }));

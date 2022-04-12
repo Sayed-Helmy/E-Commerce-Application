@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   MenuIcon,
@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import axios from "axios";
-import { cartActions } from "../../store/cartSlice";
 import ProfileAvatar from "./ProfileAvatar";
 
 const navigation = {
@@ -29,9 +28,6 @@ export default function MainNavigation() {
   const cartCount = useSelector((state) => state.cart.cartCount);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    dispatch(cartActions.getCount());
-  }, [dispatch, cartCount]);
   const logoutHandler = async () => {
     console.log("logout");
     await axios.get("http://localhost:5000/api/v1/auth/logout", {
@@ -151,7 +147,7 @@ export default function MainNavigation() {
               <div className="hidden lg:block">
                 <ul className="flex items-center justify-center ml-5 space-x-8 text-sm">
                   <li>
-                    <Link to="/" className="">
+                    <Link to="/shop" className="">
                       Shop
                     </Link>
                   </li>

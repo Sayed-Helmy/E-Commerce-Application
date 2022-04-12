@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userActions } from "../../store/userSlice";
 import { useState } from "react";
+import { cartActions } from "../../store/cartSlice";
 
 const schema = yup
   .object({
@@ -41,6 +42,7 @@ const Signin = () => {
         }
       );
       dispatch(userActions.setUser(user.data));
+      dispatch(cartActions.setCart(user.data.cart));
       navigator("/");
     } catch (err) {
       setError(err.response.data.msg);

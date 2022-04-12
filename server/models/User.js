@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "/upload/Default-avatar.jpg",
+      default: "/uploads/Default-avatar.jpg",
     },
     roles: {
       type: [String],
@@ -53,23 +53,19 @@ const UserSchema = new mongoose.Schema(
     },
     cart: [
       {
-        productId: {
+        id: {
           type: String,
           required: [true, "Cart Item must  have the product Id!"],
         },
-        productName: {
+        name: {
           type: String,
           required: [true, "Cart Item Must have a product Name!"],
         },
-        productDesc: {
-          type: String,
-          required: [true, "Cart Item Must have a product Description!"],
-        },
-        productPrice: {
+        price: {
           type: Number,
           required: [true, "Cart Item Must have a product Price!"],
         },
-        productImage: {
+        imageSrc: {
           type: String,
           required: [true, "Cart Item Must have a product Image!"],
         },
