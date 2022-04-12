@@ -1,3 +1,4 @@
+import { XCircleIcon } from "@heroicons/react/outline";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,16 +12,28 @@ const CartRow = ({ product, index }) => {
     dispatch(cartActions.setQuantity({ product, quantity: +e.target.value }));
     dispatch(cartActions.getCount());
   };
+  const handleDelete = (e) => {
+    dispatch(cartActions.delProduct({ product }));
+    dispatch(cartActions.getCount());
+  };
   return (
     <tr className=" border-b">
-      <td className="hidden py-4 md:table-cell ">
-        <Link to={`/shop/${product.id}`}>
-          <img
-            src={product.imageSrc}
-            className="w-20 rounded"
-            alt="Thumbnail"
-          />
-        </Link>
+      <td className="py-4 md:table-cell">
+        <div className="flex flex-row items-center">
+          <span>
+            <XCircleIcon
+              className="w-4 mr-2 cursor-pointer"
+              onClick={handleDelete}
+            />
+          </span>
+          <Link to={`/shop/${product.id}`}>
+            <img
+              src={product.imageSrc}
+              className="w-20 rounded"
+              alt="Thumbnail"
+            />
+          </Link>
+        </div>
       </td>
       <td>
         <Link to={`/shop/${product.id}`}>

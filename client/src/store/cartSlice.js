@@ -61,6 +61,12 @@ const cartSlice = createSlice({
         state.cartItems[itemIndex].quantity = action.payload.quantity;
       }
     },
+    delProduct(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.product.id
+      );
+      state.cartItems.splice(itemIndex, 1);
+    },
   },
 });
 
