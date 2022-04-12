@@ -1,46 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const intialVlaue = {
-  cartItems: [
-    {
-      id: 1,
-      name: "White EliteBook Tablet  ",
-      price: 900,
-      rating: 3.9,
-      reviewCount: 117,
-      inStock: 10,
-      href: "shop/product1",
-      imageSrc: "/assets/best-seller-1.png",
-      imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-      category: "HEADPHONES",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "Nomad Tumbler",
-      href: "product2",
-      price: 35,
-      category: "HEADPHONES",
-      rating: 3.9,
-      reviewCount: 117,
-      inStock: 10,
-      imageSrc: "/assets/best-seller-2.png",
-      imageAlt:
-        "Olive drab green insulated bottle with flared screw lid and flat top.",
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: "Focus Paper Refill",
-      href: "#",
-      price: 89,
-      category: "laptop",
-      imageSrc: "/assets/best-seller-3.png",
-      imageAlt:
-        "Person using a pen to cross a task off a productivity paper card.",
-      quantity: 1,
-    },
-  ],
+  cartItems: [],
   cartCount: 0,
 };
 
@@ -48,21 +10,45 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: intialVlaue,
   reducers: {
-    getCount(state, action) {
+    setCart(state, action) {
+      state.cartItems = action.payload;
       state.cartCount = state.cartItems.reduce((a, b) => a + b.quantity, 0);
     },
     setQuantity(state, action) {
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.product.id
       );
-      if (action.payload.quantity === 0) {
-        state.cartItems.splice(itemIndex, 1);
+      console.log(itemIndex);
+      if (itemIndex === -1) {
+        const newProduct = { ...action.payload.product };
+        newProduct.quantity = 1;
+        state.cartItems.unshift(newProduct);
       } else {
-        state.cartItems[itemIndex].quantity = action.payload.quantity;
+        if (action.payload.quantity === 0) {
+          state.cartItems.splice(itemIndex, 1);
+        } else {
+          state.cartItems[itemIndex].quantity = action.payload.quantity;
+        }
       }
+      state.cartCount = state.cartItems.reduce((a, b) => a + b.quantity, 0);
     },
   },
 });
-
 export const cartActions = cartSlice.actions;
+
+export const updateUserCart = (product, quantity) => {
+  return async (dispatch, getState) => {
+    dispatch(cartActions.setQuantity({ product, quantity }));
+    const cart = getState().cart.cartItems;
+    console.log(cart);
+    axios.put(
+      "http://localhost:5000/api/v1/auth/updateCart",
+      { cart },
+      {
+        withCredentials: true,
+      }
+    );
+  };
+};
+
 export default cartSlice.reducer;

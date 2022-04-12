@@ -14,8 +14,8 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Tab } from "@headlessui/react";
 import Button from "../components/ui/Button";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserCart } from "../store/cartSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -24,8 +24,14 @@ function classNames(...classes) {
 export default function ProductPage() {
   const productId = useParams();
   const products = useSelector((state) => state.products);
-  const product = products.find((item) => item.id === +productId.id);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const product = products.find((item) => item.id === productId.id);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const addToCartHandler = () => {
+    dispatch(updateUserCart(product, 1));
+  };
 
   return (
     <>
@@ -148,11 +154,12 @@ export default function ProductPage() {
               </section>
               {/* Buttons */}
               <div className="grid self-start w-full sm:grid-cols-2 grid-cols-1 gap-5">
-                <Button
-                  text="Add to Cart"
-                  className="text-white bg-black hover:bg-black/90"
-                  to="#"
-                />
+                <button
+                  onClick={addToCartHandler}
+                  className="px-6 py-3 rounded-lg text-white bg-black hover:bg-black/90"
+                >
+                  Add to Cart
+                </button>
                 <Button
                   text="Buy Now"
                   className="text-black bg-white border border-black hover:bg-gray-100  hover:text-black"
@@ -221,9 +228,10 @@ export default function ProductPage() {
                       <img
                         className="w-10 h-10 bg-gray-500 rounded-full mb-4 md:mb-0"
                         alt="reviewer pic"
+                        src={user?.avatar}
                       ></img>
                       <div className="text-center md:text-left">
-                        <h3 className="text-2xl font-bold">Wade Warren</h3>
+                        <h3 className="text-2xl font-bold">{user?.name}</h3>
                         <p className="text-base ">added at : 10 march 2022</p>
                       </div>
                     </div>

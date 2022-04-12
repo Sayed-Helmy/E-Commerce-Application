@@ -69,7 +69,7 @@ const ContactUs = () => {
             </div>
           </div>
           <form
-            className="mt-8 basis-2/4  space-y-6"
+            className="basis-2/4  space-y-6"
             onSubmit={handleSubmit(onSubmit)}
           >
             <input type="hidden" name="remember" defaultValue="true" />

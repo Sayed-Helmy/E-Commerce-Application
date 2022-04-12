@@ -35,8 +35,15 @@ const login = asyncWrapper(async (req, res) => {
   res.status(200).json(result);
 });
 
-const getUser = asyncWrapper(async (req, res) => {
-  if (req.payload) res.status(200).json(req.payload);
+const updateCart = asyncWrapper(async (req, res) => {
+  const user = req.payload;
+  user.cart = req.body.cart;
+  await User.findByIdAndUpdate(
+    user._id,
+    { cart: req.body.cart },
+    { new: true }
+  );
+  res.status(201).json({ cart: user.cart });
 });
 
 const logout = asyncWrapper(async (req, res) => {
@@ -44,4 +51,4 @@ const logout = asyncWrapper(async (req, res) => {
   res.json({ msg: "logging out" });
 });
 
-module.exports = { createUser, login, logout, updateUser, getUser };
+module.exports = { createUser, login, logout, updateUser, updateCart };

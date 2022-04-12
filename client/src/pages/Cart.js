@@ -4,7 +4,8 @@ import CartRow from "../components/Cart/CartRow";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.cartItems);
-  console.log(products);
+  const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
+  console.log(totalPrice);
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
       <table
@@ -26,9 +27,10 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
-            <CartRow product={product} key={product.id} index={index} />
-          ))}
+          {products &&
+            products.map((product, index) => (
+              <CartRow product={product} key={product.id} index={index} />
+            ))}
         </tbody>
       </table>
       <div className="w-full md:w-2/4  float-right mt-8 flex">
@@ -67,7 +69,7 @@ const Cart = () => {
           <div className="mt-8">
             <div className="flex justify-between border-b py-2">
               <h5>Subtotal</h5>
-              <p>$900</p>
+              <p>{`$${totalPrice}`}</p>
             </div>
             <div className="flex justify-between border-b  py-2">
               <h5>Shipping fee</h5>
@@ -79,7 +81,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-between border-t border-black  py-2">
               <h5>Total</h5>
-              <p>810$</p>
+              <p>{`$${(totalPrice * 0.9).toFixed(2)}`}</p>
             </div>
             <button
               type="submit"
