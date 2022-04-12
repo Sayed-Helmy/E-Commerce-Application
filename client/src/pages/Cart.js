@@ -44,8 +44,8 @@ const Cart = () => {
         </button>
       </div>
       {/* cart total && cart details */}
-      <div className="w-full flex py-28">
-        <div className="w-1/2 ">
+      <div className="w-full flex flex-col md:flex-row py-28  gap-24 md:gap-0">
+        <div className="md:w-1/2 ">
           <h3 className="text-4xl font-medium">Billing details</h3>
           <div className="w-full md:w-2/4   my-6 flex items-center">
             <p className="basis-2/3"> Current Address</p>
@@ -56,13 +56,13 @@ const Cart = () => {
               Add New
             </button>
           </div>
-          <div className="flex- flex-col p-8 bg-[#ECECEC] rounded-lg w-2/3">
+          <div className="flex- flex-col p-8 bg-[#ECECEC] rounded-lg md:w-2/3">
             <p>Name:</p>
             <p>Address:</p>
             <p>Phone:</p>
           </div>
         </div>
-        <div className="w-1/2 ">
+        <div className="md:w-1/2 ">
           <h3 className="text-4xl font-medium">Cart Total</h3>
           <div className="mt-8">
             <div className="flex justify-between border-b py-2">
