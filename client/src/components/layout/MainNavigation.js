@@ -1,20 +1,4 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   MenuIcon,
@@ -23,6 +7,10 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../store/userSlice";
+import axios from "axios";
+import { cartActions } from "../../store/cartSlice";
 
 const navigation = {
   pages: [
@@ -37,7 +25,18 @@ const navigation = {
 
 export default function MainNavigation() {
   const [open, setOpen] = useState(false);
-
+  const cartCount = useSelector((state) => state.cart.cartCount);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    dispatch(cartActions.getCount());
+  }, [dispatch, cartCount]);
+  const logoutHandler = async () => {
+    await axios.get("http://localhost:5000/api/v1/auth/logout", {
+      withCredentials: true,
+    });
+    dispatch(userActions.setUser(null));
+  };
   return (
     <div className="bg-white ">
       {/* Mobile menu */}
@@ -94,24 +93,26 @@ export default function MainNavigation() {
                 ))}
               </div>
 
-              <div className="px-4 py-6 space-y-6 border-t border-gray-200">
-                <div className="flow-root">
-                  <Link
-                    to="SigninPage"
-                    className="block p-2 -m-2 font-medium text-gray-900"
-                  >
-                    Sign in
-                  </Link>
+              {!user && (
+                <div className="px-4 py-6 space-y-6 border-t border-gray-200">
+                  <div className="flow-root">
+                    <Link
+                      to="SigninPage"
+                      className="block p-2 -m-2 font-medium text-gray-900"
+                    >
+                      Sign in
+                    </Link>
+                  </div>
+                  <div className="flow-root">
+                    <Link
+                      to="SignupPage"
+                      className="block p-2 -m-2 font-medium text-gray-900"
+                    >
+                      Create account
+                    </Link>
+                  </div>
                 </div>
-                <div className="flow-root">
-                  <Link
-                    to="SignupPage"
-                    className="block p-2 -m-2 font-medium text-gray-900"
-                  >
-                    Create account
-                  </Link>
-                </div>
-              </div>
+              )}
             </div>
           </Transition.Child>
         </Dialog>
@@ -168,31 +169,35 @@ export default function MainNavigation() {
                   <span className="sr-only">Search</span>
                 </form>
 
-                <div className="hidden md:flex md:items-center md:justify-end md:space-x-6">
-                  <Link
-                    to="SigninPage"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Sign in
-                  </Link>
-                  <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
-                  <Link
-                    to="SignupPage"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Create account
-                  </Link>
-                </div>
+                {!user ? (
+                  <div className="hidden md:flex md:items-center md:justify-end md:space-x-6">
+                    <Link
+                      to="SigninPage"
+                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      Sign in
+                    </Link>
+                    <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
+                    <Link
+                      to="SignupPage"
+                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      Create account
+                    </Link>
+                  </div>
+                ) : (
+                  <button onClick={logoutHandler}>Logout</button>
+                )}
 
                 {/* Cart */}
                 <div className="flow-root lg:ml-6">
-                  <Link to="#" className="flex items-center p-2 -m-2 group">
+                  <Link to="/cart" className="flex items-center p-2 -m-2 group">
                     <ShoppingBagIcon
                       className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                      {cartCount}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>

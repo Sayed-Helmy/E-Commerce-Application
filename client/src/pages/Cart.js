@@ -1,46 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import CartRow from "../components/Cart/CartRow";
 
 const Cart = () => {
-  const products = [
-    {
-      id: 1,
-      name: "White EliteBook Tablet  ",
-      price: 900,
-      rating: 3.9,
-      reviewCount: 117,
-      inStock: 10,
-      href: "shop/product1",
-      imageSrc: "/assets/best-seller-1.png",
-      imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-      category: "HEADPHONES",
-    },
-    {
-      id: 2,
-      name: "Nomad Tumbler",
-      href: "product2",
-      price: 35,
-      category: "HEADPHONES",
-      rating: 3.9,
-      reviewCount: 117,
-      inStock: 10,
-
-      imageSrc: "/assets/best-seller-2.png",
-      imageAlt:
-        "Olive drab green insulated bottle with flared screw lid and flat top.",
-    },
-    {
-      id: 3,
-      name: "Focus Paper Refill",
-      href: "#",
-      price: 89,
-      category: "laptop",
-
-      imageSrc: "/assets/best-seller-3.png",
-      imageAlt:
-        "Person using a pen to cross a task off a productivity paper card.",
-    },
-  ];
+  const products = useSelector((state) => state.cart.cartItems);
+  console.log(products);
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
       <table

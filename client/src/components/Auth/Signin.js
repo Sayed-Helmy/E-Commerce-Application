@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userActions } from "../../store/userSlice";
+import { useState } from "react";
 
 const schema = yup
   .object({
@@ -12,6 +16,9 @@ const schema = yup
   .required();
 
 const Signin = () => {
+  const [error, setError] = useState();
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,8 +28,23 @@ const Signin = () => {
     mode: "onChange",
   });
   const onSubmit = async (data) => {
-    const user = await axios.post("/api/v1/auth", data);
-    console.log(user);
+    const { email, password } = data;
+    try {
+      const user = await axios.post(
+        "http://localhost:5000/api/v1/auth/signin",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(userActions.setUser(user.data));
+      navigator("/");
+    } catch (err) {
+      setError(err.response.data.msg);
+    }
   };
 
   return (
@@ -91,6 +113,7 @@ const Signin = () => {
                 </span>
                 Sign in
               </button>
+              <p className="py-2 text-red-600 text-sm">{error && error}</p>
             </div>
           </form>
         </div>

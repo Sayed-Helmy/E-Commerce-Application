@@ -1,14 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { cartActions } from "../../store/cartSlice";
 
 const CartRow = ({ product, index }) => {
   const [productCount, setproductCount] = useState(1);
-  const handleChange = (e) => setproductCount(e.target.value);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setproductCount(e.target.value);
+    dispatch(cartActions.setQuantity({ product, quantity: +e.target.value }));
+    dispatch(cartActions.getCount());
+  };
   return (
     <tr className=" border-b">
       <td className="hidden py-4 md:table-cell ">
         <Link to={`/shop/${product.id}`}>
-          <img src={product.imageSrc} class="w-20 rounded" alt="Thumbnail" />
+          <img
+            src={product.imageSrc}
+            className="w-20 rounded"
+            alt="Thumbnail"
+          />
         </Link>
       </td>
       <td>

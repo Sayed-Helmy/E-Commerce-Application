@@ -17,10 +17,10 @@ const productsRouter = require("./routes/products");
 const categoriesRouter = require("./routes/categories");
 const checkoutRouter = require("./routes/checkout");
 
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
 app.use(cookiesParser());
+app.use(express.json());
 
 app.use(`${apiRoute}/auth`, authRouter);
 app.use(`${apiRoute}/categories`, categoriesRouter);

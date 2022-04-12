@@ -1,5 +1,4 @@
 import Layout from "./components/layout/Layout";
-
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SigninPage from "./pages/SigninPage";
@@ -9,8 +8,10 @@ import ProductPage from "./pages/ProductPage";
 import ContactUs from "./pages/ContactUs";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
+// import { useSelector } from "react-redux";
 
 function App() {
+  // const user = useSelector((state) => state.user);
   return (
     <Layout>
       <Routes>
@@ -19,9 +20,9 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/shop/:id" element={<ProductPage />} />
         <Route path="/SigninPage" element={<SigninPage />} />
         <Route path="/SignupPage" element={<SignupPage />} />
-        <Route path="/shop/:id" element={<ProductPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

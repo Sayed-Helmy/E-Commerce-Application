@@ -39,7 +39,7 @@ const ProductSchema = new mongoose.Schema(
       default: "",
     },
     images: {
-      type: [String],
+      type: {},
       required: [true, "Please Provide a Product Image!"],
     },
     brand: {

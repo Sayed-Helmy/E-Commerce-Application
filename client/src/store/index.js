@@ -1,3 +1,4 @@
+import cartReducer from "./cartSlice";
 import productsReducer from "./productsSlice";
 import userReducer from "./userSlice";
 
@@ -7,6 +8,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     products: productsReducer,
+    cart: cartReducer,
   },
 });
 
