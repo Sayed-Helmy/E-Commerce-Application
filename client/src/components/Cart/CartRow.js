@@ -12,8 +12,7 @@ const CartRow = ({ product, index }) => {
     dispatch(updateUserCart(product, +e.target.value));
   };
   const handleDelete = (e) => {
-    dispatch(cartActions.delProduct({ product }));
-    dispatch(cartActions.getCount());
+    dispatch(updateUserCart(product, 0));
   };
   return (
     <tr className=" border-b">
@@ -25,9 +24,9 @@ const CartRow = ({ product, index }) => {
               onClick={handleDelete}
             />
           </span>
-          <Link to={`/shop/${product.id}`}>
+          <Link to={`/shop/${product._id}`}>
             <img
-              src={product.imageSrc}
+              src={product.images.mainImage}
               className="w-20 rounded"
               alt="Thumbnail"
             />
@@ -35,8 +34,8 @@ const CartRow = ({ product, index }) => {
         </div>
       </td>
       <td>
-        <Link to={`/shop/${product.id}`}>
-          <p className=" md:ml-4">{product.name}</p>
+        <Link to={`/shop/${product._id}`}>
+          <p className=" md:ml-4">{product.title}</p>
         </Link>
       </td>
       <td className="justify-center md:justify-end md:flex mt-6">

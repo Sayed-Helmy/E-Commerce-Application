@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const Product = ({ product }) => {
   return (
     <div>
-      <Link key={product.id} to={`/shop/${product.id}`} className="group">
+      <Link key={product._id} to={`/shop/${product._id}`} className="group">
         <div className="w-full overflow-hidden bg-gradient-to-br from-black/20 to-[#f4f4f4] rounded-2xl max-h-56 sm:max-h-72 h-72">
           <img
-            src={product.imageSrc}
+            src={product.images.mainImage}
             alt={product.imageAlt}
             className="object-cover object-center w-full h-full group-hover:opacity-75"
           />
@@ -17,8 +17,8 @@ const Product = ({ product }) => {
         <h3 className="mt-2 text-sm bg-[#F4F4F4] inline-block py-1 px-3 rounded-lg	">
           {product.category}
         </h3>
-        <h1 className="text-xl ">{product.name}</h1>
-        <p className="text-2xl ">{product.price}</p>
+        <h1 className="text-xl ">{product.title}</h1>
+        <p className="text-2xl ">${product.price}</p>
       </div>
     </div>
   );

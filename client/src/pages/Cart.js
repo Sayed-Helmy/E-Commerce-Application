@@ -5,7 +5,6 @@ import CartRow from "../components/Cart/CartRow";
 const Cart = () => {
   const products = useSelector((state) => state.cart.cartItems);
   const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
-  console.log(totalPrice);
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
       <table
@@ -29,7 +28,7 @@ const Cart = () => {
         <tbody>
           {products &&
             products.map((product, index) => (
-              <CartRow product={product} key={product.id} index={index} />
+              <CartRow product={product} key={product._id} index={index} />
             ))}
         </tbody>
       </table>

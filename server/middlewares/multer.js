@@ -35,10 +35,15 @@ const multerUploader = async (req, res, next) => {
     if (err) {
       res.json({ msg: err });
     } else {
-      if (req.files.length > 0) {
+      if (req.files.length === 1) {
+        req.body[req.files[0].fieldname] = req.files[0].path
+          .replace(/\\/g, "/")
+          .substring("public".length);
+      }
+      if (req.files.length > 1) {
         req.body.images = {};
         req.files.forEach((image) => {
-          req.body[image.fieldname] = image.path
+          req.body.images[image.fieldname] = image.path
             .replace(/\\/g, "/")
             .substring("public".length);
         });
