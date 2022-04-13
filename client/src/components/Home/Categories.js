@@ -8,7 +8,7 @@ const categories = [
     href: "#",
     price: "$48",
     category: "laptop",
-    colorGradient: "bg-gradient-to-br from-black to-black/70",
+    colorGradient: "black",
     gridClass: "",
 
     imageSrc: "/assets/category-1.png",
@@ -22,7 +22,7 @@ const categories = [
     href: "#",
     price: "$35",
     category: "laptop",
-    colorGradient: "bg-gradient-to-br from-[#FEC62E] to-[#FEC62E]/70",
+    colorGradient: "[#FEC62E]",
     gridClass: "",
     imageSrc: "/assets/category-2.png",
     imageAlt:
@@ -35,8 +35,8 @@ const categories = [
     href: "#",
     price: "$89",
     category: "laptop",
-    colorGradient: "bg-gradient-to-br from-[#F42C37]  to-[#F42C37]/70",
-    gridClass: "xl:col-span-2",
+    colorGradient: "[#F42C37]",
+    gridClass: true,
     imageSrc: "/assets/category-3.png",
     imageAlt:
       "Person using a pen to cross a task off a productivity paper card.",
@@ -48,8 +48,8 @@ const categories = [
     href: "#",
     category: "laptop",
     price: "$35",
-    colorGradient: "bg-gradient-to-br from-[#F42C37]  to-[#F42C37]/70",
-    gridClass: "xl:col-span-2",
+    colorGradient: "[#F42C37]",
+    gridClass: true,
     imageSrc: "/assets/category-1.png",
     imageAlt:
       "Hand holding black machined steel mechanical pencil with brass tip and top.",
@@ -61,7 +61,7 @@ const categories = [
     href: "#",
     category: "laptop",
     price: "$35",
-    colorGradient: "bg-gradient-to-br from-[#FEC62E] to-[#FEC62E]/70",
+    colorGradient: "[#FEC62E]",
     gridClass: "",
     imageSrc: "/assets/category-2.png",
     imageAlt:
@@ -74,7 +74,7 @@ const categories = [
     href: "#",
     category: "laptop",
     price: "$35",
-    colorGradient: "bg-gradient-to-br from-black to-black/70",
+    colorGradient: "black",
     gridClass: "",
     imageSrc: "/assets/category-3.png",
     imageAlt:

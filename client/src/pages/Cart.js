@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import CartRow from "../components/Cart/CartRow";
+import { ReactComponent as Spinner } from "./../assets/spinner.svg";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.cartItems);
   const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
-  console.log(totalPrice);
+  const [loading, setloading] = useState(false);
+
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
       <table
@@ -85,8 +87,12 @@ const Cart = () => {
             </div>
             <button
               type="submit"
+              onClick={() => {
+                setloading(true);
+              }}
               className="group basis-1/3 mt-2  flex justify-center py-3 px-6 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
+              {loading && <Spinner className=" animate-spin mr-4 " />}
               Proceed to Checkout
             </button>
           </div>
