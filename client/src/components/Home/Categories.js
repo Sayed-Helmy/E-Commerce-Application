@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
-
 export default function Categories() {
   const [categories, setcategories] = useState([]);
   useEffect(() => {
