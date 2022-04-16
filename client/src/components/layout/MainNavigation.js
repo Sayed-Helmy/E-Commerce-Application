@@ -191,7 +191,7 @@ export default function MainNavigation() {
                     </Link>
                   </div>
                 ) : (
-                  <ProfileAvatar logoutHandler={logoutHandler} />
+                  <ProfileAvatar user={user} logoutHandler={logoutHandler} />
 
                   // <button onClick={logoutHandler}>Logout</button>
                 )}

@@ -24,7 +24,7 @@ const Hero = () => {
             <Button
               text="Visit Our Shop"
               className="text-white bg-black hover:bg-white hover:text-black"
-              to="#"
+              to="/shop"
             />
           </div>
         </div>

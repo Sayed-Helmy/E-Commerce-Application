@@ -31,7 +31,7 @@ const Cart = () => {
         <tbody>
           {products &&
             products.map((product, index) => (
-              <CartRow product={product} key={product.id} index={index} />
+              <CartRow product={product} key={product._id} index={index} />
             ))}
         </tbody>
       </table>

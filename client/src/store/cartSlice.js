@@ -16,9 +16,8 @@ const cartSlice = createSlice({
     },
     setQuantity(state, action) {
       const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.product.id
+        (item) => item._id === action.payload.product._id
       );
-      console.log(itemIndex);
       if (itemIndex === -1) {
         const newProduct = { ...action.payload.product };
         newProduct.quantity = 1;
@@ -32,12 +31,6 @@ const cartSlice = createSlice({
       }
       state.cartCount = state.cartItems.reduce((a, b) => a + b.quantity, 0);
     },
-    delProduct(state, action) {
-      const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.product.id
-      );
-      state.cartItems.splice(itemIndex, 1);
-    },
   },
 });
 export const cartActions = cartSlice.actions;
@@ -46,7 +39,6 @@ export const updateUserCart = (product, quantity) => {
   return async (dispatch, getState) => {
     dispatch(cartActions.setQuantity({ product, quantity }));
     const cart = getState().cart.cartItems;
-    console.log(cart);
     axios.put(
       "http://localhost:5000/api/v1/auth/updateCart",
       { cart },

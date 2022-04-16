@@ -53,11 +53,11 @@ const UserSchema = new mongoose.Schema(
     },
     cart: [
       {
-        id: {
+        _id: {
           type: String,
           required: [true, "Cart Item must  have the product Id!"],
         },
-        name: {
+        title: {
           type: String,
           required: [true, "Cart Item Must have a product Name!"],
         },
@@ -65,8 +65,8 @@ const UserSchema = new mongoose.Schema(
           type: Number,
           required: [true, "Cart Item Must have a product Price!"],
         },
-        imageSrc: {
-          type: String,
+        images: {
+          type: {},
           required: [true, "Cart Item Must have a product Image!"],
         },
         quantity: {

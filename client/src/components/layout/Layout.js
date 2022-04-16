@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import { useCookies } from "react-cookie";
 import { cartActions } from "../../store/cartSlice";
+import { productsActions } from "../../store/productsSlice";
 
 const Layout = (props) => {
   const dispatch = useDispatch();
@@ -20,6 +21,13 @@ const Layout = (props) => {
           dispatch(userActions.setUser(result.data));
           dispatch(cartActions.setCart(result.data.cart));
         });
+    axios
+      .get("http://localhost:5000/api/v1/products", {
+        withCredentials: true,
+      })
+      .then((result) => {
+        dispatch(productsActions.setProducts(result.data));
+      });
   }, [dispatch, cookies.token]);
   return (
     <>
