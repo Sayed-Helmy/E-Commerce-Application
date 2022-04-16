@@ -7,7 +7,7 @@ const CategoryCard = ({ category }) => {
       key={category._id}
       className={` relative flex items-center justify-end group rounded-2xl ${
         category.featured && "xl:col-span-2"
-      } bg-gradient-to-br from-${category.color} to-${category.color}/70 `}
+      } bg-gradient-to-br from-black to-black/20 `}
     >
       {/* <div className="w-full overflow-hidden bg-gray-200 rounded-lg max-h-96 h-26 aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8"> */}
       <div className=" overflow-hidden sm:h-80 flex items-center">

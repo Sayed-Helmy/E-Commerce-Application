@@ -21,11 +21,12 @@ export default function Categories() {
       <div className="max-w-2xl mx-auto  px-4  sm:px-6 md:max-w-7xl lg:px-8">
         <h2 className="sr-only">Categories</h2>
         <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {categories
-            .sort((a, b) => a.order - b.order)
-            .map((category) => (
-              <CategoryCard key={category._id} category={category} />
-            ))}
+          {categories &&
+            categories
+              .sort((a, b) => a.order - b.order)
+              .map((category) => (
+                <CategoryCard key={category._id} category={category} />
+              ))}
         </div>
       </div>
     </div>

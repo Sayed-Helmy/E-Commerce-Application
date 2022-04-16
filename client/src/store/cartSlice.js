@@ -39,7 +39,6 @@ export const updateUserCart = (product, quantity) => {
   return async (dispatch, getState) => {
     dispatch(cartActions.setQuantity({ product, quantity }));
     const cart = getState().cart.cartItems;
-    console.log(cart);
     axios.put(
       "http://localhost:5000/api/v1/auth/updateCart",
       { cart },
