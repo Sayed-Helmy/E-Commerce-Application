@@ -1,4 +1,28 @@
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../store/userSlice";
+
 export default function Profile() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [imageState, setImageState] = useState(null);
+  console.log(user);
+  const changehandler = (e) => {
+    setImageState(URL.createObjectURL(e.target.files[0]));
+  };
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const result = await axios.patch(
+      "http://localhost:5000/api/v1/auth/updateUser",
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch(userActions.setUser(result.data));
+  };
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
       <div className="mt-10 sm:mt-0">
@@ -14,7 +38,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
+            <form onSubmit={submitHandler}>
               <div className="shadow overflow-hidden sm:rounded-md">
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
@@ -24,21 +48,18 @@ export default function Profile() {
                           Photo
                         </label>
                         <div className="mt-1 flex items-center">
-                          <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                            <svg
-                              className="h-full w-full text-gray-300"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                          </span>
-                          <button
-                            type="button"
+                          <img
+                            src={imageState || user?.avatar}
+                            alt=""
+                            className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 object-cover"
+                          />
+                          {/* Change */}
+                          <input
+                            type="file"
+                            name="avatar"
+                            onChange={changehandler}
                             className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50"
-                          >
-                            Change
-                          </button>
+                          />
                         </div>
                       </div>
                     </div>
@@ -47,29 +68,14 @@ export default function Profile() {
                         htmlFor="first-name"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        First name
+                        Your name
                       </label>
                       <input
                         type="text"
-                        name="first-name"
+                        name="name"
                         id="first-name"
+                        defaultValue={user?.name}
                         autoComplete="given-name"
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="last-name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Last name
-                      </label>
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -82,9 +88,11 @@ export default function Profile() {
                         Email address
                       </label>
                       <input
+                        disabled
                         type="text"
                         name="email-address"
                         id="email-address"
+                        value={user ? user.email : ""}
                         autoComplete="email"
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
@@ -118,9 +126,10 @@ export default function Profile() {
                       </label>
                       <input
                         type="text"
-                        name="street-address"
+                        name="street"
                         id="street-address"
                         autoComplete="street-address"
+                        defaultValue={user?.address.street}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -137,6 +146,7 @@ export default function Profile() {
                         name="city"
                         id="city"
                         autoComplete="address-level2"
+                        defaultValue={user?.address.city}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -150,25 +160,27 @@ export default function Profile() {
                       </label>
                       <input
                         type="text"
-                        name="region"
+                        name="state"
                         id="region"
                         autoComplete="address-level1"
+                        defaultValue={user?.address.state}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                       <label
-                        htmlFor="postal-code"
+                        htmlFor="phone-num"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        ZIP / Postal code
+                        Phone Number
                       </label>
                       <input
                         type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
+                        name="phone"
+                        id="phone-num"
+                        autoComplete="phone"
+                        defaultValue={user?.address.phone}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>

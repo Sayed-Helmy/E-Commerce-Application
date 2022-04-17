@@ -1,6 +1,8 @@
 const { BadRequest, NotFound, Unauthenticated } = require("../errors");
 const asyncWrapper = require("../middlewares/asyncwrapper");
 const User = require("../models/User");
+const path = require("path");
+const { unlink } = require("fs/promises");
 
 const createUser = asyncWrapper(async (req, res) => {
   const user = await User.create(req.body);
@@ -11,7 +13,7 @@ const createUser = asyncWrapper(async (req, res) => {
   res.status(201).json(result);
 });
 
-const updateUser = asyncWrapper(async (req, res) => {
+const changePassword = asyncWrapper(async (req, res) => {
   const { email } = req.payload.email;
   const { password } = req.body;
   const user = await User.findOne({ email });
@@ -45,10 +47,38 @@ const updateCart = asyncWrapper(async (req, res) => {
   );
   res.status(201).json({ cart: user.cart });
 });
+const updateUser = asyncWrapper(async (req, res) => {
+  const userId = req.payload._id;
+  const { name, country, city, state, phone, avatar, street } = req.body;
+  const user = await User.findById(userId);
+  if (name) user.name = name;
+  if (avatar) {
+    const avatarPath = path.join(process.cwd(), "public", user.avatar);
+    if (avatarPath) unlink(avatarPath);
+    user.avatar = avatar;
+  }
+  user.address = {
+    country,
+    city,
+    state,
+    phone,
+    street,
+  };
+  await user.save();
+  const { password, roles, ...newUser } = user.toObject();
+  res.status(201).json(newUser);
+});
 
 const logout = asyncWrapper(async (req, res) => {
   res.cookie("token", "", { maxAge: 1 });
   res.json({ msg: "logging out" });
 });
 
-module.exports = { createUser, login, logout, updateUser, updateCart };
+module.exports = {
+  createUser,
+  login,
+  logout,
+  changePassword,
+  updateCart,
+  updateUser,
+};
