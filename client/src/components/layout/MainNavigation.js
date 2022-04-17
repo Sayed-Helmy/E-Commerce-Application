@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import axios from "axios";
 import ProfileAvatar from "./ProfileAvatar";
+import SliderCart from "../Cart/SliderCart";
 
 const navigation = {
   pages: [
@@ -25,6 +26,7 @@ const navigation = {
 
 export default function MainNavigation() {
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const cartCount = useSelector((state) => state.cart.cartCount);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -196,8 +198,12 @@ export default function MainNavigation() {
                 )}
 
                 {/* Cart */}
-                <div className="flow-root lg:ml-6">
-                  <Link to="/cart" className="flex items-center p-2 -m-2 group">
+                <div
+                  className="flow-root lg:ml-6"
+                  onClick={() => setCartOpen(true)}
+                >
+                  <SliderCart open={cartOpen} setOpen={setCartOpen} />
+                  <div className="flex items-center p-2 -m-2 group cursor-pointer">
                     <ShoppingBagIcon
                       className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -206,7 +212,7 @@ export default function MainNavigation() {
                       {cartCount}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>

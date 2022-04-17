@@ -20,7 +20,7 @@ const cartSlice = createSlice({
       );
       if (itemIndex === -1) {
         const newProduct = { ...action.payload.product };
-        newProduct.quantity = 1;
+        newProduct.quantity = action.payload.quantity;
         state.cartItems.unshift(newProduct);
       } else {
         if (action.payload.quantity === 0) {

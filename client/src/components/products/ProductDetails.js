@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 
@@ -16,6 +16,9 @@ import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button";
 import { updateUserCart } from "../../store/cartSlice";
+import { productsActions } from "../../store/productsSlice";
+import axios from "axios";
+import ProductReview from "./ProductReview";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -23,9 +26,30 @@ function classNames(...classes) {
 
 const ProductDetails = ({ product, user }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [error, isError] = useState();
+  const [stars, setStars] = useState();
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
+  const reviewRef = useRef();
   const addToCartHandler = () => {
-    dispatch(updateUserCart(product, 1));
+    dispatch(updateUserCart(product, +qty));
+  };
+  const reviewHandler = async (e) => {
+    e.preventDefault();
+    const message = reviewRef.current.value;
+    const review = { rating: stars, message };
+    try {
+      const result = await axios.patch(
+        ` http://localhost:5000/api/v1/products/reviews/${product._id}`,
+        review,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(productsActions.addreview(result.data));
+    } catch (error) {
+      isError(error.response.data.msg);
+    }
   };
   return (
     <>
@@ -56,7 +80,15 @@ const ProductDetails = ({ product, user }) => {
                   <img alt="" src={product.images.image3} />
                 </SwiperSlide>
               </Swiper>
-              <Swiper onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={4} freeMode={true} watchSlidesProgress={true} modules={[FreeMode, Navigation, Thumbs]} className="">
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className=""
+              >
                 <SwiperSlide className="bg-gray-200 rounded-lg cursor-pointer">
                   <img alt="" src={product.images.mainImage} />
                 </SwiperSlide>
@@ -73,15 +105,22 @@ const ProductDetails = ({ product, user }) => {
           {/* Right Side */}
           <div className="space-y-8 sm:col-span-1">
             {/* NAME */}
-            <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl">{product.title}</h2>
+            <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl">
+              {product.title}
+            </h2>
 
-            <section aria-labelledby="information-heading" className="space-y-8">
+            <section
+              aria-labelledby="information-heading"
+              className="space-y-8"
+            >
               <h3 id="information-heading" className="sr-only">
                 Product information
               </h3>
 
               {/* Price */}
-              <p className="text-gray-900 text-3xl font-bold">${product.price}</p>
+              <p className="text-gray-900 text-3xl font-bold">
+                ${product.price}
+              </p>
 
               {/* Reviews */}
               <div>
@@ -89,7 +128,16 @@ const ProductDetails = ({ product, user }) => {
                 <div className="flex items-center">
                   <div className="flex items-center">
                     {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon key={rating} className={classNames(product.rating > rating ? "text-gray-900" : "text-gray-400", "h-5 w-5 flex-shrink-0")} aria-hidden="true" />
+                      <StarIcon
+                        key={rating}
+                        className={classNames(
+                          product.rating > rating
+                            ? "text-gray-900"
+                            : "text-gray-400",
+                          "h-5 w-5 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
                     ))}
                   </div>
                   <p className="sr-only">{product.rating} out of 5 stars</p>
@@ -109,17 +157,38 @@ const ProductDetails = ({ product, user }) => {
                   </div>
                   {/* Stock */}
                   <div className="space-y-2">
-                    <input type="number" min="1" max={product.stock} className="" placeholder="1" />
-                    {product.stock ? <div className="text-base ">In Stock: {product.stock}</div> : <p className="text-base  ">Out Of Stock</p>}
+                    <input
+                      type="number"
+                      min="1"
+                      max={product.stock}
+                      className=""
+                      onChange={(e) => setQty(e.target.value)}
+                      value={qty}
+                      placeholder="1"
+                    />
+                    {product.stock ? (
+                      <div className="text-base ">
+                        In Stock: {product.stock}
+                      </div>
+                    ) : (
+                      <p className="text-base  ">Out Of Stock</p>
+                    )}
                   </div>
                 </div>
               </section>
               {/* Buttons */}
               <div className="grid self-start w-full sm:grid-cols-2 grid-cols-1 gap-5">
-                <button onClick={addToCartHandler} className="px-6 py-3 rounded-lg text-white bg-black hover:bg-black/90">
+                <button
+                  onClick={addToCartHandler}
+                  className="px-6 py-3 rounded-lg text-white bg-black hover:bg-black/90"
+                >
                   Add to Cart
                 </button>
-                <Button text="Buy Now" className="text-black bg-white border border-black hover:bg-gray-100  hover:text-black" to="#" />
+                <Button
+                  text="Buy Now"
+                  className="text-black bg-white border border-black hover:bg-gray-100  hover:text-black"
+                  to="#"
+                />
               </div>
             </div>
           </div>
@@ -130,8 +199,26 @@ const ProductDetails = ({ product, user }) => {
           <Tab.Group>
             {/* Switcher BTN */}
             <Tab.List className="flex max-w-sm mx-auto space-x-1 border border-black rounded-lg overflow-hidden">
-              <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black shadow text-white" : "text-black ")}>Description</Tab>
-              <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black shadow text-white" : "text-black ")}>Reviews</Tab>
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-base ",
+                    selected ? "bg-black shadow text-white" : "text-black "
+                  )
+                }
+              >
+                Description
+              </Tab>
+              <Tab
+                className={({ selected }) =>
+                  classNames(
+                    "w-full py-2.5 text-base ",
+                    selected ? "bg-black shadow text-white" : "text-black "
+                  )
+                }
+              >
+                Reviews
+              </Tab>
             </Tab.List>
 
             {/* Description */}
@@ -147,103 +234,62 @@ const ProductDetails = ({ product, user }) => {
               {/* Reviews */}
               <Tab.Panel>
                 {/* Comment */}
-                <div className="px-8 pb-16 mt-16 bg-[#ECECEC] rounded-2xl sm:px-7 pt-7 ">
-                  {/* Header */}
-                  <div className="flex flex-col items-center justify-between space-y-5 sm:flex-row">
-                    {/* account */}
-                    <div className="flex flex-col md:flex-row items-center justify-center space-x-3">
-                      <img className="w-10 h-10 bg-gray-500 rounded-full mb-4 md:mb-0" alt="reviewer pic" src={user?.avatar}></img>
-                      <div className="text-center md:text-left">
-                        <h3 className="text-2xl font-bold">{user?.name}</h3>
-                        <p className="text-base ">added at : 10 march 2022</p>
-                      </div>
-                    </div>
-                    {/* rating */}
-                    <div>
-                      <h4 className="sr-only">Reviews</h4>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          {[0, 1, 2, 3, 4].map((rating) => (
-                            <StarIcon key={rating} className={classNames(product.rating > rating ? "text-gray-900" : "text-gray-400", "h-5 w-5 flex-shrink-0")} aria-hidden="true" />
-                          ))}
-                        </div>
-                        <p className="sr-only">{product.rating} out of 5 stars</p>
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="mt-3 mb-6 border-black" />
-                  <p className="text-base ">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-                </div>
-
+                {product?.reviews.map((item) => (
+                  <ProductReview key={item._id} review={item} />
+                ))}
                 {/* Add Comment */}
                 <div className="mt-16 px-7 pt-7 space-y-7">
                   {/* Header*/}
-                  <h1 className="text-3xl font-bold sm:text-5xl">Add a review</h1>
+                  <h1 className="text-3xl font-bold sm:text-5xl">
+                    Add a review
+                  </h1>
                   {/* Rating */}
-                  {/* <div className="flex flex-row items-center space-x-3 -mt-4">
-                    <div>Your Rating</div>
-                    <div>
-                      <h4 className="sr-only">Reviews</h4>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          {[0, 1, 2, 3, 4].map((rating) => (
-                            <StarIcon
-                              key={rating}
-                              className={classNames(
-                                product.rating > rating
-                                  ? "text-gray-900"
-                                  : "text-gray-400",
-                                "h-5 w-5 flex-shrink-0"
-                              )}
-                              aria-hidden="true"
-                            />
-                          ))}
-                        </div>
-                        <p className="sr-only">
-                          {product.rating} out of 5 stars
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  */}
                   {/* Form */}
-                  <form className="space-y-7">
-                    <div className="flex flex-row items-center space-x-3">
+                  <form className="space-y-7" onSubmit={reviewHandler}>
+                    <div className="flex flex-row items-center space-x-3 -mt-2">
                       <div>Your Rating</div>
                       <div>
-                        <fieldset class="rating">
-                          <input type="radio" id="star5" name="rating" value="5" />
-                          <label class="full" for="star5" title="Awesome - 5 stars"></label>
-                          <input type="radio" id="star4half" name="rating" value="4 and a half" />
-                          <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                          <input type="radio" id="star4" name="rating" value="4" />
-                          <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                          <input type="radio" id="star3half" name="rating" value="3 and a half" />
-                          <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                          <input type="radio" id="star3" name="rating" value="3" />
-                          <label class="full" for="star3" title="Meh - 3 stars"></label>
-                          <input type="radio" id="star2half" name="rating" value="2 and a half" />
-                          <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                          <input type="radio" id="star2" name="rating" value="2" />
-                          <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                          <input type="radio" id="star1half" name="rating" value="1 and a half" />
-                          <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                          <input type="radio" id="star1" name="rating" value="1" />
-                          <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                          <input type="radio" id="starhalf" name="rating" value="half" />
-                          <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
+                        <h4 className="sr-only">Reviews</h4>
+                        <div className="flex items-center">
+                          <div className="flex items-center">
+                            {[1, 2, 3, 4, 5].map((rating) => (
+                              <StarIcon
+                                key={rating}
+                                onClick={() => setStars(rating)}
+                                className={classNames(
+                                  stars >= rating
+                                    ? "text-gray-900"
+                                    : "text-gray-400",
+                                  "h-5 w-5 flex-shrink-0 cursor-pointer"
+                                )}
+                                aria-hidden="true"
+                              />
+                            ))}
+                          </div>
+                          <p className="sr-only">
+                            {product.rating} out of 5 stars
+                          </p>
+                        </div>
                       </div>
                     </div>
-
                     <div className="flex flex-col">
                       <label htmlFor="w3review" className="">
                         Your Review:
                       </label>
-                      <textarea rows="4" cols="50" placeholder="Type your review..." className="max-w-md p-3 border border-black rounded-lg"></textarea>
+                      <textarea
+                        rows="4"
+                        cols="50"
+                        placeholder="Type your review..."
+                        className="max-w-md p-3 border border-black rounded-lg"
+                        ref={reviewRef}
+                      ></textarea>
                     </div>
-
-                    <button type="submit" form="" value="Submit" className="px-5 py-2 text-white bg-black rounded-lg ">
+                    {error && <p>{error}</p>}
+                    <button
+                      type="submit"
+                      value="Submit"
+                      className="px-5 py-2 text-white bg-black rounded-lg "
+                    >
                       Submit
                     </button>
                   </form>
