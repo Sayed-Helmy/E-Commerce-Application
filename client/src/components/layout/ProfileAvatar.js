@@ -1,12 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import SliderCart from "../Cart/SliderCart";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ProfileAvatar = ({ logoutHandler, user }) => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div>
       <Menu as="div" className="ml-3 relative">
@@ -29,7 +32,7 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to="/"
+                  to="/profile"
                   className={classNames(
                     active ? "bg-gray-100" : "",
                     "block px-4 py-2 text-sm text-gray-700"
@@ -41,15 +44,16 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <Link
-                  to="/"
-                  className={classNames(
-                    active ? "bg-gray-100" : "",
-                    "block px-4 py-2 text-sm text-gray-700"
-                  )}
-                >
-                  Settings
-                </Link>
+                <>
+                  <Menu.Button className="w-full text-left">
+                    <span
+                      onClick={() => setOpen(!open)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full"
+                    >
+                      Manage order
+                    </span>
+                  </Menu.Button>
+                </>
               )}
             </Menu.Item>
             <Menu.Item>
@@ -67,6 +71,7 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
             </Menu.Item>
           </Menu.Items>
         </Transition>
+        <SliderCart open={open} setOpen={setOpen} />
       </Menu>
     </div>
   );
