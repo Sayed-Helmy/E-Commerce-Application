@@ -14,12 +14,12 @@ export default function Categories() {
   }, []);
   return (
     <div>
-      <div className="px-2 pb-16 pt-32 sm:pb-20 text-5xl sm:text-6xl font-bold text-center">
-        <h1> Our Categories </h1>
+      <div className="px-2 pb-16 pt-32 text-center  sm:pb-20 ">
+        <h1 className="text-5xl font-bold sm:text-6xl"> Our Categories </h1>
       </div>
-      <div className="max-w-2xl mx-auto  px-4  sm:px-6 md:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl  px-4  sm:px-6 md:max-w-7xl lg:px-8">
         <h2 className="sr-only">Categories</h2>
-        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {categories &&
             categories
               .sort((a, b) => a.order - b.order)
