@@ -6,12 +6,13 @@ import {
   MailOpenIcon,
   PhoneIcon,
 } from "@heroicons/react/solid";
+import { useSelector } from "react-redux";
 
 const schema = yup
   .object({
     name: yup.string().required("Name is required"),
-    email: yup.string().email().required("mail is required"),
-    message: yup.string().required("message is required"),
+    email: yup.string().email().required("Email is required"),
+    message: yup.string().required("Message is required"),
   })
   .required();
 
@@ -23,6 +24,7 @@ const ContactUs = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const user = useSelector((state) => state.user);
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -81,7 +83,8 @@ const ContactUs = () => {
                 <input
                   {...register("name")}
                   className="rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
-                  placeholder="your name"
+                  placeholder="Your name"
+                  defaultValue={user?.name}
                   autoFocus
                 />
                 <p className="py-2 text-red-600 text-sm">
@@ -96,6 +99,7 @@ const ContactUs = () => {
                   {...register("email")}
                   className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  defaultValue={user?.email}
                 />
                 <p className="py-2 text-red-600 text-sm">
                   {errors.email?.message}
@@ -108,7 +112,7 @@ const ContactUs = () => {
                 <textarea
                   {...register("message")}
                   className=" rounded-lg  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
-                  placeholder="type your messgae here"
+                  placeholder="Type your message here"
                   rows={6}
                 />
                 <p className="py-2 text-red-600 text-sm">

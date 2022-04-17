@@ -22,8 +22,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "You have to provide a password."],
       trim: true,
-      maxlength: [20, "Username length must be blew 20 char."],
-      minlength: [6, "Password length must be above 6 char."],
     },
     avatar: {
       type: String,
@@ -80,6 +78,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();

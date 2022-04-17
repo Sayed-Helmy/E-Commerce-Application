@@ -29,7 +29,6 @@ export default function MainNavigation() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const logoutHandler = async () => {
-    console.log("logout");
     await axios.get("http://localhost:5000/api/v1/auth/logout", {
       withCredentials: true,
     });
