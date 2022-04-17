@@ -36,7 +36,7 @@ export default function MainNavigation() {
     dispatch(userActions.setUser(null));
   };
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog
