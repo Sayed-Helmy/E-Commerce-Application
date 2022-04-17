@@ -1,5 +1,7 @@
 // const { unlink } = require("fs/promises");
 // const path = require("path");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const { NotFound, BadRequest } = require("../errors");
 const asyncWrapper = require("../middlewares/asyncwrapper");
 const Product = require("../models/Product");
@@ -53,6 +55,10 @@ const getProducts = asyncWrapper(async (req, res) => {
   ];
   matchFunction(isFeatured === "true", "isFeatured", pipeLine);
   matchFunction(title, "title", pipeLine);
+  if (category) {
+    const data = category.split(",").map((i) => ObjectId(i));
+    matchFunction({ $in: data }, "category", pipeLine);
+  }
   const products = await Product.aggregate(pipeLine);
   res.status(200).json(products);
 });

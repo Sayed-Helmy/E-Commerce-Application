@@ -1,6 +1,7 @@
 const asyncWrapper = require("../middlewares/asyncwrapper");
 const Coupon = require("../models/Coupon");
 const Order = require("../models/Order");
+const User = require("../models/User");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const checkout = asyncWrapper(async (req, res) => {
@@ -33,7 +34,9 @@ const checkout = asyncWrapper(async (req, res) => {
   order.paymentId = session.id;
   order.totalPrice = session.amount_total / 100;
   await order.save();
-  console.log(order);
+  await User.findByIdAndUpdate(_id, {
+    cart: [],
+  });
   res.status(201).json({ order, session });
 });
 

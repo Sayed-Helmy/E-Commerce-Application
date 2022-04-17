@@ -1,29 +1,23 @@
 import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MinusSmIcon, PlusSmIcon } from "@heroicons/react/solid";
 import ShopProducts from "./shopProducts";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { productsActions } from "../../store/productsSlice";
 
-const subCategories = [
-  { name: "Headphones", href: "#" },
-  { name: "Headset", href: "#" },
-  { name: "Laptops", href: "#" },
-  { name: "Watches", href: "#" },
-];
 const filters = [
   {
     id: "category",
     name: "Category",
-    options: [
-      { value: "new-arrivals", label: "Headphones", checked: false },
-      { value: "sale", label: "Headset", checked: true },
-      { value: "travel", label: "Laptops", checked: false },
-      { value: "organization", label: "Watches", checked: false },
-    ],
+    opened: true,
+    options: [],
   },
   {
     id: "size",
     name: "Size",
+    opened: false,
     options: [
       { value: "2l", label: "2L", checked: false },
       { value: "6l", label: "6L", checked: false },
@@ -34,22 +28,30 @@ const filters = [
     ],
   },
 ];
-const prices = [
-  {
-    id: "price",
-    name: "Price",
-    options: [
-      { value: "new-arrivals", label: "Headphones", checked: false },
-      { value: "sale", label: "Headset", checked: true },
-      { value: "travel", label: "Laptops", checked: false },
-      { value: "organization", label: "Watches", checked: false },
-    ],
-  },
-];
 
 export default function ShopFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
+  const categories = useSelector((state) => state.products.categories);
+  const dispatch = useDispatch();
+  filters[0].options = categories.map((item) => ({
+    value: item._id,
+    label: item.name,
+    checked: false,
+  }));
+  let catArray = [];
+  const checkedHandler = async (e, section) => {
+    let url = `http://localhost:5000/api/v1/products`;
+    if (e.target.checked) catArray = [...catArray, e.target.value];
+    else catArray = catArray.filter((i) => i !== e.target.value);
+    if (catArray.length > 0)
+      url = `http://localhost:5000/api/v1/products?${
+        section.id
+      }=${catArray.join(",")}`;
+    const result = await axios.get(url, {
+      withCredentials: true,
+    });
+    dispatch(productsActions.setFiltered(result.data));
+  };
   return (
     <div className="bg-white">
       <div>
@@ -81,56 +83,42 @@ export default function ShopFilter() {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="relative flex flex-col w-full h-full max-w-xs py-4 pb-12 ml-auto overflow-y-auto bg-white shadow-xl">
+              <div className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                 <div className="flex items-center justify-between px-4">
                   <h2 className="text-lg font-medium text-gray-900">Filters</h2>
                   <button
                     type="button"
-                    className="flex items-center justify-center w-10 h-10 p-2 -mr-2 text-gray-400 bg-white rounded-md"
+                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
                     onClick={() => setMobileFiltersOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
-                    <XIcon className="w-6 h-6" aria-hidden="true" />
+                    <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-
                 {/* Filters */}
                 <form className="mt-4 border-t text-black/70">
-                  {/*
-                  <h3 className="sr-only">Categories</h3>
-                  <ul className="px-2 py-3 font-medium text-black-900">
-                    {subCategories.map((category) => (
-                      <li key={category.name}>
-                        <a href={category.href} className="block px-2 py-3">
-                          {category.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                  */}
-
                   {filters.map((section) => (
                     <Disclosure
                       as="div"
                       key={section.id}
-                      className="px-4 py-6 border-t border-gray-200"
+                      className="border-t border-gray-200 px-4 py-6"
                     >
                       {({ open }) => (
                         <>
-                          <h3 className="flow-root -mx-2 -my-3">
-                            <Disclosure.Button className="flex items-center justify-between w-full px-2 py-3 text-gray-400 bg-white hover:text-gray-500">
+                          <h3 className="-mx-2 -my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">
                                 {section.name}
                               </span>
-                              <span className="flex items-center ml-6">
+                              <span className="ml-6 flex items-center">
                                 {open ? (
                                   <MinusSmIcon
-                                    className="w-5 h-5"
+                                    className="h-5 w-5"
                                     aria-hidden="true"
                                   />
                                 ) : (
                                   <PlusSmIcon
-                                    className="w-5 h-5"
+                                    className="h-5 w-5"
                                     aria-hidden="true"
                                   />
                                 )}
@@ -150,11 +138,11 @@ export default function ShopFilter() {
                                     defaultValue={option.value}
                                     type="checkbox"
                                     defaultChecked={option.checked}
-                                    className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label
                                     htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                    className="flex-1 min-w-0 ml-3 text-gray-500"
+                                    className="ml-3 min-w-0 flex-1 text-gray-500"
                                   >
                                     {option.label}
                                   </label>
@@ -171,11 +159,10 @@ export default function ShopFilter() {
             </Transition.Child>
           </Dialog>
         </Transition.Root>
-
-        <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="relative z-10 flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-              Shop{" "}
+              Shop
             </h1>
           </div>
 
@@ -184,124 +171,69 @@ export default function ShopFilter() {
               Products
             </h2>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
-                {filters.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="py-6 border-b border-gray-200"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="flow-root -my-3">
-                          <Disclosure.Button className="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="flex items-center ml-6">
-                              {open ? (
-                                <MinusSmIcon
-                                  className="w-5 h-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusSmIcon
-                                  className="w-5 h-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
+                {categories &&
+                  filters.map((section) => (
+                    <Disclosure
+                      defaultOpen={section.opened}
+                      as="div"
+                      key={section.id}
+                      className="border-b border-gray-200 py-6"
+                    >
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                              <span className="font-medium text-gray-900">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusSmIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusSmIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
                                 >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
-                
-                {prices.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="py-6 border-b border-gray-200"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="flow-root -my-3">
-                          <Disclosure.Button className="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
-                            <span className="font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="flex items-center ml-6">
-                              {open ? (
-                                <MinusSmIcon
-                                  className="w-5 h-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusSmIcon
-                                  className="w-5 h-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="checkbox"
+                                    defaultChecked={option.checked}
+                                    onChange={(e) => checkedHandler(e, section)}
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 cursor-pointer text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
               </form>
 
               {/* Product grid */}

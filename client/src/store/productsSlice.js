@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue = {
   featured: [],
+  filtered: [],
+  categories: [],
   errors: {},
 };
 
@@ -11,6 +13,12 @@ const productsSlice = createSlice({
   reducers: {
     setProducts(state, action) {
       state.featured = action.payload;
+    },
+    setFiltered(state, action) {
+      state.filtered = action.payload;
+    },
+    setCategories(state, action) {
+      state.categories = action.payload;
     },
     addreview(state, action) {
       const productIndex = state.featured.findIndex(
