@@ -16,6 +16,7 @@ const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
 const categoriesRouter = require("./routes/categories");
 const checkoutRouter = require("./routes/checkout");
+const couponRouter = require("./routes/coupons");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -32,6 +33,7 @@ app.use(`${apiRoute}/auth`, authRouter);
 app.use(`${apiRoute}/categories`, categoriesRouter);
 app.use(`${apiRoute}/products`, productsRouter);
 app.use(`${apiRoute}/checkout`, checkoutRouter);
+app.use(`${apiRoute}/coupons`, couponRouter);
 // serve the Static Files.
 app.use(express.static("public"));
 app.get("/success", async (req, res) => {

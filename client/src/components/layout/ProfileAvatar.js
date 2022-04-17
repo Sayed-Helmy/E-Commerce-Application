@@ -1,7 +1,6 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import SliderCart from "../Cart/SliderCart";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -75,7 +74,6 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
             </Menu.Item>
           </Menu.Items>
         </Transition>
-        <SliderCart open={open} setOpen={setOpen} />
       </Menu>
     </div>
   );

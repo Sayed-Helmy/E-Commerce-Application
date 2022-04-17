@@ -97,8 +97,8 @@ const getCategoryProducts = asyncWrapper(async (req, res) => {
 const createReview = asyncWrapper(async (req, res) => {
   const id = req.params.id;
   const { message, rating } = req.body;
-  const { _id, email, name } = req.payload;
-  const review = { email, name, rating, message, user: _id };
+  const { email, name, avatar } = req.payload;
+  const review = { email, name, rating, message, avatar };
   const product = await Product.findById(id);
   if (product.reviews.find((item) => email === item.email))
     throw new BadRequest("You have already reviewed this Product!");

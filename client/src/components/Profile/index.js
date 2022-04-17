@@ -14,14 +14,18 @@ export default function Profile() {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const result = await axios.patch(
-      "http://localhost:5000/api/v1/auth/updateUser",
-      formData,
-      {
-        withCredentials: true,
-      }
-    );
-    dispatch(userActions.setUser(result.data));
+    try {
+      const result = await axios.patch(
+        "http://localhost:5000/api/v1/auth/updateUser",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(userActions.setUser(result.data));
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
   };
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
@@ -129,7 +133,7 @@ export default function Profile() {
                         name="street"
                         id="street-address"
                         autoComplete="street-address"
-                        defaultValue={user?.address.street}
+                        defaultValue={user?.address?.street}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -146,7 +150,7 @@ export default function Profile() {
                         name="city"
                         id="city"
                         autoComplete="address-level2"
-                        defaultValue={user?.address.city}
+                        defaultValue={user?.address?.city}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -163,7 +167,7 @@ export default function Profile() {
                         name="state"
                         id="region"
                         autoComplete="address-level1"
-                        defaultValue={user?.address.state}
+                        defaultValue={user?.address?.state}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -180,7 +184,7 @@ export default function Profile() {
                         name="phone"
                         id="phone-num"
                         autoComplete="phone"
-                        defaultValue={user?.address.phone}
+                        defaultValue={user?.address?.phone}
                         className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>

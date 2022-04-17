@@ -5,6 +5,7 @@ const ReviewSchema = new mongoose.Schema(
     name: {
       type: String,
     },
+    avatar: String,
     email: {
       type: String,
     },
@@ -15,10 +16,6 @@ const ReviewSchema = new mongoose.Schema(
     rating: {
       type: Number,
       default: 0,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
     },
   },
   { timestamps: true }
