@@ -3,6 +3,12 @@ import { useSelector } from "react-redux";
 import CartRow from "../components/Cart/CartRow";
 import { ReactComponent as Spinner } from "./../assets/spinner.svg";
 
+import { Tab } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const Cart = () => {
   const products = useSelector((state) => state.cart.cartItems);
   const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
@@ -10,10 +16,7 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
-      <table
-        className="w-full text-sm lg:text-base table-auto "
-        cellSpacing="0"
-      >
+      <table className="w-full text-sm lg:text-base table-auto " cellSpacing="0">
         <thead>
           <tr className="h-12 capitalize border-b ">
             <th className="hidden md:table-cell"></th>
@@ -28,29 +31,55 @@ const Cart = () => {
             <th className="text-right">Total price</th>
           </tr>
         </thead>
-        <tbody>
-          {products &&
-            products.map((product, index) => (
-              <CartRow product={product} key={product._id} index={index} />
-            ))}
-        </tbody>
+        <tbody>{products && products.map((product, index) => <CartRow product={product} key={product._id} index={index} />)}</tbody>
       </table>
       <div className="w-full md:w-2/4  float-right mt-8 flex">
-        <input
-          className=" rounded-lg block basis-2/3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
-          placeholder="your copoun"
-        />
-        <button
-          type="submit"
-          className="group basis-1/3 ml-2  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-        >
+        <input className=" rounded-lg block basis-2/3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="your copoun" />
+        <button type="submit" className="group basis-1/3 ml-2  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           Apply
         </button>
       </div>
       {/* cart total && cart details */}
-      <div className="w-full flex flex-col md:flex-row py-28  gap-24 md:gap-0">
+      <div className="w-full flex flex-col md:flex-row pt-28 pb-10  gap-24 md:gap-0">
         <div className="md:w-1/2 ">
           <h3 className="text-4xl font-medium">Billing details</h3>
+          <div>
+            <Tab.Group>
+              <Tab.List className="flex w-5/6   mt-5 mb-2">
+                <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black text-white rounded-lg" : "")}>Current Address</Tab>
+                <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black text-white rounded-lg" : "")}>Add New Address</Tab>
+              </Tab.List>
+
+              <Tab.Panels>
+                <Tab.Panel>
+                  <div className="flex flex-col p-8 bg-[#ECECEC] rounded-lg w-5/6">
+                    <p className="py-1 px-2 rounded-lg">Name :</p>
+                    <br />
+                    <p className="py-1 px-2 rounded-lg">Address :</p>
+                    <br />
+                    <p className="py-1 px-2 rounded-lg">Phone :</p>
+                  </div>
+                </Tab.Panel>
+
+                <Tab.Panel>
+                  <div className="flex flex-col p-8 bg-[#ECECEC] rounded-lg w-5/6">
+                    <form>
+                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Name" type="text" />
+                      <br />
+                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Address" type="text" />
+                      <br />
+                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Phone" type="tel" />
+                      <br />
+                      <button type="submit" className=" py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Save
+                      </button>
+                    </form>
+                  </div>
+                </Tab.Panel>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>
+          {/*
           <div className="w-full md:w-2/4   my-6 flex items-center">
             <p className="basis-2/3"> Current Address</p>
             <button
@@ -65,6 +94,7 @@ const Cart = () => {
             <p>Address:</p>
             <p>Phone:</p>
           </div>
+          */}
         </div>
         <div className="md:w-1/2 ">
           <h3 className="text-4xl font-medium">Cart Total</h3>
