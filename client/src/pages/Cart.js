@@ -47,14 +47,12 @@ const Cart = () => {
             <Tab.Group>
               <Tab.List className="flex w-5/6   mt-5 mb-2">
                 <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black text-white rounded-lg" : "")}>Current Address</Tab>
-                <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black text-white rounded-lg" : "")}>Add New Address</Tab>
+                <Tab className={({ selected }) => classNames("w-full py-2.5 text-base ", selected ? "bg-black text-white rounded-lg" : "")}>Add New</Tab>
               </Tab.List>
 
               <Tab.Panels>
                 <Tab.Panel>
                   <div className="flex flex-col p-8 bg-[#ECECEC] rounded-lg w-5/6">
-                    <p className="py-1 px-2 rounded-lg">Name :</p>
-                    <br />
                     <p className="py-1 px-2 rounded-lg">Address :</p>
                     <br />
                     <p className="py-1 px-2 rounded-lg">Phone :</p>
@@ -63,13 +61,45 @@ const Cart = () => {
 
                 <Tab.Panel>
                   <div className="flex flex-col p-8 bg-[#ECECEC] rounded-lg w-5/6">
-                    <form>
-                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Name" type="text" />
-                      <br />
-                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Address" type="text" />
-                      <br />
-                      <input className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm" placeholder="Phone" type="tel" />
-                      <br />
+                    <form className="space-y-5">
+                      <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                          Country
+                        </label>
+                        <select id="country" name="country" autoComplete="country-name" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-black/50 focus:border-black/50 sm:text-sm">
+                          <option>Egypt</option>
+                          <option>Saudi Arabia</option>
+                          <option>United Arab Emirates</option>
+                        </select>
+                      </div>
+
+                      <div className="col-span-6">
+                        <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                          Street address
+                        </label>
+                        <input type="text" name="street-address" id="street-address" autoComplete="street-address" className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                          City
+                        </label>
+                        <input type="text" name="city" id="city" autoComplete="address-level2" className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                          State / Province
+                        </label>
+                        <input type="text" name="region" id="region" autoComplete="address-level1" className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                      </div>
+
+                      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                        <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                          Phone Number
+                        </label>
+                        <input type="text" name="postal-code" id="postal-code" autoComplete="postal-code" className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                      </div>
                       <button type="submit" className=" py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         Save
                       </button>
