@@ -1,12 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import Button from "../ui/Button";
 
 export default function SliderCart({ open, setOpen }) {
-  //   const [open, setOpen] = useState(true);
-
   return (
     <div className="z-50">
       <Transition.Root show={open} as={Fragment}>
@@ -61,22 +59,24 @@ export default function SliderCart({ open, setOpen }) {
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                     <div className="px-4 sm:px-6">
                       <Dialog.Title className="text-lg font-medium text-gray-900">
-                        Your order
+                        Your Cart
                       </Dialog.Title>
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       {/* order content */}
-                      <div className="grid self-start w-full sm:grid-cols-2 grid-cols-1 gap-5">
+                      <div className="grid w-full grid-cols-1 gap-5 self-start sm:grid-cols-2">
                         <Button
-                          text="update"
-                          className="text-black bg-white border border-black hover:bg-gray-100  hover:text-black"
-                          to="/shop"
+                          text="Checkout"
+                          className="border border-black bg-white text-black hover:bg-gray-100  hover:text-black"
+                          to="/checkout"
                         />
-                        <button className="px-6 py-3 rounded-lg text-white bg-black hover:bg-black/90">
+                        <button
+                          onClick={() => setOpen(false)}
+                          className="rounded-lg bg-black px-6 py-3 text-white hover:bg-black/90"
+                        >
                           cancel
                         </button>
                       </div>
-
                       {/* /order content */}
                     </div>
                   </div>

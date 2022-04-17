@@ -1,20 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import CategoryCard from "./CategoryCard";
 export default function Categories() {
-  const [categories, setcategories] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/categories", {
-        withCredentials: true,
-      })
-      .then((result) => {
-        setcategories(result.data);
-      });
-  }, []);
+  const categories = [...useSelector((state) => state.products.categories)];
   return (
     <div>
-      <div className="px-2 pb-16 pt-32 text-center  sm:pb-20 ">
+      <div className="px-2 pb-16 pt-5 text-center sm:pb-20 ">
         <h1 className="text-5xl font-bold sm:text-6xl"> Our Categories </h1>
       </div>
       <div className="mx-auto max-w-2xl  px-4  sm:px-6 md:max-w-7xl lg:px-8">

@@ -1,34 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MainNavigation from "./MainNavigation";
 import Footer from "./Footer";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { userActions } from "../../store/userSlice";
-import { useCookies } from "react-cookie";
-import { cartActions } from "../../store/cartSlice";
-import { productsActions } from "../../store/productsSlice";
 
 const Layout = (props) => {
-  const dispatch = useDispatch();
-  const [cookies] = useCookies(["token"]);
-  useEffect(() => {
-    if (cookies.token)
-      axios
-        .get("http://localhost:5000/api/v1/auth/validate", {
-          withCredentials: true,
-        })
-        .then((result) => {
-          dispatch(userActions.setUser(result.data));
-          dispatch(cartActions.setCart(result.data.cart));
-        });
-    axios
-      .get("http://localhost:5000/api/v1/products", {
-        withCredentials: true,
-      })
-      .then((result) => {
-        dispatch(productsActions.setProducts(result.data));
-      });
-  }, [dispatch, cookies.token]);
   return (
     <>
       <MainNavigation />
