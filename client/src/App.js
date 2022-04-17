@@ -7,7 +7,7 @@ import NotFound from "./pages/NotFound";
 import ProductPage from "./pages/ProductPage";
 import ContactUs from "./pages/ContactUs";
 import Shop from "./pages/Shop";
-import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import ProfilePage from "./pages/ProfilePage";
 // import { useSelector } from "react-redux";
 
@@ -20,7 +20,7 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/shop/:id" element={<ProductPage />} />
         <Route path="/SigninPage" element={<SigninPage />} />
         <Route path="/SignupPage" element={<SignupPage />} />
