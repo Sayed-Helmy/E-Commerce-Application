@@ -9,6 +9,8 @@ import ContactUs from "./pages/ContactUs";
 import Shop from "./pages/Shop";
 import Checkout from "./pages/Checkout";
 import ProfilePage from "./pages/ProfilePage";
+import Success from "./pages/Success";
+import Canceled from "./pages/Canceled";
 // import { useSelector } from "react-redux";
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/SignupPage" element={<SignupPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/canceled" element={<Canceled />} />
       </Routes>
     </Layout>
   );
