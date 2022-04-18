@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { userActions } from "../../store/userSlice";
 import { useState } from "react";
 import { cartActions } from "../../store/cartSlice";
@@ -20,6 +20,8 @@ const Signin = () => {
   const [error, setError] = useState();
   const dispatch = useDispatch();
   const navigator = useNavigate();
+  const location = useLocation();
+  console.log(location);
   const {
     register,
     handleSubmit,
@@ -43,7 +45,7 @@ const Signin = () => {
       );
       dispatch(userActions.setUser(user.data));
       dispatch(cartActions.setCart(user.data.cart));
-      navigator("/");
+      navigator(location.state?.from.pathname || "/");
     } catch (err) {
       setError(err.response.data.msg);
     }
@@ -51,8 +53,8 @@ const Signin = () => {
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+      <div className="flex min-h-full items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Sign in to your account
@@ -60,18 +62,18 @@ const Signin = () => {
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
                   {...register("email")}
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="Email address"
                   autoFocus
                 />
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.email?.message}
                 </p>
               </div>
@@ -82,10 +84,10 @@ const Signin = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="Password"
                 />
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.password?.message}
                 </p>
               </div>
@@ -105,9 +107,9 @@ const Signin = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon
                     className="h-5 w-5  group-hover:text-gray-100"
                     aria-hidden="true"
@@ -115,7 +117,7 @@ const Signin = () => {
                 </span>
                 Sign in
               </button>
-              <p className="py-2 text-red-600 text-sm">{error && error}</p>
+              <p className="py-2 text-sm text-red-600">{error && error}</p>
             </div>
           </form>
         </div>
