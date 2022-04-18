@@ -1,5 +1,5 @@
 import Layout from "./components/layout/Layout";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
@@ -21,6 +21,7 @@ import { productsActions } from "./store/productsSlice";
 
 function App() {
   const user = useSelector((state) => state.user);
+  const location = useLocation();
   const dispatch = useDispatch();
   const [cookies] = useCookies(["token"]);
   useEffect(() => {
@@ -57,16 +58,34 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route
           path="/checkout"
-          element={!user ? <Navigate to="/SigninPage" /> : <Checkout />}
+          element={
+            !user ? (
+              <Navigate to="/SigninPage" replace state={{ from: location }} />
+            ) : (
+              <Checkout />
+            )
+          }
         />
         <Route path="/shop/:id" element={<ProductPage />} />
         <Route
           path="/SigninPage"
-          element={user ? <Navigate to="/profile" replace /> : <SigninPage />}
+          element={
+            user ? (
+              <Navigate to="/profile" replace state={{ from: location }} />
+            ) : (
+              <SigninPage />
+            )
+          }
         />
         <Route
           path="/SignupPage"
-          element={user ? <Navigate to="/profile" replace /> : <SignupPage />}
+          element={
+            user ? (
+              <Navigate to="/profile" replace state={{ from: location }} />
+            ) : (
+              <SignupPage />
+            )
+          }
         />
         <Route
           path="/profile"

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 
@@ -16,9 +16,9 @@ import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import Button from "../ui/Button";
 import { updateUserCart } from "../../store/cartSlice";
-import { productsActions } from "../../store/productsSlice";
-import axios from "axios";
 import ProductReview from "./ProductReview";
+import ReviewForm from "./ReviewForm";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,33 +26,12 @@ function classNames(...classes) {
 
 const ProductDetails = ({ product, user }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [error, isError] = useState();
-  const [stars, setStars] = useState();
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
-  const reviewRef = useRef();
+
   const addToCartHandler = () => {
     dispatch(updateUserCart(product, +qty));
   };
-  const reviewHandler = async (e) => {
-    e.preventDefault();
-    const message = reviewRef.current.value;
-    const review = { rating: stars, message };
-    try {
-      const result = await axios.patch(
-        ` http://localhost:5000/api/v1/products/reviews/${product._id}`,
-        review,
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(result);
-      dispatch(productsActions.addreview(result.data));
-    } catch (error) {
-      isError(error.response.data.msg);
-    }
-  };
-  console.log(product);
   return (
     <>
       <div className="mx-auto grid w-full max-w-2xl grid-cols-1 px-4 pt-16 sm:px-6 md:max-w-7xl lg:px-8">
@@ -240,61 +219,27 @@ const ProductDetails = ({ product, user }) => {
                   <ProductReview key={item._id} review={item} />
                 ))}
                 {/* Add Comment */}
-                <div className="mt-16 space-y-7 px-7 pt-7">
+                <div className="mt-10 space-y-7 px-7 pt-7">
                   {/* Header*/}
                   <h1 className="text-3xl font-bold sm:text-5xl">
                     Add a review
                   </h1>
                   {/* Rating */}
                   {/* Form */}
-                  <form className="space-y-7" onSubmit={reviewHandler}>
-                    <div className="-mt-2 flex flex-row items-center space-x-3">
-                      <div>Your Rating</div>
-                      <div>
-                        <h4 className="sr-only">Reviews</h4>
-                        <div className="flex items-center">
-                          <div className="flex items-center">
-                            {[1, 2, 3, 4, 5].map((rating) => (
-                              <StarIcon
-                                key={rating}
-                                onClick={() => setStars(rating)}
-                                className={classNames(
-                                  stars >= rating
-                                    ? "text-gray-900"
-                                    : "text-gray-400",
-                                  "h-5 w-5 flex-shrink-0 cursor-pointer"
-                                )}
-                                aria-hidden="true"
-                              />
-                            ))}
-                          </div>
-                          <p className="sr-only">
-                            {product.rating} out of 5 stars
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="w3review" className="">
-                        Your Review:
-                      </label>
-                      <textarea
-                        rows="4"
-                        cols="50"
-                        placeholder="Type your review..."
-                        className="max-w-md rounded-lg border border-black p-3"
-                        ref={reviewRef}
-                      ></textarea>
-                    </div>
-                    {error && <p>{error}</p>}
-                    <button
-                      type="submit"
-                      value="Submit"
-                      className="rounded-lg bg-black px-5 py-2 text-white "
-                    >
-                      Submit
-                    </button>
-                  </form>
+                  {user ? (
+                    <ReviewForm product={product} />
+                  ) : (
+                    <p>
+                      Please
+                      <Link
+                        to="/SigninPage"
+                        className="text-green-600 underline"
+                      >
+                        Login
+                      </Link>
+                      in order To make Review
+                    </p>
+                  )}
                 </div>
               </Tab.Panel>
             </Tab.Panels>
