@@ -6,18 +6,18 @@ function classNames(...classes) {
 
 const ProductReview = ({ review }) => {
   return (
-    <div className="px-8 pb-16 mt-16 bg-[#ECECEC] rounded-2xl sm:px-7 pt-7 ">
+    <div className="mt-16 rounded-2xl bg-[#ECECEC] px-8 pb-16 pt-7 sm:px-7 ">
       {/* Header */}
       <div className="flex flex-col items-center justify-between space-y-5 sm:flex-row">
         {/* account */}
-        <div className="flex flex-col md:flex-row items-center justify-center space-x-3">
+        <div className="flex flex-col items-center justify-center space-x-3 md:flex-row">
           <img
-            className="w-10 h-10 bg-gray-500 rounded-full mb-4 md:mb-0"
+            className="mb-4 h-10 w-10 rounded-full bg-gray-500 md:mb-0"
             alt="reviewer pic"
             src={review?.avatar}
           ></img>
           <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold">{review?.name}</h3>
+            <h3 className="text-2xl font-bold">{review?.user}</h3>
             <p className="text-base ">
               added at : {new Date(review.createdAt).toLocaleDateString()}
             </p>

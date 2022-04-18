@@ -2,12 +2,9 @@ const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-    },
-    avatar: String,
-    email: {
-      type: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     message: {
       type: String,

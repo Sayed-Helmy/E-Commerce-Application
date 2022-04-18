@@ -46,14 +46,20 @@ const ProductDetails = ({ product, user }) => {
           withCredentials: true,
         }
       );
-      dispatch(productsActions.addreview(result.data));
+      console.log(result);
+      dispatch(
+        productsActions.addreview({
+          review: result.data,
+          productId: product._id,
+        })
+      );
     } catch (error) {
       isError(error.response.data.msg);
     }
   };
   return (
     <>
-      <div className="grid w-full max-w-2xl grid-cols-1 px-4 pt-16 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
+      <div className="mx-auto grid w-full max-w-2xl grid-cols-1 px-4 pt-16 sm:px-6 md:max-w-7xl lg:px-8">
         {/* Product */}
         <div className="grid grid-cols-1 gap-y-8 gap-x-6 md:grid-cols-2 lg:gap-x-16">
           {/*  Slider */}
@@ -68,7 +74,7 @@ const ProductDetails = ({ product, user }) => {
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="bg-gray-200 rounded-2xl"
+                className="rounded-2xl bg-gray-200"
               >
                 <SwiperSlide className="cursor-pointer">
                   <img alt="" src={product.images.mainImage} />
@@ -89,13 +95,13 @@ const ProductDetails = ({ product, user }) => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className=""
               >
-                <SwiperSlide className="bg-gray-200 rounded-lg cursor-pointer">
+                <SwiperSlide className="cursor-pointer rounded-lg bg-gray-200">
                   <img alt="" src={product.images.mainImage} />
                 </SwiperSlide>
-                <SwiperSlide className="bg-gray-200 rounded-lg cursor-pointer">
+                <SwiperSlide className="cursor-pointer rounded-lg bg-gray-200">
                   <img alt="" src={product.images.image2} />
                 </SwiperSlide>
-                <SwiperSlide className="bg-gray-200 rounded-lg cursor-pointer">
+                <SwiperSlide className="cursor-pointer rounded-lg bg-gray-200">
                   <img alt="" src={product.images.image3} />
                 </SwiperSlide>
               </Swiper>
@@ -118,7 +124,7 @@ const ProductDetails = ({ product, user }) => {
               </h3>
 
               {/* Price */}
-              <p className="text-gray-900 text-3xl font-bold">
+              <p className="text-3xl font-bold text-gray-900">
                 ${product.price}
               </p>
 
@@ -152,7 +158,7 @@ const ProductDetails = ({ product, user }) => {
                   Product options
                 </h3>
                 <div className=" space-y-8">
-                  <div className="text-lg mt-7 sm:mt-0">
+                  <div className="mt-7 text-lg sm:mt-0">
                     <p>{product.description}</p>
                   </div>
                   {/* Stock */}
@@ -177,16 +183,16 @@ const ProductDetails = ({ product, user }) => {
                 </div>
               </section>
               {/* Buttons */}
-              <div className="grid self-start w-full sm:grid-cols-2 grid-cols-1 gap-5">
+              <div className="grid w-full grid-cols-1 gap-5 self-start sm:grid-cols-2">
                 <button
                   onClick={addToCartHandler}
-                  className="px-6 py-3 rounded-lg text-white bg-black hover:bg-black/90"
+                  className="rounded-lg bg-black px-6 py-3 text-white hover:bg-black/90"
                 >
                   Add to Cart
                 </button>
                 <Button
                   text="Buy Now"
-                  className="text-black bg-white border border-black hover:bg-gray-100  hover:text-black"
+                  className="border border-black bg-white text-black hover:bg-gray-100  hover:text-black"
                   to="#"
                 />
               </div>
@@ -198,12 +204,12 @@ const ProductDetails = ({ product, user }) => {
         <div className="w-full px-2 py-36 sm:px-0 ">
           <Tab.Group>
             {/* Switcher BTN */}
-            <Tab.List className="flex max-w-sm mx-auto space-x-1 border border-black rounded-lg overflow-hidden">
+            <Tab.List className="mx-auto flex max-w-sm space-x-1 overflow-hidden rounded-lg border border-black">
               <Tab
                 className={({ selected }) =>
                   classNames(
                     "w-full py-2.5 text-base ",
-                    selected ? "bg-black shadow text-white" : "text-black "
+                    selected ? "bg-black text-white shadow" : "text-black "
                   )
                 }
               >
@@ -213,7 +219,7 @@ const ProductDetails = ({ product, user }) => {
                 className={({ selected }) =>
                   classNames(
                     "w-full py-2.5 text-base ",
-                    selected ? "bg-black shadow text-white" : "text-black "
+                    selected ? "bg-black text-white shadow" : "text-black "
                   )
                 }
               >
@@ -238,7 +244,7 @@ const ProductDetails = ({ product, user }) => {
                   <ProductReview key={item._id} review={item} />
                 ))}
                 {/* Add Comment */}
-                <div className="mt-16 px-7 pt-7 space-y-7">
+                <div className="mt-16 space-y-7 px-7 pt-7">
                   {/* Header*/}
                   <h1 className="text-3xl font-bold sm:text-5xl">
                     Add a review
@@ -246,7 +252,7 @@ const ProductDetails = ({ product, user }) => {
                   {/* Rating */}
                   {/* Form */}
                   <form className="space-y-7" onSubmit={reviewHandler}>
-                    <div className="flex flex-row items-center space-x-3 -mt-2">
+                    <div className="-mt-2 flex flex-row items-center space-x-3">
                       <div>Your Rating</div>
                       <div>
                         <h4 className="sr-only">Reviews</h4>
@@ -280,7 +286,7 @@ const ProductDetails = ({ product, user }) => {
                         rows="4"
                         cols="50"
                         placeholder="Type your review..."
-                        className="max-w-md p-3 border border-black rounded-lg"
+                        className="max-w-md rounded-lg border border-black p-3"
                         ref={reviewRef}
                       ></textarea>
                     </div>
@@ -288,7 +294,7 @@ const ProductDetails = ({ product, user }) => {
                     <button
                       type="submit"
                       value="Submit"
-                      className="px-5 py-2 text-white bg-black rounded-lg "
+                      className="rounded-lg bg-black px-5 py-2 text-white "
                     >
                       Submit
                     </button>

@@ -19,7 +19,7 @@ const createProduct = asyncWrapper(async (req, res) => {
 });
 
 const getProducts = asyncWrapper(async (req, res) => {
-  const { category, isFeatured, title, price, limit, page } = req.query;
+  const { category, isFeatured, title, price, limit, page, id } = req.query;
   const pipeLine = [
     {
       $lookup: {
@@ -30,6 +30,27 @@ const getProducts = asyncWrapper(async (req, res) => {
       },
     },
     { $unwind: "$category" },
+    {
+      $lookup: {
+        from: "users",
+        localField: "reviews.user",
+        foreignField: "_id",
+        as: "reviewsDocuments",
+        pipeline: [{ $project: { user: "$name", email: 1, avatar: 1 } }],
+      },
+    },
+    {
+      $addFields: {
+        reviews: {
+          $map: {
+            input: {
+              $zip: { inputs: ["$reviews", "$reviewsDocuments"] },
+            },
+            in: { $mergeObjects: "$$this" },
+          },
+        },
+      },
+    },
     {
       $project: {
         _id: 1,
@@ -55,6 +76,7 @@ const getProducts = asyncWrapper(async (req, res) => {
   ];
   matchFunction(isFeatured === "true", "isFeatured", pipeLine);
   matchFunction(title, "title", pipeLine);
+  // matchFunction(ObjectId(id), "_id", pipeLine);
   if (category) {
     const data = category.split(",").map((i) => ObjectId(i));
     matchFunction({ $in: data }, "category", pipeLine);
@@ -103,15 +125,24 @@ const getCategoryProducts = asyncWrapper(async (req, res) => {
 const createReview = asyncWrapper(async (req, res) => {
   const id = req.params.id;
   const { message, rating } = req.body;
-  const { email, name, avatar } = req.payload;
-  const review = { email, name, rating, message, avatar };
+  const { _id } = req.payload;
+  const review = { user: _id, rating, message };
   const product = await Product.findById(id);
-  if (product.reviews.find((item) => email === item.email))
+  if (product.reviews.find((item) => item.user?.toString() === _id.toString()))
     throw new BadRequest("You have already reviewed this Product!");
   product.reviews.unshift(review);
   product.getRating();
   await product.save();
-  res.status(201).json(product);
+  await product.populate("reviews.user", "name email avatar -_id");
+  const { name, email, avatar } = product.reviews[0].user;
+  const newProduct = product.toObject();
+  const newReview = {
+    ...newProduct.reviews[0],
+    user: name,
+    email,
+    avatar,
+  };
+  res.status(201).json(newReview);
 });
 
 const deleteReview = asyncWrapper(async (req, res) => {

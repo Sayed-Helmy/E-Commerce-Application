@@ -22,9 +22,9 @@ const productsSlice = createSlice({
     },
     addreview(state, action) {
       const productIndex = state.featured.findIndex(
-        (item) => item._id === action.payload._id
+        (item) => item._id === action.payload.productId
       );
-      state.featured[productIndex] = action.payload;
+      state.featured[productIndex].reviews.unshift(action.payload.review);
     },
     errorHandler(state, action) {
       state.errors[action.payload.field] = action.payload.error;
