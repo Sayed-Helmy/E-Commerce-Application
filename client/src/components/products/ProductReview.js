@@ -5,7 +5,6 @@ function classNames(...classes) {
 }
 
 const ProductReview = ({ review }) => {
-  console.log(review);
   return (
     <div className="mt-16 rounded-2xl bg-[#ECECEC] px-8 pb-16 pt-7 sm:px-7 ">
       {/* Header */}
@@ -19,9 +18,7 @@ const ProductReview = ({ review }) => {
           ></img>
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold">
-              {typeof review?.user === "string"
-                ? review?.user
-                : review?.user.name}
+              {review?.name || review?.user.name}
             </h3>
             <p className="text-base ">
               added at : {new Date(review.createdAt).toLocaleDateString()}
