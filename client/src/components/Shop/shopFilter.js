@@ -15,8 +15,8 @@ const filters = [
     options: [],
   },
   {
-    id: "size",
-    name: "Size",
+    id: "price",
+    name: "Price",
     opened: false,
     options: [
       { value: "2l", label: "2L", checked: false },
