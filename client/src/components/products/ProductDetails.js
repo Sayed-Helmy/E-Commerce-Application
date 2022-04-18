@@ -52,6 +52,7 @@ const ProductDetails = ({ product, user }) => {
       isError(error.response.data.msg);
     }
   };
+  console.log(product);
   return (
     <>
       <div className="mx-auto grid w-full max-w-2xl grid-cols-1 px-4 pt-16 sm:px-6 md:max-w-7xl lg:px-8">
