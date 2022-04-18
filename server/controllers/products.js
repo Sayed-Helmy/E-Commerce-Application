@@ -36,17 +36,27 @@ const getProducts = asyncWrapper(async (req, res) => {
         localField: "reviews.user",
         foreignField: "_id",
         as: "reviewsDocuments",
-        pipeline: [{ $project: { user: "$name", email: 1, avatar: 1 } }],
+        pipeline: [{ $project: { name: 1, email: 1, avatar: 1 } }],
       },
     },
     {
       $addFields: {
         reviews: {
           $map: {
-            input: {
-              $zip: { inputs: ["$reviews", "$reviewsDocuments"] },
+            input: "$reviews",
+            in: {
+              $mergeObjects: [
+                "$$this",
+                {
+                  $arrayElemAt: [
+                    "$reviewsDocuments",
+                    {
+                      $indexOfArray: ["$reviewsDocuments._id", "$$this.user"],
+                    },
+                  ],
+                },
+              ],
             },
-            in: { $mergeObjects: "$$this" },
           },
         },
       },
