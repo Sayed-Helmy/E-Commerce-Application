@@ -47,12 +47,7 @@ const ProductDetails = ({ product, user }) => {
         }
       );
       console.log(result);
-      dispatch(
-        productsActions.addreview({
-          review: result.data,
-          productId: product._id,
-        })
-      );
+      dispatch(productsActions.addreview(result.data));
     } catch (error) {
       isError(error.response.data.msg);
     }
