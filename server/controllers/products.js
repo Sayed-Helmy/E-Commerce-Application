@@ -134,15 +134,7 @@ const createReview = asyncWrapper(async (req, res) => {
   product.getRating();
   await product.save();
   await product.populate("reviews.user", "name email avatar -_id");
-  const { name, email, avatar } = product.reviews[0].user;
-  const newProduct = product.toObject();
-  const newReview = {
-    ...newProduct.reviews[0],
-    user: name,
-    email,
-    avatar,
-  };
-  res.status(201).json(newReview);
+  res.status(201).json(product);
 });
 
 const deleteReview = asyncWrapper(async (req, res) => {

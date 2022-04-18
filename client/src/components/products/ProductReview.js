@@ -5,6 +5,7 @@ function classNames(...classes) {
 }
 
 const ProductReview = ({ review }) => {
+  console.log(review);
   return (
     <div className="mt-16 rounded-2xl bg-[#ECECEC] px-8 pb-16 pt-7 sm:px-7 ">
       {/* Header */}
@@ -14,10 +15,14 @@ const ProductReview = ({ review }) => {
           <img
             className="mb-4 h-10 w-10 rounded-full bg-gray-500 md:mb-0"
             alt="reviewer pic"
-            src={review?.avatar}
+            src={review?.avatar || review?.user.avatar}
           ></img>
           <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold">{review?.user}</h3>
+            <h3 className="text-2xl font-bold">
+              {typeof review?.user === "string"
+                ? review?.user
+                : review?.user.name}
+            </h3>
             <p className="text-base ">
               added at : {new Date(review.createdAt).toLocaleDateString()}
             </p>

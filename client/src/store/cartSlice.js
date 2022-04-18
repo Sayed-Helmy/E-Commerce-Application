@@ -31,14 +31,23 @@ const cartSlice = createSlice({
       }
       state.cartCount = state.cartItems.reduce((a, b) => a + b.quantity, 0);
     },
+    resetCart(state, action) {
+      return (state = intialVlaue);
+    },
   },
 });
 export const cartActions = cartSlice.actions;
 
-export const updateUserCart = (product, quantity) => {
+export const updateUserCart = (product, quantity, reset = false) => {
   return async (dispatch, getState) => {
-    dispatch(cartActions.setQuantity({ product, quantity }));
-    const cart = getState().cart.cartItems;
+    let cart = [];
+    if (!reset) {
+      dispatch(cartActions.setQuantity({ product, quantity }));
+      cart = getState().cart.cartItems;
+    }
+    if (reset) {
+      dispatch(cartActions.resetCart());
+    }
     axios.put(
       "http://localhost:5000/api/v1/auth/updateCart",
       { cart },

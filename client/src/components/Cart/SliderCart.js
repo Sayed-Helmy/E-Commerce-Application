@@ -3,10 +3,16 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserCart } from "../../store/cartSlice";
 
 export default function SliderCart({ open, setOpen }) {
   const products = useSelector((state) => state.cart.cartItems);
+  const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
+  const dispatch = useDispatch();
+  const handleDelete = (_e, product) => {
+    dispatch(updateUserCart(product, 0));
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -77,7 +83,7 @@ export default function SliderCart({ open, setOpen }) {
                                         {product?.title}
                                       </Link>
                                     </h3>
-                                    <p className="ml-4">{product?.price}</p>
+                                    <p className="ml-4">${product?.price}</p>
                                   </div>
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
@@ -89,6 +95,7 @@ export default function SliderCart({ open, setOpen }) {
                                     <button
                                       type="button"
                                       className="font-medium text-black/60 underline"
+                                      onClick={(e) => handleDelete(e, product)}
                                     >
                                       Remove
                                     </button>
@@ -105,7 +112,7 @@ export default function SliderCart({ open, setOpen }) {
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>$262.00</p>
+                      <p>${totalPrice}</p>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
                       Shipping and taxes calculated at checkout.
@@ -121,11 +128,14 @@ export default function SliderCart({ open, setOpen }) {
                     </div>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
-                        or{" "}
+                        or
                         <button
                           type="button"
                           className="font-medium text-black underline hover:text-black/70"
-                          onClick={() => setOpen(false)}
+                          onClick={() => {
+                            dispatch(updateUserCart("", 0, true));
+                            setOpen(false);
+                          }}
                         >
                           Cancel order
                         </button>

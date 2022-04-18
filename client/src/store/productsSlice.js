@@ -21,10 +21,11 @@ const productsSlice = createSlice({
       state.categories = action.payload;
     },
     addreview(state, action) {
+      console.log(action.payload);
       const productIndex = state.featured.findIndex(
-        (item) => item._id === action.payload.productId
+        (item) => item._id === action.payload._id
       );
-      state.featured[productIndex].reviews.unshift(action.payload.review);
+      state.featured[productIndex] = action.payload;
     },
     errorHandler(state, action) {
       state.errors[action.payload.field] = action.payload.error;
