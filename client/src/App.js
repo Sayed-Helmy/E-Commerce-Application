@@ -18,7 +18,7 @@ import axios from "axios";
 import { userActions } from "./store/userSlice";
 import { cartActions } from "./store/cartSlice";
 import { productsActions } from "./store/productsSlice";
-import Admin from "./components/admin";
+import AdminPage from "./pages/admin/AdminPage";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -99,7 +99,7 @@ function App() {
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Canceled />} />
           {/* admin routers */}
-          <Route path="admin/*" element={<Admin />} />
+          <Route path="admin/*" element={<AdminPage />} />
         </Routes>
       </Layout>
     </>

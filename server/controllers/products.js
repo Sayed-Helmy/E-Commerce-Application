@@ -87,6 +87,10 @@ const getProducts = asyncWrapper(async (req, res) => {
   matchFunction(isFeatured === "true", "isFeatured", pipeLine);
   matchFunction(title, "title", pipeLine);
   // matchFunction(ObjectId(id), "_id", pipeLine);
+  if (price) {
+    const data = price.split(",").map((i) => +i);
+    matchFunction({ $gt: data[0], $lt: data[1] }, "price", pipeLine);
+  }
   if (category) {
     const data = category.split(",").map((i) => ObjectId(i));
     matchFunction({ $in: data }, "category", pipeLine);

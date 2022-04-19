@@ -31,9 +31,9 @@ function Admin() {
     });
     dispatch(userActions.setUser(null));
   };
-  useEffect(() => {
-    navigate("dashboard");
-  }, [navigate]);
+  // useEffect(() => {
+  //   navigate("dashboard");
+  // }, [navigate]);
 
   return (
     <>
