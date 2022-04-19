@@ -1,6 +1,6 @@
-import { useMemo, useEffect } from "react";
+import { useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import ProfileAvatar from "../layout/ProfileAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -33,7 +33,7 @@ function Admin() {
   };
   useEffect(() => {
     navigate("dashboard");
-  }, []);
+  }, [navigate]);
 
   return (
     <>
