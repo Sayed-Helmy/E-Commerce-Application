@@ -18,6 +18,10 @@ import axios from "axios";
 import { userActions } from "./store/userSlice";
 import { cartActions } from "./store/cartSlice";
 import { productsActions } from "./store/productsSlice";
+import Admin from "./components/admin";
+import Products from "./components/admin/Products";
+import Users from "./components/admin/Users";
+import Dashboard from "./components/admin/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -50,54 +54,62 @@ function App() {
       });
   }, [dispatch, cookies.token]);
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/ContactUs" element={<ContactUs />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route
-          path="/checkout"
-          element={
-            !user ? (
-              <Navigate to="/SigninPage" replace state={{ from: location }} />
-            ) : (
-              <Checkout />
-            )
-          }
-        />
-        <Route path="/shop/:id" element={<ProductPage />} />
-        <Route
-          path="/SigninPage"
-          element={
-            user ? (
-              <Navigate to="/profile" replace state={{ from: location }} />
-            ) : (
-              <SigninPage />
-            )
-          }
-        />
-        <Route
-          path="/SignupPage"
-          element={
-            user ? (
-              <Navigate to="/profile" replace state={{ from: location }} />
-            ) : (
-              <SignupPage />
-            )
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            !user ? <Navigate to="/SigninPage" replace /> : <ProfilePage />
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Canceled />} />
-      </Routes>
-    </Layout>
+    <>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/ContactUs" element={<ContactUs />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route
+            path="/checkout"
+            element={
+              !user ? (
+                <Navigate to="/SigninPage" replace state={{ from: location }} />
+              ) : (
+                <Checkout />
+              )
+            }
+          />
+          <Route path="/shop/:id" element={<ProductPage />} />
+          <Route
+            path="/SigninPage"
+            element={
+              user ? (
+                <Navigate to="/profile" replace state={{ from: location }} />
+              ) : (
+                <SigninPage />
+              )
+            }
+          />
+          <Route
+            path="/SignupPage"
+            element={
+              user ? (
+                <Navigate to="/profile" replace state={{ from: location }} />
+              ) : (
+                <SignupPage />
+              )
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              !user ? <Navigate to="/SigninPage" replace /> : <ProfilePage />
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Canceled />} />
+          {/* admin routers */}
+          <Route path="admin" element={<Admin />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="products" element={<Products />} />
+            <Route path="users" element={<Users />} />
+          </Route>
+        </Routes>
+      </Layout>
+    </>
   );
 }
 
