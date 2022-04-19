@@ -6,6 +6,7 @@ import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import ScrollToTop from "./components/layout/ScrollToTop";
+import "flowbite";
 
 ReactDOM.render(
   <React.StrictMode>
