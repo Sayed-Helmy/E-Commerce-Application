@@ -14,11 +14,10 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 
 import { Tab } from "@headlessui/react";
 import { useDispatch } from "react-redux";
-import Button from "../ui/Button";
 import { updateUserCart } from "../../store/cartSlice";
 import ProductReview from "./ProductReview";
 import ReviewForm from "./ReviewForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -32,6 +31,7 @@ const ProductDetails = ({ product, user }) => {
   const addToCartHandler = () => {
     dispatch(updateUserCart(product, +qty));
   };
+  const navigator = useNavigate();
   return (
     <>
       <div className="mx-auto grid w-full max-w-2xl grid-cols-1 px-4 pt-16 sm:px-6 md:max-w-7xl lg:px-8">
@@ -165,11 +165,15 @@ const ProductDetails = ({ product, user }) => {
                 >
                   Add to Cart
                 </button>
-                <Button
-                  text="Buy Now"
+                <button
                   className="border border-black bg-white text-black hover:bg-gray-100  hover:text-black"
-                  to="#"
-                />
+                  onClick={() => {
+                    addToCartHandler();
+                    navigator("/checkout");
+                  }}
+                >
+                  Buy Now
+                </button>
               </div>
             </div>
           </div>

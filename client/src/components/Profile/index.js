@@ -5,6 +5,7 @@ import { userActions } from "../../store/userSlice";
 
 export default function Profile() {
   const user = useSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [imageState, setImageState] = useState(null);
   console.log(user);
@@ -13,6 +14,7 @@ export default function Profile() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
       const result = await axios.patch(
@@ -23,8 +25,10 @@ export default function Profile() {
         }
       );
       dispatch(userActions.setUser(result.data));
+      setIsLoading(false);
     } catch (error) {
       console.log(error.response.data.msg);
+      setIsLoading(false);
     }
   };
   return (
@@ -193,7 +197,8 @@ export default function Profile() {
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2"
+                    disabled={isLoading}
+                    className="inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400"
                   >
                     Save
                   </button>
