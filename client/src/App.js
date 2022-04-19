@@ -19,9 +19,6 @@ import { userActions } from "./store/userSlice";
 import { cartActions } from "./store/cartSlice";
 import { productsActions } from "./store/productsSlice";
 import Admin from "./components/admin";
-import Products from "./components/admin/Products";
-import Users from "./components/admin/Users";
-import Dashboard from "./components/admin/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -102,11 +99,7 @@ function App() {
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Canceled />} />
           {/* admin routers */}
-          <Route path="admin" element={<Admin />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="products" element={<Products />} />
-            <Route path="users" element={<Users />} />
-          </Route>
+          <Route path="admin/*" element={<Admin />} />
         </Routes>
       </Layout>
     </>
