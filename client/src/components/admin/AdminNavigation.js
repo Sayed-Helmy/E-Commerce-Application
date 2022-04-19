@@ -1,19 +1,18 @@
-import { useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import ProfileAvatar from "../layout/ProfileAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { userActions } from "../../store/userSlice";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "dashboard", current: true },
+  { name: "Dashboard", href: "admin/dashboard", current: true },
   { name: "brands", href: "#", current: false },
   { name: "categories", href: "#", current: false },
-  { name: "Products", href: "products", current: false },
+  { name: "Products", href: "admin/products", current: false },
   { name: "orders", href: "#", current: false },
-  { name: "Users", href: "users", current: false },
+  { name: "Users", href: "admin/users", current: false },
   { name: "statistics", href: "#", current: false },
 ];
 
@@ -21,8 +20,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Admin() {
-  let navigate = useNavigate();
+function AdminNavigation() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const logoutHandler = async () => {
@@ -31,10 +29,6 @@ function Admin() {
     });
     dispatch(userActions.setUser(null));
   };
-  // useEffect(() => {
-  //   navigate("dashboard");
-  // }, [navigate]);
-
   return (
     <>
       <div className="min-h-full">
@@ -138,7 +132,6 @@ function Admin() {
             </>
           )}
         </Disclosure>
-
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Outlet />
@@ -149,4 +142,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default AdminNavigation;
