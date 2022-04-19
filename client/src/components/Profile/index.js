@@ -28,7 +28,7 @@ export default function Profile() {
     }
   };
   return (
-    <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
+    <div className="mx-auto min-h-screen max-w-2xl py-28 px-4 sm:px-6 md:max-w-7xl lg:px-8">
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">
@@ -41,12 +41,12 @@ export default function Profile() {
               </p>
             </div>
           </div>
-          <div className="mt-5 md:mt-0 md:col-span-2">
+          <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={submitHandler}>
-              <div className="shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="overflow-hidden shadow sm:rounded-md">
+                <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6  py-5 bg-white  sm:py-6">
+                    <div className="col-span-6  bg-white py-5  sm:py-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700">
                           Photo
@@ -55,14 +55,14 @@ export default function Profile() {
                           <img
                             src={imageState || user?.avatar}
                             alt=""
-                            className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 object-cover"
+                            className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100 object-cover"
                           />
                           {/* Change */}
                           <input
                             type="file"
                             name="avatar"
                             onChange={changehandler}
-                            className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50"
+                            className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2"
                           />
                         </div>
                       </div>
@@ -80,7 +80,7 @@ export default function Profile() {
                         id="first-name"
                         defaultValue={user?.name}
                         autoComplete="given-name"
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
 
@@ -98,7 +98,7 @@ export default function Profile() {
                         id="email-address"
                         value={user ? user.email : ""}
                         autoComplete="email"
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-200 text-gray-400 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
 
@@ -113,7 +113,7 @@ export default function Profile() {
                         id="country"
                         name="country"
                         autoComplete="country-name"
-                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-black/50 focus:border-black/50 sm:text-sm"
+                        className="mt-1 block w-full rounded-md border border-gray-500 bg-white py-2 px-3 shadow-sm focus:border-black/50 focus:outline-none focus:ring-black/50 sm:text-sm"
                       >
                         <option>Egypt</option>
                         <option>Saudi Arabia</option>
@@ -134,7 +134,7 @@ export default function Profile() {
                         id="street-address"
                         autoComplete="street-address"
                         defaultValue={user?.address?.street}
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
 
@@ -151,7 +151,7 @@ export default function Profile() {
                         id="city"
                         autoComplete="address-level2"
                         defaultValue={user?.address?.city}
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
 
@@ -168,7 +168,7 @@ export default function Profile() {
                         id="region"
                         autoComplete="address-level1"
                         defaultValue={user?.address?.state}
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
 
@@ -185,15 +185,15 @@ export default function Profile() {
                         id="phone-num"
                         autoComplete="phone"
                         defaultValue={user?.address?.phone}
-                        className="mt-1 focus:ring-black/50 focus:border-black/50 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 block w-full rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm"
                       />
                     </div>
                   </div>
                 </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2"
                   >
                     Save
                   </button>
