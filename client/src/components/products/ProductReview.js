@@ -6,7 +6,7 @@ function classNames(...classes) {
 
 const ProductReview = ({ review }) => {
   return (
-    <div className="mt-16 rounded-2xl bg-[#ECECEC] px-8 pb-16 pt-7 sm:px-7 ">
+    <div className="mt-4 rounded-2xl bg-[#ECECEC] px-8 pb-16 pt-7 sm:px-7 ">
       {/* Header */}
       <div className="flex flex-col items-center justify-between space-y-5 sm:flex-row">
         {/* account */}
