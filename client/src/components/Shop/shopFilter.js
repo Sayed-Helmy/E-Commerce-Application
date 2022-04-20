@@ -15,6 +15,18 @@ const filters = [
     opened: true,
     options: [],
   },
+  {
+    id: "brand",
+    name: "Brand",
+    options: [
+      { value: "Beats", label: "Beats", checked: false },
+      { value: "Sony", label: "Sony", checked: false },
+      { value: "baseus", label: "Baseus", checked: false },
+      { value: "apple", label: "Apple", checked: false },
+      { value: "samsung", label: "Samsung", checked: false },
+      { value: "lenovo", label: "Lenovo", checked: false },
+    ],
+  },
 ];
 
 export default function ShopFilter() {
@@ -37,10 +49,7 @@ export default function ShopFilter() {
       catArray = catArray.filter((i) => i !== e.target.value);
       setCatArray((prev) => prev.filter((i) => i !== e.target.value));
     }
-    if (catArray.length > 0)
-      url = `http://localhost:5000/api/v1/products?${
-        section.id
-      }=${catArray.join(",")}`;
+    if (catArray.length > 0) url = `http://localhost:5000/api/v1/products?${section.id}=${catArray.join(",")}`;
     const result = await axios.get(url, {
       withCredentials: true,
     });
@@ -51,93 +60,38 @@ export default function ShopFilter() {
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-          <Dialog
-            as="div"
-            className="fixed inset-0 z-40 flex lg:hidden"
-            onClose={setMobileFiltersOpen}
-          >
-            <Transition.Child
-              as={Fragment}
-              enter="transition-opacity ease-linear duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity ease-linear duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
+          <Dialog as="div" className="fixed inset-0 z-40 flex lg:hidden" onClose={setMobileFiltersOpen}>
+            <Transition.Child as={Fragment} enter="transition-opacity ease-linear duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="transition-opacity ease-linear duration-300" leaveFrom="opacity-100" leaveTo="opacity-0">
               <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
 
-            <Transition.Child
-              as={Fragment}
-              enter="transition ease-in-out duration-300 transform"
-              enterFrom="translate-x-full"
-              enterTo="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
-              leaveTo="translate-x-full"
-            >
-              <div className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
+            <Transition.Child as={Fragment} enter="transition ease-in-out duration-300 transform" enterFrom="translate-x-full" enterTo="translate-x-0" leave="transition ease-in-out duration-300 transform" leaveFrom="translate-x-0" leaveTo="translate-x-full">
+              <div className="relative flex flex-col w-full h-full max-w-xs py-4 pb-12 ml-auto overflow-y-auto bg-white shadow-xl">
                 <div className="flex items-center justify-between px-4">
                   <h2 className="text-lg font-medium text-gray-900">Filters</h2>
-                  <button
-                    type="button"
-                    className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
-                    onClick={() => setMobileFiltersOpen(false)}
-                  >
+                  <button type="button" className="flex items-center justify-center w-10 h-10 p-2 -mr-2 text-gray-400 bg-white rounded-md" onClick={() => setMobileFiltersOpen(false)}>
                     <span className="sr-only">Close menu</span>
-                    <XIcon className="h-6 w-6" aria-hidden="true" />
+                    <XIcon className="w-6 h-6" aria-hidden="true" />
                   </button>
                 </div>
                 {/* Filters */}
                 <form className="mt-4 border-t text-black/70">
                   {filters.map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.id}
-                      className="border-t border-gray-200 px-4 py-6"
-                    >
+                    <Disclosure as="div" key={section.id} className="px-4 py-6 border-t border-gray-200">
                       {({ open }) => (
                         <>
-                          <h3 className="-mx-2 -my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusSmIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusSmIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
+                          <h3 className="flow-root -mx-2 -my-3">
+                            <Disclosure.Button className="flex items-center justify-between w-full px-2 py-3 text-gray-400 bg-white hover:text-gray-500">
+                              <span className="font-medium text-gray-900">{section.name}</span>
+                              <span className="flex items-center ml-6">{open ? <MinusSmIcon className="w-5 h-5" aria-hidden="true" /> : <PlusSmIcon className="w-5 h-5" aria-hidden="true" />}</span>
                             </Disclosure.Button>
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-6">
                               {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-mobile-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                    className="ml-3 min-w-0 flex-1 text-gray-500"
-                                  >
+                                <div key={option.value} className="flex items-center">
+                                  <input id={`filter-mobile-${section.id}-${optionIdx}`} name={`${section.id}[]`} defaultValue={option.value} type="checkbox" defaultChecked={option.checked} className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                                  <label htmlFor={`filter-mobile-${section.id}-${optionIdx}`} className="flex-1 min-w-0 ml-3 text-gray-500">
                                     {option.label}
                                   </label>
                                 </div>
@@ -153,11 +107,9 @@ export default function ShopFilter() {
             </Transition.Child>
           </Dialog>
         </Transition.Root>
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="  flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">
-              Shop
-            </h1>
+        <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200 ">
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Shop</h1>
           </div>
 
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
@@ -170,41 +122,19 @@ export default function ShopFilter() {
               <div className="hidden lg:block">
                 {categories &&
                   filters.map((section) => (
-                    <Disclosure
-                      defaultOpen={section.opened}
-                      as="div"
-                      key={section.id}
-                      className="border-b border-gray-200 py-6"
-                    >
+                    <Disclosure defaultOpen={section.opened} as="div" key={section.id} className="py-6 border-b border-gray-200">
                       {({ open }) => (
                         <>
-                          <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusSmIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusSmIcon
-                                    className="h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
+                          <h3 className="flow-root -my-3">
+                            <Disclosure.Button className="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
+                              <span className="font-medium text-gray-900">{section.name}</span>
+                              <span className="flex items-center ml-6">{open ? <MinusSmIcon className="w-5 h-5" aria-hidden="true" /> : <PlusSmIcon className="w-5 h-5" aria-hidden="true" />}</span>
                             </Disclosure.Button>
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-4">
                               {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
+                                <div key={option.value} className="flex items-center">
                                   <input
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
@@ -212,12 +142,9 @@ export default function ShopFilter() {
                                     type="checkbox"
                                     defaultChecked={option.checked}
                                     onChange={(e) => checkedHandler(e, section)}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
                                   />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 cursor-pointer text-sm text-gray-600"
-                                  >
+                                  <label htmlFor={`filter-${section.id}-${optionIdx}`} className="ml-3 text-sm text-gray-600 cursor-pointer">
                                     {option.label}
                                   </label>
                                 </div>
