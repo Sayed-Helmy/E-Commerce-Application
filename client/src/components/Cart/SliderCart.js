@@ -141,7 +141,9 @@ export default function SliderCart({ open, setOpen }) {
                           onClick={() => {
                             dispatch(updateUserCart("", 0, true));
                             setOpen(false);
-                            toast.success("orderd canceled!");
+                            toast.success("orderd canceled!", {
+                              autoClose: 1000,
+                            });
                           }}
                         >
                           Cancel order
