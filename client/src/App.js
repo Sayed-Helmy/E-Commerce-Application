@@ -19,6 +19,7 @@ import { userActions } from "./store/userSlice";
 import { cartActions } from "./store/cartSlice";
 import { productsActions } from "./store/productsSlice";
 import AdminPage from "./pages/admin/AdminPage";
+import Faqs from "./pages/Faqs";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -57,6 +58,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/ContactUs" element={<ContactUs />} />
+          <Route path="/faqs" element={<Faqs />} />
           <Route path="/shop" element={<Shop />} />
           <Route
             path="/checkout"

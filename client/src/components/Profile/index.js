@@ -6,6 +6,7 @@ import ChangeInfo from "./changeInfo";
 
 export default function Profile() {
   const user = useSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [imageState, setImageState] = useState(null);
   console.log(user);
@@ -14,14 +15,17 @@ export default function Profile() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
       const result = await axios.patch("http://localhost:5000/api/v1/auth/updateUser", formData, {
         withCredentials: true,
       });
       dispatch(userActions.setUser(result.data));
+      setIsLoading(false);
     } catch (error) {
       console.log(error.response.data.msg);
+      setIsLoading(false);
     }
   };
   return (
@@ -106,7 +110,11 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="px-4 py-3 text-right bg-gray-50 sm:px-6">
-                  <button type="submit" className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-black border border-transparent rounded-md shadow-sm cursor-pointer hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400"
+                  >
                     Save
                   </button>
                 </div>
