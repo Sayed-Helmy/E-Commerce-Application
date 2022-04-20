@@ -152,13 +152,15 @@ function Table({ columns, data }) {
   // Render the UI for your table
   return (
     <>
-      {headerGroups.map((headerGroup) =>
-        headerGroup.headers.map((column) =>
-          column.Filter ? (
-            <div key={column.id}>{column.render("Filter")}</div>
-          ) : null
-        )
-      )}
+      <div className="mb-8 flex flex-row gap-8">
+        {headerGroups.map((headerGroup) =>
+          headerGroup.headers.map((column) =>
+            column.Filter ? (
+              <div key={column.id}>{column.render("Filter")}</div>
+            ) : null
+          )
+        )}
+      </div>
       <div className="mt-2 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -175,7 +177,7 @@ function Table({ columns, data }) {
                         // we can add them into the header props
                         <th
                           scope="col"
-                          className="group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                          className=" group px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
