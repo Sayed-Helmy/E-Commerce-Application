@@ -5,6 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserCart } from "../../store/cartSlice";
+import { toast } from "react-toastify";
 
 export default function SliderCart({ open, setOpen }) {
   const products = useSelector((state) => state.cart.cartItems);
@@ -140,6 +141,7 @@ export default function SliderCart({ open, setOpen }) {
                           onClick={() => {
                             dispatch(updateUserCart("", 0, true));
                             setOpen(false);
+                            toast.success("orderd canceled!");
                           }}
                         >
                           Cancel order
