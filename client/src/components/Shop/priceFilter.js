@@ -45,7 +45,7 @@ const PriceFilter = ({ min, max, categories }) => {
   }, [maxVal, getPercent]);
 
   const priceHandler = async (e) => {
-    let url = `http://localhost:5000/api/v1/products`;
+    let url = `http://localhost:5000/api/v1/products/?price=${minVal},${maxVal}`;
     e.preventDefault();
     if (categories.length > 0)
       url = `http://localhost:5000/api/v1/products?category=${categories.join(

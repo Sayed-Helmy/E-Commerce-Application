@@ -2,7 +2,7 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserCart } from "../../store/cartSlice";
 
@@ -13,6 +13,8 @@ export default function SliderCart({ open, setOpen }) {
   const handleDelete = (_e, product) => {
     dispatch(updateUserCart(product, 0));
   };
+  const navigator = useNavigate();
+  console.log(products);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -118,17 +120,20 @@ export default function SliderCart({ open, setOpen }) {
                       Shipping and taxes calculated at checkout.
                     </p>
                     <div className="mt-6">
-                      <Link
-                        to="/checkout"
-                        onClick={() => setOpen(false)}
-                        className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-black/90"
+                      <button
+                        disabled={products.length === 0}
+                        onClick={() => {
+                          navigator("/checkout");
+                          setOpen(false);
+                        }}
+                        className="flex w-full cursor-pointer items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-black/90 disabled:cursor-not-allowed disabled:bg-gray-400"
                       >
                         Checkout
-                      </Link>
+                      </button>
                     </div>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
-                        or
+                        or{" "}
                         <button
                           type="button"
                           className="font-medium text-black underline hover:text-black/70"
