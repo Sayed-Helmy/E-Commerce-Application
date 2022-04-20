@@ -4,7 +4,7 @@ import { ChevronUpIcon } from "@heroicons/react/solid";
 
 const Faqs = () => {
   return (
-    <div className=" py-16 px-4 md:py-20 md:px-6 lg:px-20 2xl:container 2xl:mx-auto">
+    <div className=" mx-auto min-h-screen max-w-2xl px-4 py-28 sm:px-6 md:max-w-7xl lg:px-8">
       <h2 className=" text-3xl font-semibold leading-9 text-gray-800 md:leading-7 lg:text-4xl lg:leading-9">
         Frequently Asked Questions
       </h2>
