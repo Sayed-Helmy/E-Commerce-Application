@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-import Map from "./table/Map";
-import Table, {
-  SelectColumnFilter,
-  StatusPill,
-  LocateCell,
-  GlobalFilter,
-} from "./table/Table";
+import React from "react";
+// import Map from "./table/Map";
+import Table, { StatusPill, LocateCell, GlobalFilter } from "./table/Table";
 import "./table/styles.css";
-import { MapProvider } from "./table/map-context";
+// import { MapProvider } from "./table/map-context";
 
 const getData = () => [
   {
@@ -81,7 +76,7 @@ const getData = () => [
 ];
 
 export default function App() {
-  const [mapFly, setMapFly] = useState(null);
+  // const [mapFly, setMapFly] = useState(null);
 
   const columns = React.useMemo(
     () => [
