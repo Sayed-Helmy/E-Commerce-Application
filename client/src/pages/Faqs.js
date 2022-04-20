@@ -16,7 +16,7 @@ const Faqs = () => {
           </p>
         </div>
       </div>
-      <div className="mt-8 flex flex-col items-center justify-center md:mt-16 md:flex-row md:space-x-8">
+      <div className="mt-8 flex flex-col items-start justify-start md:mt-16 md:flex-row md:space-x-8">
         <div className=" flex h-full w-full items-center justify-center rounded-lg bg-gray-100 py-16 md:w-5/12 lg:w-4/12">
           <img
             src="./../assets/category-3.png"
