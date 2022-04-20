@@ -21,7 +21,7 @@ const ManageOrder = () => {
         <div className="flex w-full flex-col items-start justify-start space-y-4 md:space-y-6 xl:space-y-8">
           <div className="flex w-full flex-col items-start justify-start rounded bg-gray-50 px-4 py-4 md:p-6 md:py-6 xl:p-8">
             {products.map((product) => (
-              <ProductRow product={product} key={product.id} />
+              <ProductRow product={product} key={product._id} />
             ))}
           </div>
           {/*product summary need state still */}
