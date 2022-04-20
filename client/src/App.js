@@ -20,6 +20,9 @@ import { cartActions } from "./store/cartSlice";
 import { productsActions } from "./store/productsSlice";
 import AdminPage from "./pages/admin/AdminPage";
 import Faqs from "./pages/Faqs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ManageOrder from "./components/Profile/ManageOrder/ManageOrder";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -97,12 +100,19 @@ function App() {
               !user ? <Navigate to="/SigninPage" replace /> : <ProfilePage />
             }
           />
+          <Route
+            path="/manage-order"
+            element={
+              !user ? <Navigate to="/SigninPage" replace /> : <ManageOrder />
+            }
+          />
           <Route path="*" element={<NotFound />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Canceled />} />
           {/* admin routers */}
           <Route path="admin/*" element={<AdminPage />} />
         </Routes>
+        <ToastContainer />
       </Layout>
     </>
   );
