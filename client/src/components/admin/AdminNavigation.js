@@ -9,9 +9,9 @@ import { Link, Outlet } from "react-router-dom";
 const navigation = [
   { name: "Dashboard", href: "admin/dashboard", current: true },
   { name: "brands", href: "#", current: false },
-  { name: "categories", href: "#", current: false },
+  { name: "categories", href: "admin/categories", current: false },
   { name: "Products", href: "admin/products", current: false },
-  { name: "orders", href: "#", current: false },
+  { name: "orders", href: "admin/orders", current: false },
   { name: "Users", href: "admin/users", current: false },
   { name: "statistics", href: "#", current: false },
 ];
