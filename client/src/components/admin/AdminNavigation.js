@@ -4,7 +4,7 @@ import ProfileAvatar from "../layout/ProfileAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { userActions } from "../../store/userSlice";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "admin/dashboard", current: true },

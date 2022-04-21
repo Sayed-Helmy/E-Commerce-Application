@@ -14,10 +14,12 @@ const createUser = asyncWrapper(async (req, res) => {
 });
 
 const changePassword = asyncWrapper(async (req, res) => {
-  const { email } = req.payload.email;
-  const { password } = req.body;
-  const user = await User.findOne({ email });
-  user.password = password;
+  const { _id } = req.payload;
+  const { currentPassword, newPassword } = req.body;
+  const user = await User.findById(_id);
+  const isPssword = await user.passwordCheck(currentPassword);
+  if (!isPssword) throw new BadRequest("Wrong Password Please Try Again!");
+  user.password = newPassword;
   await user.save();
   res.status(201).json({ msg: "Password Changed successfuly." });
 });

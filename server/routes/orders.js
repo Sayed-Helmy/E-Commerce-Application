@@ -1,8 +1,8 @@
 const express = require("express");
-const { checkout, checkSession } = require("../controllers/checkout");
+const { getOrders } = require("../controllers/orders");
 const auth = require("../middlewares/authentication");
 const router = express.Router();
 
-router.route("/").post(auth, checkout).get(auth, checkSession);
+router.route("/").get(auth, getOrders);
 
 module.exports = router;

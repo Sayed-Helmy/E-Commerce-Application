@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserDate = ({ user }) => {
+const UserDate = ({ user, order }) => {
   return (
     <div className="flex w-full flex-col items-center justify-between rounded bg-gray-50 px-4 py-6 md:items-start md:p-6 xl:w-96 xl:p-8 ">
       <h3 className="text-xl font-semibold leading-5 text-gray-800">
@@ -12,7 +12,7 @@ const UserDate = ({ user }) => {
             <img
               src={user?.avatar}
               alt="avatar"
-              className="w-12 rounded-full"
+              className="h-12 w-12 rounded-full object-cover"
             />
             <div className=" flex flex-col items-start justify-start space-y-2">
               <p className="text-left text-base font-semibold leading-4 text-gray-800">
@@ -51,7 +51,7 @@ const UserDate = ({ user }) => {
           <div className="flex flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:justify-start md:space-x-6 md:space-y-0 lg:space-x-8 xl:flex-col  xl:space-x-0 xl:space-y-12 ">
             <div className="flex flex-col items-center  justify-center space-y-4 md:items-start md:justify-start xl:mt-8">
               <p className="text-center text-base font-semibold leading-4 text-gray-800 md:text-left">
-                Shipping Address
+                Billing Address
               </p>
               <p className="w-48 text-center text-sm leading-5 text-gray-600 md:text-left lg:w-full xl:w-48">
                 {user?.address?.street} , {user?.address?.city} ,{" "}
@@ -61,10 +61,13 @@ const UserDate = ({ user }) => {
             <div className="flex flex-col items-center  justify-center space-y-4 md:items-start md:justify-start ">
               {/* billing address still need to be handled */}
               <p className="text-center text-base font-semibold leading-4 text-gray-800 md:text-left">
-                Billing Address
+                Shipping Address
               </p>
               <p className="w-48 text-center text-sm leading-5 text-gray-600 md:text-left lg:w-full xl:w-48">
-                180 North King Street, Northhampton MA 1060
+                {order?.shipping.address?.street} ,{" "}
+                {order?.shipping.address?.city} ,{" "}
+                {order?.shipping.address?.state} ,{" "}
+                {order?.shipping.address?.country}
               </p>
             </div>
           </div>

@@ -14,7 +14,9 @@ const Success = () => {
     const successId = query.get("id");
     if (successId && successId?.length > 10) {
       axios
-        .get(`http://localhost:5000/api/v1/checkout?id=${successId}`)
+        .get(`http://localhost:5000/api/v1/checkout?id=${successId}`, {
+          withCredentials: true,
+        })
         .then((res) => {
           setOrderId(res.data.order._id);
         })
