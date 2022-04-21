@@ -1,8 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
+import OrdersModal from "./Orders/OrdersModal";
 import DataTableBase from "./table/DataTableBase";
 import Select from "./table/Select";
-import OrdersModal from "./OrdersModal";
 
 // documentation : https://react-data-table-component.netlify.app/
 

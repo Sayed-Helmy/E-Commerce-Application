@@ -11,10 +11,10 @@ export default function OrderDropdown() {
     <div className="w-full">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative ">
-          <Listbox.Button className="relative w-full cursor-default rounded-r-lg bg-gray-200 py-1 pl-3 pr-10 text-left shadow-md focus:outline-none  sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded-r-lg bg-orange-300 py-1 pl-3 pr-10 text-left shadow-md shadow-md focus:outline-none  sm:text-sm">
             <span className="block ">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+              <SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
             </span>
           </Listbox.Button>
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">

@@ -1,29 +1,24 @@
 import React from "react";
 import OrderDropdown from "./OrderDropdown";
-import ProductRow from "../Profile/ManageOrder/ProductRow";
+import OrdersPriceDisclosure from "./OrdersPriceDisclosure";
+import OrdersProductsDisclosure from "./OrdersProductsDisclosure";
 
 const OrdersInfo = () => {
-  console.log("loop");
   return (
     <div>
-      <form className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 md:space-y-0">
+      <form className="mt-10 grid grid-cols-4 gap-4 md:space-y-0">
         {/* ================================== 
             ==================================*/}
-        <div className=" col-span-1 space-y-4">
+        <div className="col-span-4 space-y-4 md:col-span-2">
           {/* order id */}
-          <div className="flex items-center space-x-2 text-sm sm:space-x-5 sm:text-base">
+          <div className="flex items-center space-x-2 text-sm text-white sm:space-x-5 sm:text-base ">
             <p className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white	">Order ID</p>
             <p>skladhjkashfasfashf390848r324</p>
           </div>
           {/* User */}
-          <div className="flex items-center space-x-2 text-sm sm:space-x-5 sm:text-base">
+          <div className="flex items-center space-x-2 text-sm text-white sm:space-x-5 sm:text-base ">
             <p className="w-24 whitespace-nowrap	 rounded-l-lg bg-black py-1 px-3 text-white	">User</p>
             <p>customer@gmail.com</p>
-          </div>
-          {/* price */}
-          <div className="flex items-center space-x-2 text-sm sm:space-x-5 sm:text-base">
-            <p className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white	">Total Price</p>
-            <p>399$</p>
           </div>
           {/* Status */}
           <div className="flex items-center space-x-2 text-sm sm:space-x-5 sm:text-base">
@@ -39,10 +34,16 @@ const OrdersInfo = () => {
               <OrderDropdown />
             </p>
           </div>
+          {/*  Price */}
+          <div className="flex items-center space-x-2 text-sm text-white sm:space-x-5 sm:text-base">
+            <div className="flex items-center space-x-2 sm:space-x-5">
+              <OrdersPriceDisclosure />
+            </div>
+          </div>
         </div>
         {/* ================================== 
             ==================================*/}
-        <div className=" col-span-1 space-y-4">
+        <div className="col-span-4 space-y-4 md:col-span-2">
           {/* Carrier */}
           <div className="flex items-center space-x-2 text-sm sm:space-x-5 sm:text-base">
             <p className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white	">Carrier</p>
@@ -51,33 +52,41 @@ const OrdersInfo = () => {
             </p>
           </div>
           {/* Address and Tracking */}
-          <div className="my-5 w-full space-y-2 rounded-md bg-gray-200 p-3 text-sm sm:text-base">
+          <div className="my-5 w-full space-y-2 rounded-md border-2 border-white bg-gray-300 p-3 text-sm sm:text-base">
             <div className="flex">
               <p className="w-28 whitespace-nowrap">Address :</p>
               <p> cairo, cairo, sjhdhj</p>
             </div>
-            <div className="flex">
+            <div className="flex ">
               <p className="w-28 whitespace-nowrap">Tracking :</p>
               <p> 2348656654123168161456</p>
             </div>
           </div>
           {/* Dates */}
-          <div className="my-5 w-full space-y-2 rounded-md bg-gray-200 p-3 text-sm sm:text-base">
+          <div className="my-5 w-full space-y-2 rounded-md border-2 border-white bg-gray-300 p-3 text-sm sm:text-base">
             <div className="flex">
               <p className="w-28 whitespace-nowrap">Created At :</p>
-              <p> cairo, cairo, sjhdhj</p>
+              <p> 12/2/2022</p>
             </div>
             <div className="flex">
               <p className="w-28 whitespace-nowrap">Delivery Date :</p>
-              <p> 2348656654123168161456</p>
+              <p> 12/2/2022</p>
             </div>
           </div>
         </div>
         {/* ================================== 
-            ==================================*/}
-        <div className=" col-span-1 space-y-4 pt-10">
-          <h3 className="w-24 whitespace-nowrap	 rounded-l-lg bg-black py-1 px-3 text-white	">Products</h3>
-          <div></div>
+      ==================================*/}
+        <div className="col-span-4 space-y-4  md:col-span-4 lg:col-span-3 ">
+          <div className="flex items-center space-x-2 sm:space-x-5">
+            <OrdersProductsDisclosure />
+          </div>
+        </div>
+        {/* ================================== 
+          ==================================*/}
+        <div className="col-span-4">
+          <button type="submit" className=" float-right w-40 rounded-md bg-orange-300 py-2 px-4  hover:bg-black hover:text-white">
+            Save
+          </button>
         </div>
       </form>
     </div>
