@@ -2,60 +2,64 @@ import React from "react";
 import { toast } from "react-toastify";
 import DataTableBase from "./table/DataTableBase";
 import Select from "./table/Select";
+import OrdersModal from "./OrdersModal";
 
 // documentation : https://react-data-table-component.netlify.app/
 
 const columns = [
   {
-    name: "order",
-    selector: (row) => row.title,
+    name: "Order Id",
+    selector: (row) => row.id,
     sortable: true,
+    // cell: (row, index, column, id) => <Select />,
   },
   {
-    name: "Year",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "status",
+    name: "Status",
     selector: (row) => row.status,
     sortable: true,
   },
   {
-    name: "test",
-    selector: (row) => row.zip,
-    cell: (row, index, column, id) => <Select />,
+    name: "Payment Status",
+    selector: (row) => row.paymentStatus,
+    sortable: true,
+  },
+  {
+    name: "User",
+    selector: (row) => row.user,
+    sortable: true,
+  },
+  {
+    name: "Created Date",
+    selector: (row) => row.createdDate,
+    sortable: true,
   },
 ];
 
 const data = [
   {
     id: 1,
-    title: "Beetlejuice",
-    year: "1988",
     status: "shipped",
-    button: true,
-    cell: (row, index, column, id) => {
-      <Title />;
-    },
+    paymentStatus: "paid",
+    user: "mohamed@gmail.com",
+    createdDate: "12/2/2022",
   },
   {
     id: 2,
-    title: "Ghostbusters",
-    year: "1984",
+    status: "shipped",
+    paymentStatus: "paid",
+    user: "sayed@gmail.com",
+    createdDate: "13/2/2022",
+    // cell: (row, index, column, id) => {
+    //   <Title />;
+    // },
   },
 ];
 
 function Orders() {
   return (
     <div className=" mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6 md:max-w-7xl lg:px-8">
-      <DataTableBase
-        columns={columns}
-        data={data}
-        progressPending={false}
-        selectableRows
-        subHeaderComponent={<Title />}
-      />
+      <DataTableBase columns={columns} data={data} progressPending={false} selectableRows subHeaderComponent={<Title />} />
+      <OrdersModal />
     </div>
   );
 }
