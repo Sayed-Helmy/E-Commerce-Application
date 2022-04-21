@@ -1,5 +1,7 @@
 import React from "react";
+import { toast } from "react-toastify";
 import DataTableBase from "./table/DataTableBase";
+import Select from "./table/Select";
 
 // documentation : https://react-data-table-component.netlify.app/
 
@@ -20,9 +22,9 @@ const columns = [
     sortable: true,
   },
   {
-    name: "zip",
+    name: "test",
     selector: (row) => row.zip,
-    sortable: true,
+    cell: (row, index, column, id) => <Select />,
   },
 ];
 
@@ -32,6 +34,10 @@ const data = [
     title: "Beetlejuice",
     year: "1988",
     status: "shipped",
+    button: true,
+    cell: (row, index, column, id) => {
+      <Title />;
+    },
   },
   {
     id: 2,
@@ -48,9 +54,14 @@ function Orders() {
         data={data}
         progressPending={false}
         selectableRows
+        subHeaderComponent={<Title />}
       />
     </div>
   );
 }
 
 export default Orders;
+
+export function Title() {
+  return <div>zzzzzzzzzz</div>;
+}
