@@ -78,7 +78,11 @@ function App() {
             path="/SigninPage"
             element={
               user ? (
-                <Navigate to="/profile" replace state={{ from: location }} />
+                <Navigate
+                  to={location.state?.from.pathname}
+                  replace
+                  state={{ from: location }}
+                />
               ) : (
                 <SigninPage />
               )
@@ -97,13 +101,21 @@ function App() {
           <Route
             path="/profile"
             element={
-              !user ? <Navigate to="/SigninPage" replace /> : <ProfilePage />
+              !user ? (
+                <Navigate to="/SigninPage" replace state={{ from: location }} />
+              ) : (
+                <ProfilePage />
+              )
             }
           />
           <Route
             path="/manage-order"
             element={
-              !user ? <Navigate to="/SigninPage" replace /> : <ManageOrder />
+              !user ? (
+                <Navigate to="/SigninPage" replace state={{ from: location }} />
+              ) : (
+                <ManageOrder />
+              )
             }
           />
           <Route path="*" element={<NotFound />} />

@@ -1,18 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import CartRow from "../components/Cart/CartRow";
 import BillingDetails from "../components/checkout/BillingDetails";
-import { ReactComponent as Spinner } from "./../assets/spinner.svg";
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.cartItems);
   const totalPrice = products?.reduce((a, b) => a + b.price * b.quantity, 0);
-  const [loading, setloading] = useState(false);
   const [newAddress, setNewAddress] = useState(null);
   const [couponDisc, setCouponDisc] = useState(null);
   const user = useSelector((state) => state.user);
+
   const couponHandler = async (e) => {
+    const tostyId = toast.loading("Please wait...");
     e.preventDefault();
     const formData = Object.fromEntries([...new FormData(e.currentTarget)]);
     try {
@@ -23,13 +24,24 @@ const Cart = () => {
         }
       );
       setCouponDisc(coupon.data);
+      toast.update(tostyId, {
+        render: `Nice You have Got ${coupon.data.discount}% Off`,
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
     } catch (error) {
-      console.log(error.response.data.msg);
+      toast.update(tostyId, {
+        render: "Wrong Coupon Scammer :D",
+        type: "warning",
+        isLoading: false,
+        autoClose: 2000,
+      });
     }
   };
   const checkoutHandler = async () => {
     let address = user?.address;
-    setloading(true);
+    const tostyId = toast.loading("Please wait you will redirected to Payment");
     if (newAddress) address = newAddress;
     const orederProducts = products.map((item) => ({
       productId: item._id,
@@ -51,23 +63,34 @@ const Cart = () => {
         }
       );
       const { session } = result.data;
-      setloading(false);
+      toast.update(tostyId, {
+        render: `Redirecting...`,
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
       window.location.replace(session.url);
     } catch (error) {
-      console.log(error.response.data.msg);
+      console.log(error.response.data);
+      toast.update(tostyId, {
+        render: error.response.data.msg,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
   };
   return (
-    <div className="min-h-screen py-28 max-w-2xl px-4 mx-auto sm:px-6 md:max-w-7xl lg:px-8">
+    <div className="mx-auto min-h-screen max-w-2xl py-28 px-4 sm:px-6 md:max-w-7xl lg:px-8">
       <table
-        className="w-full text-sm lg:text-base table-auto "
+        className="w-full table-auto text-sm lg:text-base "
         cellSpacing="0"
       >
         <thead>
-          <tr className="h-12 capitalize border-b ">
+          <tr className="h-12 border-b capitalize ">
             <th className="hidden md:table-cell"></th>
             <th className="text-left">Product</th>
-            <th className="lg:text-right text-left pl-5 lg:pl-0">
+            <th className="pl-5 text-left lg:pl-0 lg:text-right">
               <span className="lg:hidden" title="Quantity">
                 Qtd
               </span>
@@ -85,22 +108,22 @@ const Cart = () => {
         </tbody>
       </table>
       <form onSubmit={couponHandler}>
-        <div className="w-full md:w-2/4  float-right mt-8 flex">
+        <div className="float-right mt-8  flex w-full md:w-2/4">
           <input
-            className=" rounded-lg block basis-2/3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+            className=" block basis-2/3 rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
             placeholder="Your coupon"
             name="coupon"
           />
           <button
             type="submit"
-            className="group basis-1/3 ml-2  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            className="group ml-2 flex  basis-1/3 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
           >
             Apply
           </button>
         </div>
       </form>
       {/* cart total && cart details */}
-      <div className="w-full flex flex-col md:flex-row pt-28 pb-10  gap-24 md:gap-0">
+      <div className="flex w-full flex-col gap-24 pt-28 pb-10  md:flex-row md:gap-0">
         <BillingDetails
           setAddress={setNewAddress}
           newAddress={newAddress}
@@ -131,9 +154,8 @@ const Cart = () => {
             <button
               type="submit"
               onClick={checkoutHandler}
-              className="group basis-1/3 mt-2  flex justify-center py-3 px-6 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="group mt-2 flex  basis-1/3 justify-center rounded-md border border-transparent bg-black py-3 px-6 text-sm font-medium text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
-              {loading && <Spinner className=" animate-spin mr-4 " />}
               Proceed to Checkout
             </button>
           </div>

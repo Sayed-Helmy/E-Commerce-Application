@@ -25,6 +25,14 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    amountDiscount: {
+      type: Number,
+      default: 0,
+    },
+    priceSubtotal: {
+      type: Number,
+      default: 0,
+    },
     status: {
       type: String,
       default: "Pending",
