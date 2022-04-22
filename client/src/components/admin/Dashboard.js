@@ -32,12 +32,7 @@ const data = [
 function Dashboard() {
   return (
     <div className=" mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6 md:max-w-7xl lg:px-8">
-      <DataTableBase
-        columns={columns}
-        data={data}
-        progressPending={false}
-        selectableRows
-      />
+      <DataTableBase columns={columns} data={data} progressPending={false} selectableRows />
     </div>
   );
 }
