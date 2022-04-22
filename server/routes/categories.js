@@ -14,7 +14,7 @@ const router = express.Router();
 router
   .route("/")
   .get(getAllCategories)
-  .post(auth, rolesChecker(["ADMIN"]), multerUploader, createCategory);
+  .post(auth, multerUploader, createCategory);
 
 router
   .route("/:id")
