@@ -1,5 +1,5 @@
 import React from "react";
-import DataTableBase from "./table/DataTableBase";
+import DataTableBase from "../table/DataTableBase";
 
 // documentation : https://react-data-table-component.netlify.app/
 
