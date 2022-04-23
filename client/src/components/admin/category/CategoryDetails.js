@@ -80,8 +80,8 @@ const CategoryDetails = () => {
             <input type="text" placeholder={category.order} id="cat-name" name="order" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
           </div>
           {/* button */}
-          <div className="flex justify-end">
-            <button type="submit" className=" w-32 cursor-pointer rounded-md border border-transparent bg-black px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
+          <div className="flex justify-end pt-5">
+            <button type="submit" className=" w-32 cursor-pointer rounded-md border border-transparent bg-green-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
               Save
             </button>
           </div>

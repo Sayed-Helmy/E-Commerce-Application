@@ -63,7 +63,6 @@ const ProductForm = () => {
               <input type="checkbox" value={true} name="onSale" id="prod-onSale" className="rounded-full ring-2" />
             </div>
           </div>
-
           {/* OnSalePrice */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <label htmlFor="prod-onSalePrice" className="w-28">
@@ -74,15 +73,21 @@ const ProductForm = () => {
         </div>
         {/* right side */}
         <div className="col-span-2 space-y-4  md:col-span-1">
-          {/* IsFeatured */}
+          {/* Category */}
           <div className="flex items-center justify-start space-x-2 sm:space-x-4">
-            <label htmlFor="prod-isFeatured" className="w-28">
-              IsFeatured
+            <label htmlFor="prod-category" className="w-28">
+              Category
             </label>
-            <div className="">
-              <input type="checkbox" value={true} name="isFeatured" id="prod-isFeatured" className="rounded-full ring-2" />
-            </div>
+            <select name="category" id="prod-category" className="mt-1 block w-60  rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm">
+              {categories &&
+                categories.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name}
+                  </option>
+                ))}
+            </select>
           </div>
+
           {/* Brand */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <label htmlFor="prod-brand" className="w-28">
@@ -98,6 +103,16 @@ const ProductForm = () => {
             </label>
             <input type="text" name="stock" id="prod-stock" className="mt-1 block w-60  rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm" />
           </div>
+          {/* IsFeatured */}
+          <div className="flex items-center justify-start space-x-2 sm:space-x-4">
+            <label htmlFor="prod-isFeatured" className="w-28">
+              IsFeatured
+            </label>
+            <div className="">
+              <input type="checkbox" value={true} name="isFeatured" id="prod-isFeatured" className="rounded-full ring-2" />
+            </div>
+          </div>
+
           {/* Images */}
           <div className="space-y-3">
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -125,24 +140,10 @@ const ProductForm = () => {
               <input type="file" name="image4" id="prod-image4" className="mt-1 block w-60  rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm" />
             </div>
           </div>
-          {/* Category */}
-          <div className="flex items-center justify-start space-x-2 sm:space-x-4">
-            <label htmlFor="prod-category" className="w-28">
-              Category
-            </label>
-            <select name="category" id="prod-category" className="mt-1 block w-60  rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm">
-              {categories &&
-                categories.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-            </select>
-          </div>
         </div>
         {/* Submit */}
         <div className="col-span-2 mt-4">
-          <button type="submit" className="float-right w-32 cursor-pointer rounded-md border border-transparent bg-black px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
+          <button type="submit" className="float-right w-32 cursor-pointer rounded-md border border-transparent bg-green-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
             Submit
           </button>
         </div>
