@@ -87,21 +87,21 @@ const ProductDetails = () => {
             <div className="col-span-6 space-y-4 rounded-2xl border-2 py-10 px-3 md:col-span-3 md:px-4  xl:col-span-2 xl:px-8">
               {/* _id */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   ID
                 </label>
                 <p>{Product._id}</p>
               </div>
               {/* name */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Name
                 </label>
                 <input type="text" placeholder={Product.title} id="cat-name" name="name" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
               </div>
               {/* description */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Description
                 </label>
                 <textarea id="" name="description" rows="4" cols="20" className=" w-60  rounded-md focus:border-black/50 focus:ring-black/50">
@@ -110,7 +110,7 @@ const ProductDetails = () => {
               </div>
               {/* richDescription */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   rich-Desc
                 </label>
                 <textarea id="" name="richDescription" rows="5" cols="20" className=" w-60  rounded-md focus:border-black/50 focus:ring-black/50">
@@ -119,21 +119,21 @@ const ProductDetails = () => {
               </div>
               {/* price */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Price
                 </label>
                 <input type="text" placeholder={Product.price} id="cat-name" name="price" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
               </div>
               {/* OnSale */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   OnSale
                 </label>
                 <input type="checkbox" value={Product.onSale} id="cat-featured" name="onSale" className="rounded-full ring-2" />
               </div>
               {/* OnSale price */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-2 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-2 text-white">
                   onSalePrice
                 </label>
                 <input type="text" placeholder={Product.onSalePrice} id="cat-name" name="onSalePrice" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
@@ -144,7 +144,7 @@ const ProductDetails = () => {
             <div className="col-span-6 space-y-4 rounded-2xl border-2 py-10 px-1 sm:px-10 md:col-span-3 xl:col-span-2">
               {/* category */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="prod-category" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="prod-category" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Category
                 </label>
                 <select name="category" defaultValue={Product.category} id="prod-category" className="mt-1 block w-60  rounded-md border-gray-500 shadow-sm focus:border-black/50 focus:ring-black/50 sm:text-sm">
@@ -158,28 +158,28 @@ const ProductDetails = () => {
               </div>
               {/* brand */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Brand
                 </label>
                 <input type="text" placeholder={Product.brand} id="cat-name" name="brand" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
               </div>
               {/* stock */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   Stock
                 </label>
                 <input type="text" placeholder={Product.stock} id="cat-name" name="stock" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
               </div>
               {/* isFeatured */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   isFeatured
                 </label>
                 <input type="checkbox" value={Product.isFeatured} id="cat-featured" name="isFeatured" className="rounded-full ring-2" />
               </div>
               {/* image */}
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   mainImage
                 </label>
                 <div className="relative flex items-center">
@@ -188,7 +188,7 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   image2
                 </label>
                 <div className="relative flex items-center">
@@ -197,7 +197,7 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   image3
                 </label>
                 <div className="relative flex items-center">
@@ -206,7 +206,7 @@ const ProductDetails = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2 sm:space-x-4">
-                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+                <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
                   image4
                 </label>
                 <div className="relative flex items-center">

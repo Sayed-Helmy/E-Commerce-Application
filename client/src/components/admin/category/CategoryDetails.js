@@ -34,21 +34,21 @@ const CategoryDetails = () => {
         <form className="space-y-5 rounded-2xl border-2 py-10 px-1 sm:px-10">
           {/* _id */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               ID
             </label>
             <p>{category._id}</p>
           </div>
           {/* name */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               Name
             </label>
             <input type="text" placeholder={category.name} id="cat-name" name="name" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
           </div>
           {/* description */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               Description
             </label>
             <textarea id="" name="description" rows="2" cols="20" className=" w-60  rounded-md focus:border-black/50 focus:ring-black/50">
@@ -57,7 +57,7 @@ const CategoryDetails = () => {
           </div>
           {/* image */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               Image
             </label>
             <div className="relative flex items-center">
@@ -67,14 +67,14 @@ const CategoryDetails = () => {
           </div>
           {/* featured */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               Featured
             </label>
             <input type="checkbox" value={category.featured} id="cat-featured" name="featured" className="rounded-full ring-2" />
           </div>
           {/* order */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white">
+            <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
               Order
             </label>
             <input type="text" placeholder={category.order} id="cat-name" name="order" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
