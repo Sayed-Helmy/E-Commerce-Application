@@ -33,7 +33,7 @@ export default function OrdersModal() {
               &#8203;
             </span>
             <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-              <div className="my-8 inline-block w-full max-w-7xl transform overflow-hidden rounded-2xl border-4 border-teal-700  bg-teal-600/90 px-2 py-6 text-left align-middle shadow-xl transition-all sm:px-6 sm:py-12 lg:px-12">
+              <div className="my-8 inline-block w-full max-w-7xl transform overflow-hidden rounded-2xl border-4 border-teal-700  bg-teal-500/90 px-2 py-6 text-left align-middle shadow-xl transition-all sm:px-6 sm:py-12 lg:px-12">
                 <Dialog.Title as="h3" className="text-center text-2xl font-bold leading-6 text-white">
                   Order Details
                 </Dialog.Title>

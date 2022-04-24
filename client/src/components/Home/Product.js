@@ -5,18 +5,12 @@ const Product = ({ product }) => {
   return (
     <div>
       <Link key={product._id} to={`/shop/${product._id}`} className="group">
-        <div className="w-full overflow-hidden bg-gradient-to-br from-black/20 to-[#f4f4f4] rounded-2xl max-h-56 sm:max-h-72 h-72">
-          <img
-            src={product.images.mainImage}
-            alt={product.imageAlt}
-            className="object-cover object-center w-full h-full group-hover:opacity-75"
-          />
+        <div className="h-72 max-h-56 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-black/20 to-[#f4f4f4] sm:max-h-72">
+          <img src={product.images.mainImage} alt={product.imageAlt} className="h-full w-full object-cover object-center group-hover:opacity-75" />
         </div>
       </Link>
-      <div className="space-y-3 font-bold text-center sm:text-left">
-        <h3 className="mt-2 text-sm bg-[#F4F4F4] inline-block py-1 px-3 rounded-lg	">
-          {product.category}
-        </h3>
+      <div className="space-y-3 text-center font-bold sm:text-left">
+        <h3 className="mt-2 inline-block rounded-lg bg-[#F4F4F4] py-1 px-3 text-sm	">{product.category}</h3>
         <h1 className="text-xl ">{product.title}</h1>
         <p className="text-2xl ">${product.price}</p>
       </div>

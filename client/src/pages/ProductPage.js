@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProductDetails from "../components/products/ProductDetails";
+import ProductDetails from "../components/admin/products/ProductDetails";
 
 export default function ProductPage() {
   const productId = useParams();
