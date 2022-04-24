@@ -20,7 +20,7 @@ const AdminPage = () => {
       <Route path="users" element={<Users />} />
       <Route path="userPage" element={<UserPage />} />
       <Route path="orders" element={<Orders />} />
-      <Route path="/categories" element={<Categories />} />
+      <Route path="categories" element={<Categories />} />
       <Route path="/categories/:id" element={<CategoryPage />} />
       <Route path="/products/:id" element={<ProductPage />} />
       <Route path="/categories/addnew" element={<NewCategory />} />

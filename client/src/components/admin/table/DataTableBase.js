@@ -16,7 +16,8 @@ const customStyles = {
       minHeight: "40px",
       paddingTop: "24px",
       paddingBottom: "24px",
-      backgroundColor: "#dededf",
+      backgroundColor: "#000",
+      color: "white",
     },
   },
   cells: {
