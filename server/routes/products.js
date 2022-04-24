@@ -16,10 +16,7 @@ const multerUploader = require("../middlewares/multer");
 const rolesChecker = require("../middlewares/rolesChecker");
 const router = express.Router();
 
-router
-  .route("/")
-  .get(getProducts)
-  .post(auth, rolesChecker(["ADMIN"]), multerUploader, createProduct);
+router.route("/").get(getProducts).post(auth, multerUploader, createProduct);
 
 router.route("/category/:id").get(getCategoryProducts);
 
