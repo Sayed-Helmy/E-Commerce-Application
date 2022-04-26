@@ -1,0 +1,68 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "proxy": "http://localhost:5000/",
+  "private": true,
+  "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
+    "@hookform/resolvers": "^2.8.8",
+    "@reduxjs/toolkit": "^1.8.1",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.11.0",
+    "ajv-errors": "^3.0.0",
+    "axios": "^0.26.1",
+    "classnames": "^2.3.1",
+    "flickity": "^3.0.0",
+    "flowbite": "^1.4.2",
+    "react": "^18.0.0",
+    "react-cookie": "^4.1.1",
+    "react-data-table-component": "^7.5.0",
+    "react-dom": "^18.0.0",
+    "react-hook-form": "^7.29.0",
+    "react-leaflet": "^4.0.0",
+    "react-redux": "^7.2.7",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "react-toastify": "^8.2.0",
+    "swiper": "^8.0.7",
+    "swr": "^1.2.2",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "autoprefixer": "^10.4.4",
+    "postcss": "^8.4.12",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.8",
+    "tailwindcss": "^3.0.23"
+  }
+}
