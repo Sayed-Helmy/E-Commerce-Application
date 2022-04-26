@@ -54,7 +54,7 @@ function Products() {
   return (
     <div className=" mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6 md:max-w-7xl lg:px-8">
       <Link
-        to="/admin"
+        to="/admin/products/addnew"
         className="float-right mb-4 bg-black px-6 py-3 text-white"
       >
         Add new
