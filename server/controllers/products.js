@@ -101,6 +101,7 @@ const getProducts = asyncWrapper(async (req, res) => {
 
 const deleteProduct = asyncWrapper(async (req, res) => {
   const id = req.params.id;
+  console.log(req.params.id);
   const product = await Product.findByIdAndDelete(id);
   if (!product) throw new NotFound("Product Not Found!");
   // const imagePath = path.join(process.cwd(), "public", product.image);

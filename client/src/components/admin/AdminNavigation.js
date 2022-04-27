@@ -4,16 +4,15 @@ import ProfileAvatar from "../layout/ProfileAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { userActions } from "../../store/userSlice";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "admin/dashboard", current: true },
-  { name: "brands", href: "#", current: false },
+  { name: "brands", href: "/", current: false },
   { name: "categories", href: "admin/categories", current: false },
   { name: "Products", href: "admin/products", current: false },
   { name: "orders", href: "admin/orders", current: false },
   { name: "Users", href: "admin/users", current: false },
-  { name: "statistics", href: "#", current: false },
 ];
 
 function classNames(...classes) {

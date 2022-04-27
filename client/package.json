@@ -14,10 +14,13 @@
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "axios": "^0.26.1",
+    "chart.js": "^3.7.1",
     "classnames": "^2.3.1",
+    "faker": "^6.6.6",
     "flickity": "^3.0.0",
     "flowbite": "^1.4.2",
     "react": "^18.0.0",
+    "react-chartjs-2": "^4.1.0",
     "react-cookie": "^4.1.1",
     "react-data-table-component": "^7.5.0",
     "react-dom": "^18.0.0",
@@ -57,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.2.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "autoprefixer": "^10.4.4",
