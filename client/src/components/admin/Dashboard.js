@@ -1,38 +1,35 @@
 import React from "react";
-import DataTableBase from "./table/DataTableBase";
-
-// documentation : https://react-data-table-component.netlify.app/
-
-const columns = [
-  {
-    name: "Title",
-    selector: (row) => row.title,
-    sortable: true,
-  },
-  {
-    name: "Year",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-];
-
-const data = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
+import { IncomeChart } from "./charts/IncomeChart";
+import { NewCustomersChart } from "./charts/NewCustomersChart";
+import { OrdersChart } from "./charts/OrdersChart";
+import { TodaysOrderChart } from "./charts/TodaysOrderChart";
+import { UserChart } from "./charts/UserChart";
 
 function Dashboard() {
   return (
-    <div className=" mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6 md:max-w-7xl lg:px-8">
-      <DataTableBase columns={columns} data={data} progressPending={false} selectableRows />
+    <div className=" mx-auto grid grid-cols-3 items-center gap-8 px-4 py-8 sm:px-6 md:max-w-7xl lg:px-8">
+      <div className="rounded-2xl bg-slate-100 p-8">
+        <h2 className="my-4 text-center text-lg font-bold">users data</h2>
+        <UserChart />
+      </div>
+      <div className="flex h-full flex-col justify-center rounded-2xl bg-slate-100 p-8">
+        <h2 className="my-4 text-center text-lg font-bold"> income data</h2>
+        <IncomeChart />
+      </div>
+      <div className="flex h-full flex-col justify-center rounded-2xl bg-slate-100 p-8">
+        <h2 className="my-4 text-center text-lg font-bold">
+          New Customers data
+        </h2>
+        <NewCustomersChart />
+      </div>
+      <div className="col-span-2 flex h-full flex-col justify-center rounded-2xl bg-green-100 p-8">
+        <h2 className="my-4 text-center text-lg font-bold">Orders data</h2>
+        <OrdersChart />
+      </div>
+      <div className="flex h-full flex-col justify-center rounded-2xl bg-green-100 p-8">
+        <h2 className="my-4 text-center text-lg font-bold">Todays Orders</h2>
+        <TodaysOrderChart />
+      </div>
     </div>
   );
 }
