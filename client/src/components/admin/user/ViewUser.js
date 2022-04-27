@@ -7,8 +7,8 @@ import AccountStatusDrop from "./AccountStatusDrop";
 import UserOrders from "./UserOrders";
 import UserInfo from "./UserInfo";
 
-export default function ViewUser() {
-  const user = useSelector((state) => state.user);
+export default function ViewUser({ user }) {
+  console.log(user);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [imageState, setImageState] = useState(null);
@@ -21,9 +21,13 @@ export default function ViewUser() {
     setIsLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      const result = await axios.patch("http://localhost:5000/api/v1/auth/updateUser", formData, {
-        withCredentials: true,
-      });
+      const result = await axios.patch(
+        "http://localhost:5000/api/v1/auth/updateUser",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       dispatch(userActions.setUser(result.data));
       setIsLoading(false);
       toast.success("Data Has Been Saved Successfuly!", { autoClose: 1000 });
@@ -39,16 +43,26 @@ export default function ViewUser() {
         {/* Photo */}
         <div className=" flex items-center justify-center">
           <div className="relative mb-4 flex items-center">
-            <img src="" type="file" id="cat-Image" alt="" name="mainImage" className="h-14 w-14 rounded-full border-2 border-gray-300 " />
+            <img
+              src={user.avatar}
+              type="file"
+              id="cat-Image"
+              alt=""
+              name="mainImage"
+              className="h-14 w-14 rounded-full border-2 border-gray-300 "
+            />
             <input type="file" className="absolute left-0 w-14 opacity-0 " />
           </div>
         </div>
         {/* ID */}
         <div className="flex items-center justify-center space-x-2 sm:space-x-4">
-          <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
-            ID
+          <label
+            htmlFor="cat-name"
+            className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white"
+          >
+            Name
           </label>
-          <p>123454657683557326457856</p>
+          <p>{user?.name}</p>
         </div>
         {/* Status */}
         <div className="mx-auto max-w-sm">
@@ -59,11 +73,11 @@ export default function ViewUser() {
           <div className="grid grid-cols-2 gap-4">
             {/* Left Side */}
             <div className="col-span-1 rounded-2xl border-2 py-10 px-3 md:px-4 xl:px-6">
-              <UserOrders />
+              {user && <UserOrders user={user} />}
             </div>
             {/* Right Side */}
             <div className="col-span-1 rounded-2xl border-2 py-10 px-3 md:px-4 xl:px-6">
-              <UserInfo />
+              {user && <UserInfo user={user} />}
             </div>
           </div>
         </div>
