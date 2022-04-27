@@ -1,10 +1,8 @@
-import React from 'react'
-import UserDetails from '../../components/admin/UserDetails'
+import React from "react";
+import ViewUser from "../../components/admin/user/ViewUser";
 
 const UserPage = () => {
-  return (
-    <><UserDetails /></>
-  )
-}
+  return <ViewUser />;
+};
 
-export default UserPage
+export default UserPage;
