@@ -22,6 +22,7 @@ const ProductSchema = new mongoose.Schema(
   {
     title: {
       type: String,
+      unique: true,
       required: [true, "Please Provide a Product Title!"],
     },
     description: {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/userSlice";
+import { toast } from "react-toastify";
 
 const schema = yup
   .object({
@@ -44,17 +45,19 @@ const Signup = () => {
           withCredentials: true,
         }
       );
+      console.log(user);
       dispatch(userActions.setUser(user.data));
       navigator("/");
     } catch (err) {
-      setError(err.response.data.msg);
+      toast.error(err.response.data.message, { autoClose: 1500 });
+      setError(err.response.data.message);
     }
   };
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+      <div className="flex min-h-full items-center justify-center py-14 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Create a new account
@@ -62,18 +65,18 @@ const Signup = () => {
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="rounded-md shadow-sm -space-y-px">
+            <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email" className="sr-only">
                   Name
                 </label>
                 <input
                   {...register("name")}
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="your name"
                   autoFocus
                 />
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.name?.message}
                 </p>
               </div>
@@ -83,10 +86,10 @@ const Signup = () => {
                 </label>
                 <input
                   {...register("email")}
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="Email address"
                 />
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.email?.message}
                 </p>
               </div>
@@ -97,11 +100,11 @@ const Signup = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="Password"
                 />
 
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.password?.message}
                 </p>
               </div>
@@ -112,11 +115,11 @@ const Signup = () => {
                 <input
                   {...register("passwordConfirmation")}
                   type="password"
-                  className=" rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                  className=" relative block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500  focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                   placeholder="confirm your password"
                 />
 
-                <p className="py-2 text-red-600 text-sm">
+                <p className="py-2 text-sm text-red-600">
                   {errors.passwordConfirmation?.message}
                 </p>
               </div>
@@ -124,11 +127,11 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               >
                 Sign up
               </button>
-              <p className="py-2 text-red-600 text-sm">{error && error}</p>
+              <p className="py-2 text-sm text-red-600">{error && error}</p>
             </div>
           </form>
         </div>

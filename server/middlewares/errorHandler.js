@@ -6,12 +6,12 @@ const errorHandler = (err, req, res, next) => {
     const [[key, value]] = Object.entries(err.keyValue);
     return res
       .status(400)
-      .json({ msg: `This ${key}: ${value} is already exist!` });
+      .json({ message: `This ${key}: ${value} is already exist!` });
   }
   if (err instanceof CustomError) {
-    return res.status(err.statusCode).json({ msg: err.message });
+    return res.status(err.statusCode).json({ message: err.message });
   }
-  return res.status(500).json(err.message);
+  return res.status(500).json({ message: err.message });
 };
 
 module.exports = errorHandler;

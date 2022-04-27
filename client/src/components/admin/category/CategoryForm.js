@@ -2,14 +2,6 @@ import axios from "axios";
 import React from "react";
 
 const CategoryForm = () => {
-  const category = {
-    _id: "625554689667e91cfd60ac7e",
-    name: "Headphones",
-    description: "Enjoy With our Headphones Category",
-    image: "/uploads/image-1649759336567.png",
-    featured: false,
-    order: 0,
-  };
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);

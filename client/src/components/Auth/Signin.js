@@ -47,7 +47,7 @@ const Signin = () => {
       dispatch(cartActions.setCart(user.data.cart));
       navigator(location.state?.from.pathname || "/");
     } catch (err) {
-      setError(err.response.data.msg);
+      setError(err.response.data.message);
     }
   };
 
