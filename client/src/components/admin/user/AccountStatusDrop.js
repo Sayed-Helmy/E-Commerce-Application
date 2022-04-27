@@ -2,7 +2,11 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-const people = [{ name: "Active" }, { name: "Deactivated" }, { name: "Suspended" }];
+const people = [
+  { name: "Active" },
+  { name: "Deactivated" },
+  { name: "Suspended" },
+];
 
 export default function OrderDropdown() {
   const [selected, setSelected] = useState(people[0]);
@@ -17,13 +21,32 @@ export default function OrderDropdown() {
               <SelectorIcon className="h-5 w-5 text-white" aria-hidden="true" />
             </span>
           </Listbox.Button>
-          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white  text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {people.map((person, personIdx) => (
-                <Listbox.Option key={personIdx} className={({ active }) => `relative cursor-default select-none py-2 pl-4 pr-4 ${active ? "bg-slate-100 text-black/90" : "text-gray-900"}`} value={person}>
+                <Listbox.Option
+                  key={personIdx}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-4 pr-4 ${
+                      active ? "bg-slate-100 text-black/90" : "text-gray-900"
+                    }`
+                  }
+                  value={person}
+                >
                   {({ selected }) => (
                     <>
-                      <span className={`block  ${selected ? "font-medium" : "font-normal"}`}>{person.name}</span>
+                      <span
+                        className={`block  ${
+                          selected ? "font-medium" : "font-normal"
+                        }`}
+                      >
+                        {person.name}
+                      </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 hidden pl-3 text-amber-600">
                           <CheckIcon className="h-5 w-5" aria-hidden="true" />

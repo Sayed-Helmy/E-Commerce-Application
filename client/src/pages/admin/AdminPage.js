@@ -19,7 +19,7 @@ const AdminPage = () => {
       <Route path="dashboard" element={<Dashboard />} />
       <Route path="products" element={<Products />} />
       <Route path="users" element={<Users />} />
-      <Route path="/userPage" element={<UserPage />} />
+      <Route path="userPage" element={<UserPage />} />
       <Route path="orders" element={<Orders />} />
       <Route path="categories" element={<Categories />} />
       <Route path="/categories/:id" element={<CategoryPage />} />
