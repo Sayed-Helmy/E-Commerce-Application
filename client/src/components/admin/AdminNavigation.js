@@ -7,12 +7,12 @@ import { userActions } from "../../store/userSlice";
 import { NavLink } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "admin/dashboard", current: true },
+  { name: "Dashboard", href: "/admin/dashboard", current: true },
   { name: "brands", href: "/", current: false },
-  { name: "categories", href: "admin/categories", current: false },
-  { name: "Products", href: "admin/products", current: false },
-  { name: "orders", href: "admin/orders", current: false },
-  { name: "Users", href: "admin/users", current: false },
+  { name: "categories", href: "/admin/categories", current: false },
+  { name: "Products", href: "/admin/products", current: false },
+  { name: "orders", href: "/admin/orders", current: false },
+  { name: "Users", href: "/admin/users", current: false },
 ];
 
 function classNames(...classes) {

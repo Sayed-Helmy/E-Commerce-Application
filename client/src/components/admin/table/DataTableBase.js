@@ -5,10 +5,10 @@ import { ArrowSmUpIcon } from "@heroicons/react/solid";
 const customStyles = {
   rows: {
     style: {
-      minHeight: "72px",
+      minHeight: "80px",
       paddingTop: "36px",
       paddingBottom: "36px",
-      height: "40px",
+      height: "100px",
     },
   },
   headCells: {
@@ -24,6 +24,7 @@ const customStyles = {
     style: {
       paddingLeft: "8px", // override the cell padding for data cells
       paddingRight: "8px",
+      // height: "40px",
     },
   },
 };
