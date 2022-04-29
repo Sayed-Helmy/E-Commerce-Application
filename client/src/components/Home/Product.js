@@ -10,9 +10,9 @@ const Product = ({ product }) => {
         </div>
       </Link>
       <div className="space-y-3 text-center font-bold sm:text-left">
-        <h3 className="mt-2 inline-block rounded-lg bg-[#F4F4F4] py-1 px-3 text-sm	">{product.category}</h3>
-        <h1 className="text-xl ">{product.title}</h1>
-        <p className="text-2xl ">${product.price}</p>
+        <p className="mt-2 inline-block rounded-lg bg-[#F4F4F4] py-1 px-3 text-sm	">{product.category}</p>
+        <p className="text-[1.4rem] ">{product.title}</p>
+        <p className="text-lg ">${product.price}</p>
       </div>
     </div>
   );
