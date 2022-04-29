@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getUserOrders } from "../../../helpers/dataModule";
 import ProductRow from "./ProductRow";
 import UserDate from "./UserDate";
+import OrderHistory from "./ordersHistory";
 
 const ManageOrder = () => {
   const user = useSelector((state) => state.user);
@@ -14,9 +15,14 @@ const ManageOrder = () => {
     <>
       {orders?.length > 0 ? (
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 md:max-w-7xl lg:px-8 ">
-          <div className="item-start flex flex-col justify-start space-y-2 ">
-            <h1 className="text-3xl font-semibold leading-7 text-gray-800 lg:text-4xl  lg:leading-9">Order Summary</h1>
-            <p className="text-base font-medium leading-6 text-gray-600">{new Date(orders[0]?.createdAt).toLocaleString()}</p>
+          <div className="flex items-center justify-between">
+            <div className="item-start flex flex-col justify-start space-y-2 ">
+              <h1 className="text-3xl font-semibold leading-7 text-gray-800 lg:text-4xl  lg:leading-9">Order Summary</h1>
+              <p className="text-base font-medium leading-6 text-gray-600">{new Date(orders[0]?.createdAt).toLocaleString()}</p>
+            </div>
+            <div>
+              <OrderHistory />
+            </div>
           </div>
           <div className="jusitfy-center mt-10 flex w-full flex-col items-stretch  space-y-4 md:space-y-6 xl:flex-row xl:space-x-8 xl:space-y-0">
             <div className="flex w-full flex-col items-start justify-start space-y-4 md:space-y-6 xl:space-y-8">
