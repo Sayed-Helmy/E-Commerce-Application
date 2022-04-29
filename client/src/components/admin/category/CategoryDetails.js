@@ -111,7 +111,7 @@ const CategoryDetails = () => {
                   value={category?.featured}
                   id="cat-featured"
                   name="featured"
-                  className="rounded-full ring-2"
+                  className="ring-2"
                 />
               </div>
               {/* order */}
@@ -134,7 +134,7 @@ const CategoryDetails = () => {
               <div className="flex justify-end pt-5">
                 <button
                   type="submit"
-                  className=" w-32 cursor-pointer rounded-md border border-transparent bg-green-600 px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400"
+                  className=" w-32 cursor-pointer rounded-md border border-transparent bg-black px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400"
                 >
                   Save
                 </button>

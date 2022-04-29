@@ -15,12 +15,22 @@ const columns = [
     // selector: (row) => row.price,
     cell: (row, index, column, id) => (
       <>
-        <div className=" flex flex-row gap-2 text-xs font-semibold tracking-wider">
-          <div className="mr-2 rounded-lg bg-blue-200 px-4 py-2 ">
-            <Link to="/">change status</Link>
+        <div className=" flex flex-col gap-1 text-xs font-semibold tracking-wider md:flex-row">
+          <div className="m-2">
+            <Link
+              to="/"
+              className="rounded-lg border border-black/50 bg-black px-4 py-2 text-white "
+            >
+              change status
+            </Link>
           </div>
-          <div className="mr-2 rounded-lg bg-red-200 px-4 py-2">
-            <Link to="/">delete</Link>
+          <div className="m-2">
+            <Link
+              to="/"
+              className="rounded-lg border border-black/50 bg-white px-4 py-2 text-black"
+            >
+              delete
+            </Link>
           </div>
         </div>
       </>
