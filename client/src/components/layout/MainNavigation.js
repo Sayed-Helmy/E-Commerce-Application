@@ -7,6 +7,8 @@ import { userActions } from "../../store/userSlice";
 import axios from "axios";
 import ProfileAvatar from "./ProfileAvatar";
 import SliderCart from "../Cart/SliderCart";
+import SearchItem from "../products/SearchItem";
+
 
 const navigation = {
   pages: [
@@ -18,6 +20,51 @@ const navigation = {
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(" ");
 // }
+
+const products = [
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+  {
+  title: 'Beats Studio3 Wireless headphones',
+  price: 310,
+  images: {
+    mainImage: '/uploads/mainImage-1649764364906.png',
+  },
+},
+]
 
 export default function MainNavigation() {
   const [open, setOpen] = useState(false);
@@ -87,7 +134,7 @@ export default function MainNavigation() {
             <div className="flex items-center h-16 ">
               <button type="button" className="p-2 text-gray-400 bg-white rounded-md lg:hidden" onClick={() => setOpen(true)}>
                 <span className="sr-only">Open menu</span>
-                <MenuIcon className="w-6 h-6" aria-hidden="true" />
+                <MenuIcon className="w-6 h-6" aria-hidden="true"/>
               </button>
 
               {/* Logo */}
@@ -117,9 +164,14 @@ export default function MainNavigation() {
                 {/* Search */}
                 <form action="" className="absolute w-auto overflow-hidden border-2 rounded-lg inset-x-1/4 top-28 sm:static sm:ml-6 sm:flex sm:flex-1 sm:flex-row-reverse sm:items-center">
                   <SearchIcon className="hidden w-5 h-5 mx-3 sm:block" aria-hidden="true" />
-                  <input className="py-1 mx-3 border-0 outline-0 sm:w-full" type="" placeholder="What are you looking for?" />
+                  <input className="py-1 mx-3 border-0 outline-0 sm:w-full relative shoot" type="text" placeholder="What are you looking for?"/>
                   <span className="sr-only">Search</span>
                 </form>
+                <div className="border-2 outline-0 w-2/5 bg-white max-h-80 absolute left-1/3 top-24 overflow-auto z-50 hidden">
+                  {
+                    products && products.map((product, i) => (<SearchItem product = {product} key={product.price+i} />))
+                  }
+                </div>
 
                 {!user ? (
                   <div className="hidden md:flex md:items-center md:justify-end md:space-x-6">
