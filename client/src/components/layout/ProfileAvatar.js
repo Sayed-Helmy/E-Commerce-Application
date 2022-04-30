@@ -8,7 +8,6 @@ function classNames(...classes) {
 
 const ProfileAvatar = ({ logoutHandler, user }) => {
   const [open, setOpen] = useState(false);
-
   return (
     <div>
       <Menu as="div" className="relative ml-3">
@@ -58,6 +57,22 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
                 </Link>
               )}
             </Menu.Item>
+            {/* fix this ya sayed in backend */}
+            {user?.roles[0] === "USER" && (
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    to="/admin"
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700"
+                    )}
+                  >
+                    Dashboard
+                  </Link>
+                )}
+              </Menu.Item>
+            )}
             <Menu.Item>
               {({ active }) => (
                 <button
