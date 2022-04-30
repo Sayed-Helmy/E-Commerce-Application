@@ -78,17 +78,7 @@ function App() {
           <Route path="/shop/:id" element={<ProductPage />} />
           <Route
             path="/SigninPage"
-            element={
-              user ? (
-                <Navigate
-                  to={location.state?.from.pathname}
-                  replace
-                  state={{ from: location }}
-                />
-              ) : (
-                <SigninPage />
-              )
-            }
+            element={user ? <Navigate to="/" replace /> : <SigninPage />}
           />
           <Route
             path="/SignupPage"

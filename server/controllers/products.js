@@ -18,6 +18,28 @@ const createProduct = asyncWrapper(async (req, res) => {
   res.status(201).json(product);
 });
 
+const searchProducts = asyncWrapper(async (req, res) => {
+  const { keyword } = req.params;
+  const products = await Product.aggregate([
+    {
+      $search: {
+        autocomplete: {
+          query: keyword,
+          path: "title",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        title: 1,
+        image: "$images.mainImage",
+      },
+    },
+  ]);
+  res.status(200).json(products);
+});
+
 const getProducts = asyncWrapper(async (req, res) => {
   const { category, isFeatured, title, price, limit, page, id } = req.query;
   const pipeLine = [
@@ -171,4 +193,5 @@ module.exports = {
   getCategoryProducts,
   createReview,
   deleteReview,
+  searchProducts,
 };

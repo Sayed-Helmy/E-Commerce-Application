@@ -8,6 +8,7 @@ const {
   getCategoryProducts,
   createReview,
   deleteReview,
+  searchProducts,
 } = require("../controllers/products");
 
 const auth = require("../middlewares/authentication");
@@ -25,6 +26,8 @@ router
   .get(getSingleProduct)
   .put(auth, rolesChecker(["ADMIN"]), multerUploader, updateProduct)
   .delete(auth, rolesChecker(["ADMIN"]), deleteProduct);
+
+router.route("/search/:keyword").get(searchProducts);
 
 router
   .route("/reviews/:id")
