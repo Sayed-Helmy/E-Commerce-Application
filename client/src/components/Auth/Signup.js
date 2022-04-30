@@ -45,8 +45,8 @@ const Signup = () => {
           withCredentials: true,
         }
       );
-      console.log(user);
       dispatch(userActions.setUser(user.data));
+      toast.success("user created successfully", { autoClose: 1500 });
       navigator("/");
     } catch (err) {
       toast.error(err.response.data.message, { autoClose: 1500 });
