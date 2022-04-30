@@ -15,7 +15,6 @@ export default function SliderCart({ open, setOpen }) {
     dispatch(updateUserCart(product, 0));
   };
   const navigator = useNavigate();
-  console.log(products);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog

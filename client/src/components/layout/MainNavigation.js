@@ -43,6 +43,7 @@ export default function MainNavigation() {
   };
 
   const searchHandler = async (e) => {
+    console.log(e.target.value);
     if (e.target.value === "") {
       setShowResult(false);
       return setProducts([]);
@@ -184,42 +185,44 @@ export default function MainNavigation() {
                 </ul>
               </div>
 
-              <div className="flex w-full items-center justify-end space-x-4">
+              <div className="flex w-full items-center justify-end">
                 {/* Search */}
-                <form
-                  action=""
-                  className="absolute inset-x-1/4 top-28 w-auto overflow-hidden rounded-lg border-2 sm:static sm:ml-6 sm:flex sm:flex-1 sm:flex-row-reverse sm:items-center"
-                >
-                  <SearchIcon
-                    className="mx-3 hidden h-5 w-5 sm:block"
-                    aria-hidden="true"
-                  />
-                  <input
-                    className="shoot relative mx-3 border-0 py-1 outline-0 sm:w-full"
-                    onChange={searchHandler}
-                    type="text"
-                    placeholder="What are you looking for?"
-                  />
-                  <span className="sr-only">Search</span>
-                </form>
-                <div
-                  className={`absolute left-1/3 top-24 ${
-                    showResult ? "" : "hidden"
-                  } z-50 max-h-80 w-2/5 overflow-auto border-2 bg-white outline-0`}
-                >
-                  {products.length > 0 ? (
-                    products.map((product, i) => (
-                      <SearchItem
-                        product={product}
-                        key={product._id + i}
-                        showResult={setShowResult}
-                      />
-                    ))
-                  ) : (
-                    <p className="flex h-10 justify-center align-middle">
-                      There Is No Products Matching this keyword!
-                    </p>
-                  )}
+                <div className="relative hidden w-full sm:block">
+                  <form
+                    action=""
+                    className="absolute inset-x-1/4 top-28 w-auto overflow-hidden rounded-lg border-2 sm:static sm:ml-6 sm:flex sm:flex-1 sm:flex-row-reverse sm:items-center"
+                  >
+                    <SearchIcon
+                      className="mx-3 hidden h-5 w-5 sm:block"
+                      aria-hidden="true"
+                    />
+                    <input
+                      className="shoot relative mx-3 border-0 py-1 outline-0 focus:ring-0 sm:w-full"
+                      onChange={searchHandler}
+                      type="text"
+                      placeholder="What are you looking for?"
+                    />
+                    <span className="sr-only">Search</span>
+                  </form>
+                  <div
+                    className={`absolute  top-10 left-7 mx-auto  w-[96%] rounded-lg pt-4 ${
+                      showResult ? "" : "hidden"
+                    } z-50 max-h-80  overflow-auto border-2 bg-white outline-0`}
+                  >
+                    {products.length > 0 ? (
+                      products.map((product, i) => (
+                        <SearchItem
+                          product={product}
+                          key={product._id + i}
+                          showResult={setShowResult}
+                        />
+                      ))
+                    ) : (
+                      <p className="flex h-10 justify-center align-middle">
+                        There Is No Products Matching this keyword!
+                      </p>
+                    )}
+                  </div>
                 </div>
                 {!user ? (
                   <div className="hidden md:flex md:items-center md:justify-end md:space-x-6">

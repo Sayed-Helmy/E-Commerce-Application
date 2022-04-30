@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SearchItem = ({ product, showResult }) => {
-  console.log(product);
   return (
     <Link onClick={() => showResult(false)} to={`/shop/${product._id}`}>
       <div className="mb-2 flex cursor-pointer items-center justify-between hover:bg-gray-200">
