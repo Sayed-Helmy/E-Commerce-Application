@@ -7,7 +7,6 @@ const ChangePassword = () => {
     try {
       e.preventDefault();
       const formdata = Object.fromEntries([...new FormData(e.currentTarget)]);
-      console.log(formdata);
       await axios.post(
         "http://localhost:5000/api/v1/auth/changePassword",
         formdata,

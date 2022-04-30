@@ -23,6 +23,8 @@ import Faqs from "./pages/Faqs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ManageOrder from "./components/Profile/ManageOrder/ManageOrder";
+import ForgetPass from "./components/auth/ForgetPass";
+import ResetPassword from "./components/auth/ResetPassword";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -76,17 +78,7 @@ function App() {
           <Route path="/shop/:id" element={<ProductPage />} />
           <Route
             path="/SigninPage"
-            element={
-              user ? (
-                <Navigate
-                  to={location.state?.from.pathname}
-                  replace
-                  state={{ from: location }}
-                />
-              ) : (
-                <SigninPage />
-              )
-            }
+            element={user ? <Navigate to="/" replace /> : <SigninPage />}
           />
           <Route
             path="/SignupPage"
@@ -108,6 +100,8 @@ function App() {
               )
             }
           />
+          <Route path="/forget-password" element={<ForgetPass />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route
             path="/manage-order"
             element={

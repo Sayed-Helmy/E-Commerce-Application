@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Categories from "../../components/admin/category/Categories";
 import Dashboard from "../../components/admin/Dashboard";
-import Orders from "../../components/admin/Orders";
+import Orders from "../../components/admin/Orders/Orders";
 import Products from "../../components/admin/products/Products";
 import Users from "../../components/admin/Users";
 import UserPage from "./UserPage";

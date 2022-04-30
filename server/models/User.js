@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -31,6 +32,11 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       default: ["USER"],
     },
+    status: {
+      type: String,
+      enum: ["ACTIVE", "SUSPENDED", "BANED"],
+      default: "ACTIVE",
+    },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
     address: {
       street: {
@@ -47,6 +53,14 @@ const UserSchema = new mongoose.Schema(
       },
       phone: {
         type: String,
+      },
+      resetToken: {
+        type: String,
+        default: undefined,
+      },
+      resetTokenExp: {
+        type: Date,
+        default: undefined,
       },
     },
     cart: [
@@ -97,6 +111,15 @@ UserSchema.methods.createJwt = function () {
       expiresIn: process.env.Expire_Date,
     }
   );
+};
+UserSchema.methods.getResetToken = function () {
+  const resetPassToken = crypto.randomBytes(20).toString("hex");
+  this.resetToken = crypto
+    .createHash("sha256")
+    .update(resetPassToken)
+    .digest("hex");
+  this.resetTokenExp = Date.now() + 1000 * 10 * 60;
+  return resetPassToken;
 };
 
 module.exports = mongoose.model("User", UserSchema);

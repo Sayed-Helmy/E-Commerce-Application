@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { userActions } from "../../store/userSlice";
 import { useState } from "react";
 import { cartActions } from "../../store/cartSlice";
@@ -95,12 +95,12 @@ const Signin = () => {
 
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <a
-                  href="/"
+                <Link
+                  to="/forget-password"
                   className="font-medium text-black/50 hover:text-black/60"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
