@@ -58,7 +58,7 @@ const ProfileAvatar = ({ logoutHandler, user }) => {
               )}
             </Menu.Item>
             {/* fix this ya sayed in backend */}
-            {user?.roles[0] === "USER" && (
+            {user?.roles.includes("ADMIN") && (
               <Menu.Item>
                 {({ active }) => (
                   <Link
