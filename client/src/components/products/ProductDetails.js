@@ -166,7 +166,7 @@ const ProductDetails = ({ product, user }) => {
                   Add to Cart
                 </button>
                 <button
-                  className="border border-black bg-white text-black hover:bg-gray-100  hover:text-black"
+                  className="rounded-lg border border-black bg-white text-black hover:bg-gray-100  hover:text-black"
                   onClick={() => {
                     addToCartHandler();
                     navigator("/checkout");
