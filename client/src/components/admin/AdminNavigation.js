@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { userActions } from "../../store/userSlice";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { adminActions } from "../../store/adminSlice";
 
 const navigation = [
   { name: "Dashboard", href: "/admin/dashboard", current: true },
@@ -28,6 +30,18 @@ function AdminNavigation() {
     });
     dispatch(userActions.setUser(null));
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/v1/users", {
+        withCredentials: true,
+      })
+      .then((res) => dispatch(adminActions.setUsers(res.data)));
+    axios
+      .get("http://localhost:5000/api/v1/orders/admin", {
+        withCredentials: true,
+      })
+      .then((res) => dispatch(adminActions.setOrders(res.data)));
+  }, [dispatch]);
   return (
     <>
       <div className="min-h-full">

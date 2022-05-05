@@ -3,6 +3,7 @@ const asyncWrapper = require("../middlewares/asyncwrapper");
 const User = require("../models/User");
 const path = require("path");
 const { unlink } = require("fs/promises");
+const sendMail = require("../helpers/sendMail");
 
 const createUser = asyncWrapper(async (req, res) => {
   const user = await User.create(req.body);
@@ -49,6 +50,7 @@ const updateCart = asyncWrapper(async (req, res) => {
   );
   res.status(201).json({ cart: user.cart });
 });
+
 const updateUser = asyncWrapper(async (req, res) => {
   const userId = req.payload._id;
   const { name, country, city, state, phone, avatar, street } = req.body;
@@ -71,6 +73,22 @@ const updateUser = asyncWrapper(async (req, res) => {
   res.status(201).json(newUser);
 });
 
+const forgotPassword = asyncWrapper(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) throw new NotFound("No User Exist With This Email!");
+  const resetToken = await user.getResetToken();
+  await sendMail(
+    "s.helmy50@gmail.com",
+    "Reset Password Email Master Shop",
+    "paswordReset",
+    {
+      url: "www.google.com",
+    }
+  );
+  res.status(200).json({ resetToken });
+});
+
 const logout = asyncWrapper(async (req, res) => {
   res.cookie("token", "", { maxAge: 1 });
   res.json({ msg: "logging out" });
@@ -83,4 +101,5 @@ module.exports = {
   changePassword,
   updateCart,
   updateUser,
+  forgotPassword,
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -49,7 +50,7 @@ export const options = {
 
 const labels = ["1", "2", "3", "4", "5", "6", "7"];
 
-export const data = {
+const data = {
   labels,
   datasets: [
     {
@@ -64,5 +65,7 @@ export const data = {
 };
 
 export function IncomeChart() {
+  const orders = useSelector((state) => state.admin.orders);
+
   return <Line options={options} data={data} />;
 }
