@@ -18,6 +18,7 @@ const categoriesRouter = require("./routes/categories");
 const checkoutRouter = require("./routes/checkout");
 const couponRouter = require("./routes/coupons");
 const ordersRouter = require("./routes/orders");
+const usersRouter = require("./routes/users");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,6 +37,8 @@ app.use(`${apiRoute}/products`, productsRouter);
 app.use(`${apiRoute}/checkout`, checkoutRouter);
 app.use(`${apiRoute}/coupons`, couponRouter);
 app.use(`${apiRoute}/orders`, ordersRouter);
+app.use(`${apiRoute}/users`, usersRouter);
+
 // serve the Static Files.
 app.use(express.static("public"));
 app.get("/success", async (req, res) => {
@@ -46,7 +49,6 @@ app.get("/cancel", async (req, res) => {
   const path = resolve(__dirname + "/public" + "/cancel.html");
   res.sendFile(path);
 });
-
 app.use(errorHandler);
 app.use(notFound);
 

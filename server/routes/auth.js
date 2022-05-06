@@ -7,6 +7,7 @@ const {
   getUser,
   updateCart,
   updateUser,
+  forgotPassword,
 } = require("../controllers/auth");
 const validator = require("../middlewares/validator");
 const userValidator = require("../helpers/validation/userValidator");
@@ -19,6 +20,7 @@ router.post("/changePassword", auth, changePassword);
 router.get("/validate", auth);
 router.route("/signin").post(login);
 router.route("/logout").get(logout);
+router.route("/forgotpassword").post(forgotPassword);
 router.put("/updateCart", auth, updateCart);
 router.patch("/updateUser", auth, multerUploader, updateUser);
 
