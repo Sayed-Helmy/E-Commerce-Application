@@ -1,62 +1,50 @@
 import React from "react";
+import axios from "axios";
+
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import CategoryCard from "../../Home/CategoryCard";
 
-const CategoryDetails = () => {
-   const categories = useSelector((state) => state.products.categories);
-   const catId = useParams().id;
-   const category = categories.find((i) => i._id === catId);
-   console.log(category);
+const BrandDetails = () => {
+   const submitHandler = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      try {
+         const brand = await axios.post("http://localhost:5000/api/v1/brands", formData, {
+            withCredentials: true,
+         });
+         console.log(brand);
+      } catch (error) {
+         console.log(error.response.data);
+      }
+   };
+
    return (
-      category && (
-         <>
-            <div className="grid grid-cols-2">
-               {/* Edit */}
-               <div className="col-span-2 mx-auto w-fit space-y-7 py-10 sm:mt-8 lg:col-span-1">
-                  <div className="flex items-center justify-between">
-                     <h4 className="text-center text-2xl font-bold  sm:text-3xl  md:text-left">
-                        <span className="text-gray-400">Brand : </span>
-                        Apple
-                     </h4>
-                     <a href="/" className="flex h-12 w-12 items-center justify-center rounded-full border-2 bg-black p-2 text-white">
-                        <span>+</span>
-                     </a>
-                  </div>
-                  <form className="space-y-5 rounded-2xl border-2 py-10 px-1 sm:px-10">
-                     {/* _id */}
-                     <div className="flex items-center space-x-2 sm:space-x-4">
-                        <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
-                           ID
-                        </label>
-                        <p>brand - id</p>
-                     </div>
-                     {/* name */}
-                     <div className="flex items-center space-x-2 sm:space-x-4">
-                        <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
-                           Name
-                        </label>
-                        <input type="text" placeholder={category?.name} id="cat-name" name="name" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
-                     </div>
-                     {/* description */}
-                     <div className="flex items-center space-x-2 sm:space-x-4">
-                        <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
-                           Description
-                        </label>
-                        <textarea id="" name="description" rows="2" cols="20" defaultValue={category?.description} className=" w-60  rounded-md focus:border-black/50 focus:ring-black/50"></textarea>
-                     </div>
-                     {/* button */}
-                     <div className="flex justify-end pt-5">
-                        <button type="submit" className=" w-32 cursor-pointer rounded-md border border-transparent bg-black px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
-                           Save
-                        </button>
-                     </div>
-                  </form>
-               </div>
+      <div className="container mx-auto max-w-7xl py-10 sm:mt-12 ">
+         <h3 className="mb-7 text-3xl font-bold">Brand : name</h3>
+         <form onSubmit={submitHandler} className="flex flex-col gap-4 space-y-5 rounded-2xl border-2 py-10 px-3 sm:px-10">
+            {/* name */}
+            <div className="flex items-center space-x-2 sm:space-x-4">
+               <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
+                  Name
+               </label>
+               <input type="text" placeholder={"brand name"} id="cat-name" name="name" className="focus:ring-none w-56 border-x-0 border-t-0 border-b-4 border-b-gray-400	outline-none  focus:border-b-green-400 focus:ring-0" />
             </div>
-         </>
-      )
+            {/* description */}
+            <div className="flex items-center space-x-2 sm:space-x-4">
+               <label htmlFor="cat-name" className="w-24 whitespace-nowrap rounded-l-lg bg-black/60 py-1 px-3 text-white">
+                  Description
+               </label>
+               <textarea id="" name="description" rows="2" cols="20" defaultValue={"Description"} className=" w-60  rounded-md focus:border-black/50 focus:ring-black/50"></textarea>
+            </div>
+
+            <div className="flex justify-end pt-5">
+               <button type="submit" className=" w-32 cursor-pointer rounded-md border border-transparent bg-black px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-black/50 focus:ring-offset-2 disabled:bg-gray-400">
+                  Save
+               </button>
+            </div>
+         </form>
+      </div>
    );
 };
 
-export default CategoryDetails;
+export default BrandDetails;

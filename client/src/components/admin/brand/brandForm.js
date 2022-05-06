@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-const CategoryForm = () => {
+const BrandForm = () => {
    const submitHandler = async (e) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
@@ -41,4 +41,4 @@ const CategoryForm = () => {
    );
 };
 
-export default CategoryForm;
+export default BrandForm;

@@ -27,7 +27,7 @@ function Products() {
             <>
                <div className="flex  flex-col gap-1  text-xs font-semibold tracking-wider ">
                   <div className="p-1 lg:mt-2">
-                     <Link to={`/admin/categories/${row._id}`} className="rounded-md border border-black/50 bg-black px-4 py-2 text-white">
+                     <Link to={`/admin/brands/${row._id}`} className="rounded-md border border-black/50 bg-black px-4 py-2 text-white">
                         update
                      </Link>
                   </div>
