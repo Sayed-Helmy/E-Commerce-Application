@@ -31,7 +31,7 @@ The website also have an admin dashboard for a wide control on users and the web
 To run this project, simply install it locally using NPM:
 
 ```
-$ cd ../E-Commerce-Application/client
+$ cd ../E-Commerce-Application
 $ npm run build
 $ npm start
 ```

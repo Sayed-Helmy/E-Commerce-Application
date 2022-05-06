@@ -1,7 +1,7 @@
 import React from "react";
 import BrandForm from "../../../components/admin/brand/brandForm";
 
-const NewCategory = () => {
+const NewBrand = () => {
    return (
       <div>
          <BrandForm />
@@ -9,4 +9,4 @@ const NewCategory = () => {
    );
 };
 
-export default NewCategory;
+export default NewBrand;

@@ -1,7 +1,7 @@
 import React from "react";
 import BrandDetails from "../../../components/admin/brand/brandDetails";
 
-const CategoryPage = () => {
+const BrandPage = () => {
    return (
       <div>
          <BrandDetails />
@@ -9,4 +9,4 @@ const CategoryPage = () => {
    );
 };
 
-export default CategoryPage;
+export default BrandPage;
