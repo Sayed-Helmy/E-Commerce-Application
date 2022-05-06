@@ -36,7 +36,7 @@ export const data = {
   datasets: [
     {
       label: "pending",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      data: [123],
       backgroundColor: "#64748b",
     },
     {
