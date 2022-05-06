@@ -2,7 +2,8 @@ import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import OrdersProductRow from "./OrdersProductRow";
 
-export default function OrdersProductsDisclosure() {
+export default function OrdersProductsDisclosure({ order }) {
+  console.log(order);
   return (
     <div className="w-full">
       <div className="">
@@ -20,7 +21,9 @@ export default function OrdersProductsDisclosure() {
               <Disclosure.Panel className=" space-y-2 pt-4 pb-2 text-sm text-black">
                 <div className=" w-full space-y-4">
                   <div>
-                    <OrdersProductRow />
+                    {order?.products.map((product) => (
+                      <OrdersProductRow product={product} />
+                    ))}
                   </div>
                 </div>
               </Disclosure.Panel>

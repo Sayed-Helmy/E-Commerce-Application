@@ -1,7 +1,7 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 
-export default function OrdersPriceDisclosure() {
+export default function OrdersPriceDisclosure({ order }) {
   return (
     <div className="">
       <div className="">
@@ -21,19 +21,19 @@ export default function OrdersPriceDisclosure() {
                   <p className="w-28 whitespace-nowrap px-3 font-bold ">
                     Total
                   </p>
-                  <p>$310</p>
+                  <p>${order.totalPrice}</p>
                 </div>
                 <div className="flex">
                   <p className="w-28 whitespace-nowrap px-3	font-bold">
                     Discount
                   </p>
-                  <p>$30</p>
+                  <p>${order.amountDiscount}</p>
                 </div>
                 <div className="flex">
                   <p className="w-28 whitespace-nowrap px-3	font-bold">
                     Subtotal
                   </p>
-                  <p>$280</p>
+                  <p>${order.priceSubtotal}</p>
                 </div>
               </Disclosure.Panel>
             </>
