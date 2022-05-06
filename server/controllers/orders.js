@@ -12,8 +12,38 @@ const getOrders = asyncWrapper(async (req, res) => {
 
 const getAllOrders = asyncWrapper(async (req, res) => {
   const { date } = req.query;
-  console.log(date);
-  const pipeLine = [{ $sort: { createdAt: -1 } }];
+  const pipeLine = [
+    {
+      $lookup: {
+        from: "products",
+        localField: "products.productId",
+        foreignField: "_id",
+        as: "productsDocuments",
+      },
+    },
+    {
+      $addFields: {
+        products: {
+          $map: {
+            input: { $zip: { inputs: ["$products", "$productsDocuments"] } },
+            in: { $mergeObjects: "$$this" },
+          },
+        },
+      },
+    },
+    { $unset: "productsDocuments" },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+        pipeline: [{ $project: { name: 1, email: 1 } }],
+      },
+    },
+    { $unwind: "$user" },
+    { $sort: { createdAt: -1 } },
+  ];
   if (date)
     pipeLine.unshift({
       $match: {
