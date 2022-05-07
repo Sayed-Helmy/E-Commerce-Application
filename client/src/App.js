@@ -1,8 +1,8 @@
 import Layout from "./components/layout/Layout";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-// import SigninPage from "./pages/SigninPage";
-// import SignupPage from "./pages/SignupPage";
+import SigninPage from "./pages/SigninPage";
+import SignupPage from "./pages/SignupPage";
 import NotFound from "./pages/NotFound";
 import ProductPage from "./pages/ProductPage";
 import ContactUs from "./pages/ContactUs";
@@ -23,8 +23,8 @@ import Faqs from "./pages/Faqs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ManageOrder from "./components/Profile/ManageOrder/ManageOrder";
-// import ForgetPass from "./components/auth/ForgetPass";
-// import ResetPassword from "./components/auth/ResetPassword";
+import ForgetPass from "./components/auth/ForgetPass";
+import ResetPassword from "./components/auth/ResetPassword";
 import NotAuth from "./pages/NotAuth";
 
 function App() {
@@ -77,11 +77,11 @@ function App() {
             }
           />
           <Route path="/shop/:id" element={<ProductPage />} />
-          {/* <Route
+          <Route
             path="/SigninPage"
             element={user ? <Navigate to="/" replace /> : <SigninPage />}
-          /> */}
-          {/* <Route
+          />
+          <Route
             path="/SignupPage"
             element={
               user ? (
@@ -90,7 +90,7 @@ function App() {
                 <SignupPage />
               )
             }
-          /> */}
+          />
           <Route
             path="/profile"
             element={
@@ -101,8 +101,8 @@ function App() {
               )
             }
           />
-          {/* <Route path="/forget-password" element={<ForgetPass />} />
-          <Route path="/reset-password" element={<ResetPassword />} /> */}
+          <Route path="/forget-password" element={<ForgetPass />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route
             path="/manage-order"
             element={
