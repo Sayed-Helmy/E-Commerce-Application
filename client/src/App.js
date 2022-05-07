@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageOrder from "./components/Profile/ManageOrder/ManageOrder";
 import ForgetPass from "./components/auth/ForgetPass";
 import ResetPassword from "./components/auth/ResetPassword";
+import NotAuth from "./pages/NotAuth";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -113,6 +114,7 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />
+          <Route path="/notauth" element={<NotAuth />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Canceled />} />
           {/* admin routers */}
