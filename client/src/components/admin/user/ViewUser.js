@@ -1,8 +1,4 @@
-import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { userActions } from "../../../store/userSlice";
+import { useSelector } from "react-redux";
 import AccountStatusDrop from "./AccountStatusDrop";
 import UserOrders from "./UserOrders";
 import UserInfo from "./UserInfo";

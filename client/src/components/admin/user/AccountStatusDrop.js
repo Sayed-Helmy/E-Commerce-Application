@@ -1,10 +1,9 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { userActions } from "../../../store/userSlice";
 import { adminActions } from "../../../store/adminSlice";
 
 const people = [{ name: "ACTIVE" }, { name: "BANED" }, { name: "SUSPENDED" }];
