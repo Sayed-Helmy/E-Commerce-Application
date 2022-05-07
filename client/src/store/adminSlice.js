@@ -15,6 +15,12 @@ const adminSlice = createSlice({
     setOrders(state, action) {
       state.orders = action.payload;
     },
+    updateUser(state, action) {
+      const index = state.users.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      state.users[index] = action.payload;
+    },
   },
 });
 

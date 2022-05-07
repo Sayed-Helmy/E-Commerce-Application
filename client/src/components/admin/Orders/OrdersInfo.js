@@ -31,7 +31,17 @@ const OrdersInfo = ({ order }) => {
               Status
             </p>
             <div>
-              <OrderDropdown status={order.status} />
+              <OrderDropdown
+                status={order.status}
+                options={[
+                  { name: "Pending" },
+                  { name: "in Review" },
+                  { name: "in progress" },
+                  { name: "canceled" },
+                  { name: "on the way" },
+                  { name: "deliverd" },
+                ]}
+              />
             </div>
           </div>
           {/* Pay Status */}
@@ -39,9 +49,7 @@ const OrdersInfo = ({ order }) => {
             <p className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white	">
               Pay Status
             </p>
-            <div>
-              <OrderDropdown status={order.status} />
-            </div>
+            <div>{order.paymentStatus}</div>
           </div>
           {/*  Price */}
           <div className="flex items-center space-x-2 text-sm text-white sm:space-x-5 sm:text-base">
@@ -59,7 +67,7 @@ const OrdersInfo = ({ order }) => {
               Carrier
             </p>
             <div>
-              <OrderDropdown />
+              <OrderDropdown options={[{ name: "DHL" }, { name: "Armex" }]} />
             </div>
           </div>
           {/* Address and Tracking */}

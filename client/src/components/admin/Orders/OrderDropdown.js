@@ -2,11 +2,9 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-const people = [{ name: "option 1" }, { name: "option 2" }];
-
-export default function OrderDropdown() {
+export default function OrderDropdown({ options }) {
+  const people = options;
   const [selected, setSelected] = useState(people[0]);
-
   return (
     <div className="w-full">
       <Listbox value={selected} onChange={setSelected}>
