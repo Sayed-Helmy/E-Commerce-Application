@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const { NotFound, BadRequest } = require("../errors");
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const Product = require("../models/Product");
 
 const matchFunction = (match, field, pipeLine) => {

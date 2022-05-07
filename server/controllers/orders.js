@@ -1,4 +1,4 @@
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const Order = require("../models/Order");
 
 const getOrders = asyncWrapper(async (req, res) => {

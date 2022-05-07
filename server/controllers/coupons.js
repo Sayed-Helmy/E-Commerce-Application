@@ -1,5 +1,5 @@
 const { NotFound } = require("../errors");
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const Coupon = require("../models/Coupon");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 

@@ -9,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 import { useSelector } from "react-redux";
 
 ChartJS.register(
@@ -34,33 +33,7 @@ const labels = ["Orders data"];
 
 export const data = {
   labels,
-  datasets: [
-    {
-      label: "pending",
-      data: [123],
-      backgroundColor: "#64748b",
-    },
-    {
-      label: "in review",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "#000",
-    },
-    {
-      label: "in progress",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "#0ea5e9",
-    },
-    {
-      label: "on the way",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "#eab308",
-    },
-    {
-      label: "delivered",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "#16a34a",
-    },
-  ],
+  datasets: [],
 };
 
 export function OrdersChart() {

@@ -1,5 +1,5 @@
 const { BadRequest } = require("../errors");
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const Order = require("../models/Order");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
