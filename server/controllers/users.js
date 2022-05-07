@@ -1,4 +1,4 @@
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const User = require("../models/User");
 
 const getUsers = asyncWrapper(async (req, res) => {

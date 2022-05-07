@@ -1,5 +1,5 @@
 const { BadRequest, NotFound, Unauthenticated } = require("../errors");
-const asyncWrapper = require("../middlewares/asyncwrapper");
+const asyncWrapper = require("../middlewares/asyncWrapper");
 const User = require("../models/User");
 const path = require("path");
 const { unlink } = require("fs/promises");
