@@ -69,7 +69,7 @@ const updateUser = asyncWrapper(async (req, res) => {
     street,
   };
   await user.save();
-  const { password, roles, ...newUser } = user.toObject();
+  const { password, ...newUser } = user.toObject();
   res.status(201).json(newUser);
 });
 
