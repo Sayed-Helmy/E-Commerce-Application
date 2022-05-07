@@ -14,27 +14,30 @@ import NewCoupon from "./coupon/NewCoupon";
 import NewProduct from "./products/NewProduct";
 import BrandPage from "./brand/brandPage";
 import NewBrand from "./brand/newBrand";
+import ViewUser from "../../components/admin/user/ViewUser";
 
 const AdminPage = () => {
-   return (
-      <Routes>
-         <Route path="/" element={<Navigate to="dashboard" />} />
-         <Route path="dashboard" element={<Dashboard />} />
-         <Route path="products" element={<Products />} />
-         <Route path="users" element={<Users />} />
-         <Route path="userPage" element={<UserPage />} />
-         <Route path="orders" element={<Orders />} />
-         <Route path="categories" element={<Categories />} />
-         <Route path="/categories/:id" element={<CategoryPage />} />
-         <Route path="/categories/addnew" element={<NewCategory />} />
-         <Route path="brands" element={<Brands />} />
-         <Route path="/brands/:id" element={<BrandPage />} />
-         <Route path="/brands/addnew" element={<NewBrand />} />
-         <Route path="/products/:id" element={<ProductPage />} />
-         <Route path="products/addnew" element={<NewProduct />} />
-         <Route path="coupons/addnew" element={<NewCoupon />} />
-      </Routes>
-   );
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="dashboard" />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="products" element={<Products />} />
+      <Route path="users" element={<Users />} />
+      <Route path="users/:id" element={<ViewUser />} />
+      <Route path="users/addnew" element={<ViewUser />} />
+      <Route path="userPage" element={<UserPage />} />
+      <Route path="orders" element={<Orders />} />
+      <Route path="categories" element={<Categories />} />
+      <Route path="/categories/:id" element={<CategoryPage />} />
+      <Route path="/categories/addnew" element={<NewCategory />} />
+      <Route path="brands" element={<Brands />} />
+      <Route path="/brands/:id" element={<BrandPage />} />
+      <Route path="/brands/addnew" element={<NewBrand />} />
+      <Route path="/products/:id" element={<ProductPage />} />
+      <Route path="products/addnew" element={<NewProduct />} />
+      <Route path="coupons/addnew" element={<NewCoupon />} />
+    </Routes>
+  );
 };
 
 export default AdminPage;

@@ -13,4 +13,17 @@ const getUsers = asyncWrapper(async (req, res) => {
   res.status(200).json(users);
 });
 
-module.exports = { getUsers };
+const updateUser = asyncWrapper(async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    {
+      ...req.body,
+    },
+    {
+      new: true,
+    }
+  );
+  res.status(200).json(user);
+});
+
+module.exports = { getUsers, updateUser };
