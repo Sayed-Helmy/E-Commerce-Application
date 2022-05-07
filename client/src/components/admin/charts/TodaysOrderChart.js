@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -30,17 +31,23 @@ export const options = {
 
 const labels = ["Todays Orders"];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Todays Orders",
-      data: [100],
-      backgroundColor: "#10b981",
-    },
-  ],
-};
-
 export function TodaysOrderChart() {
+  const ordersStates = useSelector((state) => state.admin.ordersStates);
+  const todaysOrders = ordersStates?.data?.find(
+    (item) =>
+      new Date(item._id).toLocaleDateString() ===
+      new Date().toLocaleDateString()
+  );
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Todays Orders",
+        data: [todaysOrders?.ordersCount || 0],
+        backgroundColor: "#10b981",
+      },
+    ],
+  };
+
   return <Bar options={options} data={data} />;
 }

@@ -1,13 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import OrderDropdown from "./OrderDropdown";
 import OrdersPriceDisclosure from "./OrdersPriceDisclosure";
 import OrdersProductsDisclosure from "./OrdersProductsDisclosure";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { adminActions } from "../../../store/adminSlice";
+import { toast } from "react-toastify";
 
-const OrdersInfo = ({ order }) => {
-  // const submitHandler = async () => {};
+const OrdersInfo = ({ order, setIsOpen }) => {
+  const [orderStatus, setOrderStatus] = useState();
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .patch(
+        `http://localhost:5000/api/v1/orders/${order._id}`,
+        {
+          status: orderStatus,
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        dispatch(adminActions.updateOrder(res.data));
+        toast.success("Order State Has Been Changed Successfully!", {
+          autoClose: 1500,
+        });
+        setIsOpen(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response.data.message, {
+          autoClose: 1500,
+        });
+      });
+  };
   return (
     <div>
-      <form className="mt-10 grid grid-cols-4 gap-4 md:space-y-0">
+      <form
+        className="mt-10 grid grid-cols-4 gap-4 md:space-y-0"
+        onSubmit={submitHandler}
+      >
         {/* ================================== 
             ==================================*/}
         <div className="col-span-4 space-y-4 md:col-span-2">
@@ -30,9 +64,10 @@ const OrdersInfo = ({ order }) => {
             <p className="w-24 whitespace-nowrap rounded-l-lg bg-black py-1 px-3 text-white	">
               Status
             </p>
-            <div>
+            <div className="flex gap-2 align-baseline">
               <OrderDropdown
                 status={order.status}
+                onChange={(e) => setOrderStatus(e.name)}
                 options={[
                   { name: "Pending" },
                   { name: "in Review" },
@@ -42,6 +77,7 @@ const OrdersInfo = ({ order }) => {
                   { name: "deliverd" },
                 ]}
               />
+              {order.status}
             </div>
           </div>
           {/* Pay Status */}

@@ -55,4 +55,44 @@ const getAllOrders = asyncWrapper(async (req, res) => {
   res.status(200).json(orders);
 });
 
-module.exports = { getOrders, getAllOrders };
+const orderStatistics = asyncWrapper(async (req, res) => {
+  const orders = await Order.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) },
+      },
+    },
+    {
+      $group: {
+        _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+        totalPrice: { $sum: "$totalPrice" },
+        ordersCount: { $sum: 1 },
+      },
+    },
+  ]);
+  const ordersStatus = await Order.aggregate([
+    {
+      $group: {
+        _id: "$status",
+        totalPrice: { $sum: "$totalPrice" },
+        ordersCount: { $sum: 1 },
+      },
+    },
+  ]);
+  res.status(200).json({ data: orders, ordersStatus: ordersStatus });
+});
+
+const updateOrder = asyncWrapper(async (req, res) => {
+  const order = await Order.findByIdAndUpdate(
+    req.params.id,
+    {
+      status: req.body.status,
+    },
+    {
+      new: true,
+    }
+  );
+  res.status(200).json(order);
+});
+
+module.exports = { getOrders, getAllOrders, orderStatistics, updateOrder };

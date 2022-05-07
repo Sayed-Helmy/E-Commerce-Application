@@ -10,7 +10,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { adminActions } from "../../../store/adminSlice";
 
 ChartJS.register(
   CategoryScale,
@@ -55,7 +57,7 @@ const data = {
   datasets: [
     {
       label: "income",
-      data: [20, 10, 20, 40, 44, 33, 11],
+      data: [0, 0, 0, 0, 0, 0, 0],
       borderColor: "#000",
       backgroundColor: "#fff",
       cubicInterpolationMode: "monotone",
@@ -65,7 +67,20 @@ const data = {
 };
 
 export function IncomeChart() {
-  const orders = useSelector((state) => state.admin.orders);
-
-  return <Line options={options} data={data} />;
+  const [ordersData, setOrdersData] = useState();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/v1/orders/admin/states", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setOrdersData(res.data);
+        dispatch(adminActions.setOrdersStates(res.data));
+      });
+  }, [dispatch]);
+  ordersData?.data?.forEach((item) => {
+    data.datasets[0].data[item._id.split("-")[2] - 1] = item.totalPrice;
+  });
+  return <>{ordersData && <Line options={options} data={data} />}</>;
 }
