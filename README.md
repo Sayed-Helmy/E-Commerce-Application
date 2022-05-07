@@ -45,11 +45,11 @@ $ npm start
 
 ### .env schema
 
-MONGO_URI = mongoDb uri
-JWT_SECRET = any secret for JWT
-API_URL = base url for the rest Api
-Expire_Date = expire date for jwt token
-BASE_URL = base frontEnd url for stripe
+- MONGO_URI = mongoDb uri
+- JWT_SECRET = any secret for JWT
+- API_URL = base url for the rest Api
+- Expire_Date = expire date for jwt token
+- BASE_URL = base frontEnd url for stripe
 
 ### Contributers
 
