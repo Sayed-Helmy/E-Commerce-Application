@@ -49,7 +49,7 @@ export default function OrdersModal({ setIsOpen, isOpen, order }) {
                 </Dialog.Title>
                 <div className="">
                   <p className="">
-                    <OrdersInfo order={order} />
+                    <OrdersInfo order={order} setIsOpen={setIsOpen} />
                   </p>
                 </div>
               </div>

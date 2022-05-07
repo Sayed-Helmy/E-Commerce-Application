@@ -2,12 +2,18 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-export default function OrderDropdown({ options }) {
+export default function OrderDropdown({ options, onChange }) {
   const people = options;
   const [selected, setSelected] = useState(people[0]);
   return (
     <div className="w-full">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox
+        value={selected}
+        onChange={(e) => {
+          onChange(e);
+          setSelected(e);
+        }}
+      >
         <div className="relative ">
           <Listbox.Button className="relative w-full cursor-default rounded-r-lg bg-slate-300 py-[6px] pl-3 pr-10 text-left focus:outline-none  sm:text-sm">
             <span className="block ">{selected.name}</span>

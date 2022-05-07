@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   users: [],
   orders: [],
+  ordersStates: {},
 };
 
 const adminSlice = createSlice({
@@ -15,11 +16,20 @@ const adminSlice = createSlice({
     setOrders(state, action) {
       state.orders = action.payload;
     },
+    setOrdersStates(state, action) {
+      state.ordersStates = action.payload;
+    },
     updateUser(state, action) {
       const index = state.users.findIndex(
         (item) => item._id === action.payload._id
       );
       state.users[index] = action.payload;
+    },
+    updateOrder(state, action) {
+      const index = state.orders.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      state.orders[index] = action.payload;
     },
   },
 });

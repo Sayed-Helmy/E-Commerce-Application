@@ -19,13 +19,15 @@ export default function OrderDropdown({ user }) {
         }
       )
       .then((res) => {
+        toast.success("User Status Has Been Changed!", {
+          autoClose: 1000,
+        });
         dispatch(adminActions.updateUser(res.data));
       })
       .catch((error) => {
         console.log(error.response.data.msg);
         toast.error("Somthing Went Wrong!", { autoClose: 1000 });
       });
-    toast.success("Data Has Been Saved Successfuly!", { autoClose: 1000 });
   };
   return (
     <div className="w-full">
