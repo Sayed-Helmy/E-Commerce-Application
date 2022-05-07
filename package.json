@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd server && npm install  && cd ../client && npm install && npm run build",
-    "start": "node server/index.js"
+    "start": "cd server && cp -r ./public/uploads ./public/build && npm run start-prod"
   },
   "keywords": [],
   "author": "",

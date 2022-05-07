@@ -2,7 +2,10 @@ const path = require("path");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: "./public/uploads",
+  destination:
+    process.env.NODE_ENV === "dev"
+      ? "./public/uploads"
+      : "./public/build/uploads",
   filename: (req, file, cb) => {
     cb(
       null,

@@ -40,18 +40,13 @@ app.use(`${apiRoute}/orders`, ordersRouter);
 app.use(`${apiRoute}/users`, usersRouter);
 
 // serve the Static Files.
-app.use(express.static("public"));
-app.get("/success", async (req, res) => {
-  const path = resolve(__dirname + "/public" + "/success.html");
-  res.sendFile(path);
-});
-app.get("/cancel", async (req, res) => {
-  const path = resolve(__dirname + "/public" + "/cancel.html");
-  res.sendFile(path);
-});
 app.use(errorHandler);
-app.use(notFound);
-
+app.use(express.static("./public/build"));
+app.get("/*", (req, res) => {
+  res.sendFile(resolve(__dirname, "public", "build", "index.html"));
+});
+// app.use(notFound);
+console.log(process.env.NODE_ENV);
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);

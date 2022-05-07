@@ -11,7 +11,6 @@ const getOrders = asyncWrapper(async (req, res) => {
 });
 
 const getAllOrders = asyncWrapper(async (req, res) => {
-  const { date } = req.query;
   const pipeLine = [
     {
       $lookup: {
@@ -44,13 +43,6 @@ const getAllOrders = asyncWrapper(async (req, res) => {
     { $unwind: "$user" },
     { $sort: { createdAt: -1 } },
   ];
-  if (date)
-    pipeLine.unshift({
-      $match: {
-        createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * +date) },
-      },
-    });
-  console.log(new Date(Date.now() - 1000 * 60 * 60 * 24 * +date));
   const orders = await Order.aggregate(pipeLine);
   res.status(200).json(orders);
 });
